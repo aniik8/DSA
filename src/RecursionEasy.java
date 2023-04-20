@@ -13,4 +13,15 @@ public class RecursionEasy {
             return s.charAt(0);
         else return returnFirstUpper(s.substring(1));
     }
+
+
+    // 231. LeetCode - Is power of two
+    static public boolean isPowerOfTwo(int n)
+    {
+        if(n != 1 && n % 2 == 1) {
+            return false;}
+        else if(n == 1)
+            return true;
+        return isPowerOfTwo(n/2);
+    }
 }
