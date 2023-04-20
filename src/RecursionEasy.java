@@ -1,6 +1,6 @@
 public class RecursionEasy {
     public static void main(String[] args) {
-
+        
     }
 
     // gfg practice
@@ -32,5 +32,21 @@ public class RecursionEasy {
         else if(n == 1)
             return true;
         return isPowerOfThree(n/3);
+    }
+    // remove consecutive character GeeksForGeeks --
+//    aabaa
+    static public String removeConsecutiveCharacter(String S){
+        return removeHelperFunc(S, "");
+    }
+
+
+    static public String removeHelperFunc(String unprocessed, String processed){
+        if(unprocessed.length() <= 1) {
+            processed = processed + (unprocessed.charAt(0));
+            return processed;
+        }
+        if(unprocessed.charAt(0) == unprocessed.charAt(1))
+            return removeHelperFunc(unprocessed.substring(1), processed);
+        else return removeHelperFunc(unprocessed.substring(1), processed + unprocessed.charAt(0));
     }
 }

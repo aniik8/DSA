@@ -4,3 +4,5 @@ Recursion Easy Questions  from various sources
 2. Is power of two (LeetCode) (https://leetcode.com/problems/power-of-two/)
 3. Is power of three (LeetCode) (https://leetcode.com/problems/power-of-three/)
 4. Is power of Four (Leetcode) (https://leetcode.com/problems/power-of-four/)
+5. Remove consecutive character (https://practice.geeksforgeeks.org/problems/consecutive-elements2306/1).
+6.
