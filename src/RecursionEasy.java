@@ -24,4 +24,13 @@ public class RecursionEasy {
             return true;
         return isPowerOfTwo(n/2);
     }
+    //
+    static public boolean isPowerOfThree(int n) {
+        if((n != 1)&& ( n % 3 != 0)) {
+            return false;
+        }
+        else if(n == 1)
+            return true;
+        return isPowerOfThree(n/3);
+    }
 }

@@ -1,0 +1,6 @@
+Recursion Easy Questions  from various sources
+
+1. First uppercase Letter In a string.-(https://www.geeksforgeeks.org/first-uppercase-letter-in-a-string-iterative-and-recursive/)
+2. Is power of two (LeetCode) (https://leetcode.com/problems/power-of-two/)
+3. Is power of three (LeetCode) (https://leetcode.com/problems/power-of-three/)
+4. Is power of Four (Leetcode) (https://leetcode.com/problems/power-of-four/)
