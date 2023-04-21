@@ -1,7 +1,8 @@
 import java.util.*;
 public class RecursionEasy {
     public static void main(String[] args) {
-       permutationOfAString("", "abc");
+//       permutationOfAString("", "abc");
+        System.out.println(find_permutation("abc"));
     }
 
     // gfg practice
@@ -65,4 +66,20 @@ public class RecursionEasy {
         }
     }
 
+    static public List<String> find_permutation(String S) {
+        return permutations("", S);
+    }
+    static List<String> permutations(String processed, String unprocessed){
+        if(unprocessed.length() ==0){
+            List<String> st = new ArrayList<>();
+            st.add(processed);
+            return st;
+        }
+        char ch = unprocessed.charAt(0);
+        List<String> ls = new ArrayList<>();
+        for (int i = 0; i <= processed.length(); i++) {
+        ls.addAll(permutations(processed.substring(0, i) + ch+ processed.substring(i, processed.length()), unprocessed.substring(1)));
+        }
+        return ls;
+    }
 }
