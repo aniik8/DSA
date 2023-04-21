@@ -1,6 +1,7 @@
+import java.util.*;
 public class RecursionEasy {
     public static void main(String[] args) {
-        
+       permutationOfAString("", "abc");
     }
 
     // gfg practice
@@ -49,4 +50,19 @@ public class RecursionEasy {
             return removeHelperFunc(unprocessed.substring(1), processed);
         else return removeHelperFunc(unprocessed.substring(1), processed + unprocessed.charAt(0));
     }
+
+    // permutation of a string -- Printing
+    static public void permutationOfAString(String processed, String unprocessed) {
+        if(unprocessed.length()==0){
+            System.out.println(processed);
+            return;
+        }
+        char ch = unprocessed.charAt(0);
+        for (int i = 0; i <= processed.length(); i++) {
+            String first = processed.substring(0, i);
+            String second = processed.substring(i, processed.length());
+            permutationOfAString(first+ch+second, unprocessed.substring(1));
+        }
+    }
+
 }
