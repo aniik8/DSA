@@ -2,7 +2,7 @@ import java.util.*;
 public class RecursionEasy {
     public static void main(String[] args) {
 //       permutationOfAString("", "abc");
-        System.out.println(find_permutation("abc"));
+        System.out.println(find_permutation("abb"));
     }
 
     // gfg practice
@@ -65,21 +65,42 @@ public class RecursionEasy {
             permutationOfAString(first+ch+second, unprocessed.substring(1));
         }
     }
-
+// lexicographically and unique permutations.
     static public List<String> find_permutation(String S) {
-        return permutations("", S);
+        List<String> ls = new ArrayList<>();
+        permutations("", S, ls);
+        return ls;
     }
-    static List<String> permutations(String processed, String unprocessed){
+    static void permutations(String processed, String unprocessed, List<String> ls){
+
         if(unprocessed.length() ==0){
-            List<String> st = new ArrayList<>();
-            st.add(processed);
-            return st;
+            if(!ls.contains(processed))
+            {
+                ls.add(processed);
+            }
+return;
         }
         char ch = unprocessed.charAt(0);
-        List<String> ls = new ArrayList<>();
         for (int i = 0; i <= processed.length(); i++) {
-        ls.addAll(permutations(processed.substring(0, i) + ch+ processed.substring(i, processed.length()), unprocessed.substring(1)));
+        permutations(processed.substring(0, i) + ch+ processed.substring(i, processed.length()),
+                unprocessed.substring(1), ls);
         }
-        return ls;
+        Collections.sort(ls);
+    }
+
+
+// Number of steps to reduce a number to zero 1342 leetcode
+    public int numberOfSteps(int num) {
+        return countfunc(num, 0);
+    }
+    int countfunc(int num, int count)
+    {
+        if(num == 0) return count;
+        if (num % 2 == 0){
+            return countfunc(num/2, count+1);
+        }
+        else {
+            return countfunc(num-1, count+1);
+        }
     }
 }
