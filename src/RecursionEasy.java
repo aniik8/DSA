@@ -111,5 +111,19 @@ return;
         }
     }
 
-
+    static void reverse(Stack<Integer> s)
+    {
+        // add your code here
+        Stack<Integer> sc = new Stack<>();
+        sc = reverseStack(s,sc);
+        s.addAll(sc);
+    }
+    static Stack<Integer> reverseStack(Stack<Integer> s, Stack<Integer> sc){
+        if(s.isEmpty()){
+            return sc;
+        }
+        sc.add(s.pop());
+        return reverseStack(s, sc);
+    }
 }
+
