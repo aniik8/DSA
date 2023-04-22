@@ -6,6 +6,13 @@ public class RecursionEasy {
     }
 
     // gfg practice
+
+    static int sum_of_digit(int n)
+    {
+        if (n == 0)
+            return 0;
+        return (n % 10 + sum_of_digit(n / 10));
+    }
     // First uppercase Letter In a string.
     static char returnFirstUpper(String s){
         if(s.length() == 0) {
@@ -103,4 +110,6 @@ return;
             return countfunc(num-1, count+1);
         }
     }
+
+
 }
