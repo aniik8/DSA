@@ -110,7 +110,7 @@ return;
             return countfunc(num-1, count+1);
         }
     }
-
+// reversing a stack using recursion
     static void reverse(Stack<Integer> s)
     {
         // add your code here
@@ -125,5 +125,17 @@ return;
         sc.add(s.pop());
         return reverseStack(s, sc);
     }
+
+        static int kthGrammar(int n, int k) {
+
+            if(n == 1 && k == 1)
+                return 0;
+            int mid = ((int) Math.pow(2, n-1))/2;
+            if(k <= mid/2){
+                return kthGrammar(n-1, k);
+            }else{
+                return (kthGrammar(n-1, k-1));
+            }
+        }
 }
 
