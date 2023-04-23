@@ -2,7 +2,8 @@ import java.util.*;
 public class RecursionEasy {
     public static void main(String[] args) {
 //       permutationOfAString("", "abc");
-        System.out.println(find_permutation("abb"));
+//        System.out.println(find_permutation("abb"));
+        System.out.println(kthGrammar(2, 2));
     }
 
     // gfg practice
@@ -127,15 +128,17 @@ return;
     }
 
         static int kthGrammar(int n, int k) {
-
             if(n == 1 && k == 1)
                 return 0;
             int mid = ((int) Math.pow(2, n-1))/2;
-            if(k <= mid/2){
+            if(k <= mid){
                 return kthGrammar(n-1, k);
             }else{
-                return (kthGrammar(n-1, k-1));
+                return reverse(kthGrammar(n-1, k-1));
             }
+        }
+        static int reverse(int n){
+        return n == 0 ? 1 : 0;
         }
 }
 

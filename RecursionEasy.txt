@@ -8,3 +8,4 @@ Recursion Easy Questions  from various sources
 6. Permutations of a given string (https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1)
 7. Sum of digit of a number using recursion ()
 8. Reversing a stack using Recursion.
+9. K-th symbol grammer. 779 leetcode (https://leetcode.com/problems/k-th-symbol-in-grammar/)
