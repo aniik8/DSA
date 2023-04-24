@@ -9,3 +9,5 @@ Recursion Easy Questions  from various sources
 7. Sum of digit of a number using recursion ()
 8. Reversing a stack using Recursion.
 9. K-th symbol grammer. 779 leetcode (https://leetcode.com/problems/k-th-symbol-in-grammar/)
+10. Tower of hanoi, gfg (https://practice.geeksforgeeks.org/problems/tower-of-hanoi-1587115621/1)
+11.

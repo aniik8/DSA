@@ -3,7 +3,8 @@ public class RecursionEasy {
     public static void main(String[] args) {
 //       permutationOfAString("", "abc");
 //        System.out.println(find_permutation("abb"));
-        System.out.println(kthGrammar(2, 2));
+        /*System.out.println(kthGrammar(5, 3));*/
+        System.out.println(toh(2, 1, 2, 3));
     }
 
     // gfg practice
@@ -134,11 +135,23 @@ return;
             if(k <= mid){
                 return kthGrammar(n-1, k);
             }else{
-                return reverse(kthGrammar(n-1, k-1));
+                return reverse(kthGrammar(n-1, k-1)) ;
             }
         }
         static int reverse(int n){
         return n == 0 ? 1 : 0;
         }
+
+    // Tower Of Hanoi
+    static long toh(int N, int from, int to, int aux) {
+        if(N == 1){
+            System.out.println("move disk " + N + " from rod " + from + " to rod " + to);
+            return (long) (Math.pow(2, N)-1);
+        }
+        toh(N-1, from, aux, to);
+        System.out.println("move disk " + N + "from rod " + from + " to rod " + to);
+        toh(N-1, aux, to, from);
+        return (long) (Math.pow(2, N)-1);
+    }
 }
 
