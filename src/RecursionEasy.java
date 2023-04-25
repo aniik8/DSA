@@ -6,6 +6,7 @@ public class RecursionEasy {
         /*System.out.println(kthGrammar(5, 3));*/
 //        System.out.println(toh(2, 1, 2, 3));
         System.out.println(myPow(2.10000, 3));
+        System.out.println(generateParenthesis(3));
     }
 
     // gfg practice
@@ -173,6 +174,23 @@ return;
             return 1;
         return x * negativePower(x, n-1);
     }
+    public static List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>(); // initialize the result list
+        generate(result, "", n, n); // call the recursive helper function
+        return result; // return the result list
+    }
 
+    static void generate(List<String> result, String s, int leftParenthesis, int rightParenthesis){
+        if(leftParenthesis == 0 && rightParenthesis == 0){ // base case: no more parentheses to add
+            result.add(s); // add the generated string to the result list
+            return; // exit the current recursive call
+        }
+        if(leftParenthesis != 0){ // if there are still leftParenthesis parentheses to add
+            generate(result, s + "(", leftParenthesis - 1, rightParenthesis); // add a leftParenthesis parenthesis and recursively call the function
+        }
+        if(rightParenthesis > leftParenthesis){ // if there are still rightParenthesis parentheses to add and there are more leftParenthesis parentheses than rightParenthesis parentheses in the current string
+            generate(result, s + ")", leftParenthesis, rightParenthesis - 1); // add a rightParenthesis parenthesis and recursively call the function
+        }
+    }
 }
 
