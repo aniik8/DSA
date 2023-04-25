@@ -4,7 +4,8 @@ public class RecursionEasy {
 //       permutationOfAString("", "abc");
 //        System.out.println(find_permutation("abb"));
         /*System.out.println(kthGrammar(5, 3));*/
-        System.out.println(toh(2, 1, 2, 3));
+//        System.out.println(toh(2, 1, 2, 3));
+        System.out.println(myPow(2.10000, 3));
     }
 
     // gfg practice
@@ -153,5 +154,25 @@ return;
         toh(N-1, aux, to, from);
         return (long) (Math.pow(2, N)-1);
     }
+    // power(x, n)
+    static double myPow(double x, int n) {
+        if(n < 0){
+            return 1/ negativePower(x, Math.abs(n));
+        }
+        else return positivePower( x,n);
+    }
+
+// 50. Pow(x, n)
+    static double negativePower(double x, int n){
+        if(n == 0)
+            return 1;
+        return x * negativePower(x, n-1);
+    }
+    static double positivePower(double x, int n){
+        if(n == 0)
+            return 1;
+        return x * negativePower(x, n-1);
+    }
+
 }
 
