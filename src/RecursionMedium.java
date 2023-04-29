@@ -1,13 +1,15 @@
 import javax.security.auth.Subject;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class RecursionMedium {
     public static void main(String[] args) {
 //        System.out.println(NBitBinary(2));
-        int[] num3 = {1,2,3};
-//        System.out.println(subsets(num3));
-        System.out.println(subsequences("abc"));
+        int[] num3 = {2,1,2};
+        System.out.println(uniquesubsets(num3));
+//        System.out.println(subsequences("abc"));
     }
 // K-th symbol grammer. 779 leetcode
     static int kthGrammar(int n, int k) {
@@ -97,7 +99,7 @@ public class RecursionMedium {
         generateSubsets(nums, ans,index+1, output);
     }
 
-    
+
     // Subsequence of a String.
     static ArrayList<String> subsequences(String str){
         ArrayList<String> answer = new ArrayList<>();
@@ -118,6 +120,32 @@ public class RecursionMedium {
         subsequenceOfstring(answer,  unp, p.substring(1));
 
 
+    }
+
+    // Unique Subsets GFG
+    public static ArrayList <ArrayList <Integer>> uniquesubsets(int[] arr) {
+        ArrayList <ArrayList <Integer>> output = new ArrayList<>();
+        ArrayList <Integer> ans = new ArrayList<>();
+        HashMap<Integer, ArrayList<Integer>>  map = new HashMap<>();
+        int index = 0;
+        generateuniqueSubsets(arr, ans, index, output, map, 0);
+        return output;
+    }
+    static void generateuniqueSubsets(int[] nums,ArrayList <Integer> ans, int index,  ArrayList <ArrayList <Integer>> output,
+                                      HashMap<Integer, ArrayList <Integer>>  map, int i){
+        if(index == nums.length){
+            if(!(map.containsValue(ans))) {
+                map.put(i, ans);
+                output.add(new ArrayList<>(ans));
+                return;
+            }
+            return;
+        }
+        // exclude condition.
+        generateuniqueSubsets(nums, new ArrayList<>(ans), index+1, output, map,i+1);
+        // include condition.
+        ans.add(nums[index]);
+        generateuniqueSubsets(nums, ans,index+1, output, map, i+1);
     }
 }
 
