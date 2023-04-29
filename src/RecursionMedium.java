@@ -1,3 +1,4 @@
+import javax.security.auth.Subject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,7 +6,8 @@ public class RecursionMedium {
     public static void main(String[] args) {
 //        System.out.println(NBitBinary(2));
         int[] num3 = {1,2,3};
-        System.out.println(subsets(num3));
+//        System.out.println(subsets(num3));
+        System.out.println(subsequences("abc"));
     }
 // K-th symbol grammer. 779 leetcode
     static int kthGrammar(int n, int k) {
@@ -93,6 +95,29 @@ public class RecursionMedium {
         // include condition.
         ans.add(nums[index]);
         generateSubsets(nums, ans,index+1, output);
+    }
+
+    
+    // Subsequence of a String.
+    static ArrayList<String> subsequences(String str){
+        ArrayList<String> answer = new ArrayList<>();
+        subsequenceOfstring(answer, "", str);
+        return answer;
+    }
+
+
+    static void subsequenceOfstring(ArrayList<String> answer, String unp, String p){
+        if(p.length() == 0){
+            answer.add(unp);
+            return;
+        }
+        // processed
+        char ch = p.charAt(0);
+        subsequenceOfstring(answer, unp + ch,p.substring(1));
+        // unprocessed
+        subsequenceOfstring(answer,  unp, p.substring(1));
+
+
     }
 }
 
