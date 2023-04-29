@@ -3,7 +3,9 @@ import java.util.List;
 
 public class RecursionMedium {
     public static void main(String[] args) {
-        System.out.println(NBitBinary(2));
+//        System.out.println(NBitBinary(2));
+        int[] num3 = {1,2,3};
+        System.out.println(subsets(num3));
     }
 // K-th symbol grammer. 779 leetcode
     static int kthGrammar(int n, int k) {
@@ -71,6 +73,26 @@ public class RecursionMedium {
             generateOneZero(list, one, zero+1, n-1, zeroS);
         }
 
+    }
+
+    // 78 Subsets
+    public static List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> output = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
+        int index = 0;
+        generateSubsets(nums, ans, index, output);
+        return output;
+    }
+    static void generateSubsets(int[] nums,List<Integer> ans, int index,  List<List<Integer>> output){
+        if(index == nums.length){
+            output.add(new ArrayList<>(ans));
+            return;
+        }
+        // exclude condition.
+        generateSubsets(nums, new ArrayList<>(ans), index+1, output);
+        // include condition.
+        ans.add(nums[index]);
+        generateSubsets(nums, ans,index+1, output);
     }
 }
 
