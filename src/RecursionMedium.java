@@ -8,7 +8,8 @@ public class RecursionMedium {
 //        System.out.println(uniquesubsets(num3));
 //        System.out.println(subsequences("abc"));
 //        System.out.println(AllParenthesis(3));
-        System.out.println(permutation("AB"));
+//        System.out.println(permutation("AB"));
+        System.out.println(permutationwithCase("a1b2"));
     }
 // K-th symbol grammer. 779 leetcode
     static int kthGrammar(int n, int k) {
@@ -181,6 +182,27 @@ public class RecursionMedium {
         String ch =  " ";
         generatePermutation(str, unprocessed.substring(1), processed+ch+unprocessed.charAt(0), n+1);
         generatePermutation(str, unprocessed.substring(1), processed+unprocessed.charAt(0), n+1);
+    }
+
+    // permutation by changing cases - Leetcode 784
+    static ArrayList<String> permutationwithCase(String s){
+        ArrayList<String> str = new ArrayList<>();
+        generateCasePermutation(str, s,"");
+        return str;
+    }
+    static void generateCasePermutation(ArrayList<String> str, String unprocessed, String processed){
+        if(unprocessed.isEmpty()){
+            str.add(processed);
+            return;
+        }
+        if((Character.isAlphabetic(unprocessed.charAt(0)))){
+            char ch = Character.isUpperCase(unprocessed.charAt(0)) ? Character.toLowerCase(unprocessed.charAt(0)) :
+                    Character.toUpperCase(unprocessed.charAt(0))
+                    ;
+            generateCasePermutation(str,  unprocessed.substring(1),processed+ch);
+
+        }
+        generateCasePermutation(str, unprocessed.substring(1),processed+unprocessed.charAt(0));
     }
 }
 
