@@ -168,6 +168,7 @@ public class RecursionMedium {
             generates(result, s+")", open, close-1);
         }
     }
+
     static ArrayList<String> permutation(String S){
         ArrayList<String> str = new ArrayList<>();
         generatePermutation(str,S.substring(1), ""+S.charAt(0), 0);

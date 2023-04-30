@@ -12,3 +12,9 @@ Recursion Easy Questions  from various sources
 10. Tower of hanoi, gfg (https://practice.geeksforgeeks.org/problems/tower-of-hanoi-1587115621/1)
 11. Pow(x, n) Leetcode 50 (https://leetcode.com/problems/powx-n/description/).
 12. Print N-bit binary numbers having more 1s than 0s.(https://practice.geeksforgeeks.org/problems/print-n-bit-binary-numbers-having-more-1s-than-0s0252/1)
+13. Subsets leetcode 78 ()
+14. Print all subsequence of a string (https://www.geeksforgeeks.org/print-subsequences-string/)
+15. Unique subset of a string (https://practice.geeksforgeeks.org/problems/subsets-1587115621/1).
+16. generate all parentheses gfg (https://practice.geeksforgeeks.org/problems/generate-all-possible-parentheses/1).
+17. Permutation with spaces gfg (https://practice.geeksforgeeks.org/problems/permutation-with-spaces3627/1)
+18. Permutation by changing cases - Leetcode 784 (https://leetcode.com/problems/letter-case-permutation/description/).
