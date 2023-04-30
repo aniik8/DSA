@@ -7,7 +7,8 @@ public class RecursionMedium {
         int[] num3 = {2,1,2};
 //        System.out.println(uniquesubsets(num3));
 //        System.out.println(subsequences("abc"));
-        System.out.println(AllParenthesis(3));
+//        System.out.println(AllParenthesis(3));
+        System.out.println(permutation("AB"));
     }
 // K-th symbol grammer. 779 leetcode
     static int kthGrammar(int n, int k) {
@@ -165,6 +166,21 @@ public class RecursionMedium {
         if(open < close){
             generates(result, s+")", open, close-1);
         }
+    }
+    static ArrayList<String> permutation(String S){
+        ArrayList<String> str = new ArrayList<>();
+        generatePermutation(str,S.substring(1), ""+S.charAt(0), 0);
+        return str;
+    }
+    // https://practice.geeksforgeeks.org/problems/permutation-with-spaces3627/1
+    static void generatePermutation(ArrayList<String> str,String unprocessed, String processed, int n){
+        if(unprocessed.isEmpty()){
+            str.add(processed);
+            return;
+        }
+        String ch =  " ";
+        generatePermutation(str, unprocessed.substring(1), processed+ch+unprocessed.charAt(0), n+1);
+        generatePermutation(str, unprocessed.substring(1), processed+unprocessed.charAt(0), n+1);
     }
 }
 
