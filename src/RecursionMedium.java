@@ -1,15 +1,13 @@
 import javax.security.auth.Subject;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class RecursionMedium {
     public static void main(String[] args) {
 //        System.out.println(NBitBinary(2));
         int[] num3 = {2,1,2};
-        System.out.println(uniquesubsets(num3));
+//        System.out.println(uniquesubsets(num3));
 //        System.out.println(subsequences("abc"));
+        System.out.println(AllParenthesis(3));
     }
 // K-th symbol grammer. 779 leetcode
     static int kthGrammar(int n, int k) {
@@ -129,8 +127,10 @@ public class RecursionMedium {
         HashMap<Integer, ArrayList<Integer>>  map = new HashMap<>();
         int index = 0;
         generateuniqueSubsets(arr, ans, index, output, map, 0);
+//        Collections.sort(output);
         return output;
     }
+    // https://leetcode.com/problems/subsets/solutions/2034062/subset-i-4-approaches-java-solution/?languageTags=java&topicTags=recursion
     static void generateuniqueSubsets(int[] nums,ArrayList <Integer> ans, int index,  ArrayList <ArrayList <Integer>> output,
                                       HashMap<Integer, ArrayList <Integer>>  map, int i){
         if(index == nums.length){
@@ -146,6 +146,25 @@ public class RecursionMedium {
         // include condition.
         ans.add(nums[index]);
         generateuniqueSubsets(nums, ans,index+1, output, map, i+1);
+    }
+
+    // All parentheses GFG
+    public static List<String> AllParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        generates(result, "", n, n);
+        return result;
+    }
+    static void generates(List<String> result, String s, int open, int close){
+        if(open == 0 && close == 0){
+            result.add(s);
+            return;
+        }
+        if(open!=0){
+            generates(result, s + "(", open - 1, close);
+        }
+        if(open < close){
+            generates(result, s+")", open, close-1);
+        }
     }
 }
 
