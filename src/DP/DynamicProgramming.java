@@ -1,5 +1,7 @@
 package DP;
 
+import java.util.Arrays;
+
 public class DynamicProgramming {
     public static void main(String[] args) {
         int values[] = {1,2,3} ; int weight[] = {4,5,1};
@@ -23,7 +25,7 @@ public class DynamicProgramming {
     static int knapSackRec(int W, int wt[], int val[],
                            int n, int[][] dp)
     {
-
+        Arrays.fill(dp[][], -1);
         // Base condition
         if (n == 0 || W == 0)
             return 0;
