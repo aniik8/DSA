@@ -5,10 +5,11 @@ import java.util.Arrays;
 public class DynamicProgramming {
     public static void main(String[] args) {
         int values[] = {1, 2, 3};
-        int[] arr = {3, 34, 4, 12, 5, 2};
+        int[] arr = {1, 3, 5};
         int weight[] = {4, 5, 1};
 //        System.out.println(knapSack(4, values, weight, 3));
-        System.out.println(isSubsetSum(6, arr, 30));
+//        System.out.println(isSubsetSum(6, arr, 30));
+        System.out.println(equalPartition(3, arr));
     }
 
     static int knapSack(int W, int wt[], int val[], int n) {
@@ -109,4 +110,20 @@ public class DynamicProgramming {
         }
         return t[N][sum];
     }
+
+    // subset sum problem GFG
+    static int equalPartition(int N, int arr[])
+    {
+        int sum = 0;
+        for (int i = 0; i < N; i++) {
+            sum += arr[i];
+        }
+        if(sum %2 != 0)
+            return 0;
+        else{
+           boolean res = isSubsetSum(N, arr, sum/2);
+           return res ? 1: 0;
+        }
+    }
+    
 }
