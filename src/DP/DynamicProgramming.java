@@ -125,5 +125,17 @@ public class DynamicProgramming {
            return res ? 1: 0;
         }
     }
-    
+    // Can partition sum DP
+    public boolean canPartition(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        if(sum %2 != 0)
+            return false;
+        else{
+            return isSubsetSum(nums.length, nums, sum/2);
+
+        }
+    }
 }
