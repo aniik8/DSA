@@ -4,3 +4,5 @@
 4. is subset sum - https://practice.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1
 5. subset sum problem - https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1
 5.1 partition equal sum subset - https://leetcode.com/problems/partition-equal-subset-sum/
+
+6. Unbounded Knapsack https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
