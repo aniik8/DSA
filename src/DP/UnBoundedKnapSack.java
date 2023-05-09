@@ -2,9 +2,10 @@ package DP;
 
 public class UnBoundedKnapSack {
     public static void main(String[] args) {
-        int val[] = {1, 4, 5, 7}, price[] = {1, 5, 8, 9, 10, 17, 17, 20};
+        int val[] = {2}, price[] = {1, 5, 8, 9, 10, 17, 17, 20};
 //        System.out.println(knapSack(4, 8, val, wt));
-        System.out.println(cutRod(price, 8));
+//        System.out.println(cutRod(price, 8));
+        System.out.println(coinChange(val, 3));
     }
 
     // Unbounded Knapsack - in which repetition is allowed
@@ -38,6 +39,7 @@ public class UnBoundedKnapSack {
                 }
             }
         }
+//        https://leetcode.com/discuss/general-discussion/475924/my-experience-and-notes-for-learning-dp
         for (int i = 0; i < n; i++) {
             len[i] = i+1;
         }
@@ -51,5 +53,28 @@ public class UnBoundedKnapSack {
 
         }
         return t[n][n];
+    }
+    // coin chabge problem
+    static int coinChange(int[] coins, int amount){
+        int n = coins.length;
+        int[][] t = new int[coins.length+1][amount+1];
+        for (int i = 0; i < n+1; i++) {
+            for (int j = 0; j < amount+1; j++) {
+                if(j == 0)
+                    t[i][j] = 1;
+                else if(i == 0)
+                    t[i][j] = 0;
+            }
+
+        }
+        for (int i = 1; i < n+1; i++) {
+            for (int j = 1; j < amount+1; j++) {
+                if(coins[i-1] <=j){
+                    t[i][j] = t[i -1][j] + t[i][j -  coins[i-1]];
+                }
+                else t[i][j] = t[i-1][j];
+            }
+        }
+        return t[n][amount] == 0 ? -1 : t[n][amount];
     }
 }
