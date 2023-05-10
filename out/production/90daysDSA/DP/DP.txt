@@ -6,3 +6,4 @@
 5.1 partition equal sum subset - https://leetcode.com/problems/partition-equal-subset-sum/
 
 6. Unbounded Knapsack https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
+7.  coin change - https://leetcode.com/problems/coin-change/
