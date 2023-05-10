@@ -7,4 +7,5 @@
 
 6. Unbounded Knapsack https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
 7.  coin change - https://practice.geeksforgeeks.org/problems/coin-change2448/1
+8. coin change 2 - https://leetcode.com/problems/coin-change-ii ( same as coin change of gfg)
 https://leetcode.com/problems/coin-change/
