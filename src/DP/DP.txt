@@ -10,3 +10,6 @@
 7.1 coin change leetcode - https://leetcode.com/problems/coin-change/description/
 8. coin change 2 - https://leetcode.com/problems/coin-change-ii ( same as coin change of gfg)
 https://leetcode.com/problems/coin-change/
+9. longest common subsequence - https://leetcode.com/problems/longest-common-subsequence
+(https://practice.geeksforgeeks.org/problems/longest-common-subsequence-1587115620/1).
+10.
