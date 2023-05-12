@@ -14,7 +14,8 @@ public class SubSequenceDP {
         int a = S1.length(), b = S2.length();
 //        System.out.println(longestSubsequenceDP("abcdgh", "abedfhr", "abcdgh".length(),"abedfhr".length()));
 //        System.out.println(longestSubstring("abcde", "abfce", 0, 0));
-        System.out.println(longestCommonSubstr(S1, S2, a, b));
+//        System.out.println(longestCommonSubstr(S1, S2, a, b));
+        System.out.println(lcsPrint(S1, S2, a, b));
     }
     // longest common subsequence
     static int longestSubsequence(String S, String R){
@@ -64,7 +65,17 @@ public class SubSequenceDP {
        }
        return t[m][n];
     }
-
+// "abcde", "abfce
+    static int longestSubstring(String s, String r, int count, int max){
+        if(s.length() == 0 || r.length() == 0) {
+            max = Math.max(count, max);
+            return max;
+        }
+        else if(s.charAt(0) == r.charAt(0))
+            return longestSubstring(s.substring(1), r.substring(1), count+1, max);
+        else
+            return longestSubstring(s.substring(1), r.substring(1), 0, max);
+    }
     static int longestCommonSubstr(String S1, String S2, int n, int m){
         int[][] t = new int[n+1][m+1];
         for (int i = 0; i < n + 1; i++) {
@@ -89,5 +100,34 @@ public class SubSequenceDP {
         }
         return max;
     }
-
+    static String lcsPrint(String s, String r, int m, int n){
+        StringBuilder str = new StringBuilder();
+        int[][] t = new int[m+1][n+1];
+        for (int i = 0; i < m + 1; i++) {
+            for (int j = 0; j < n + 1; j++) {
+                if(i == 0 || j == 0)
+                    t[i][j] = 0;
+            }
+        }
+        for (int i = 1; i < m+1; i++) {
+            for (int j = 1; j < n+1; j++) {
+                if(s.charAt(i-1) == r.charAt(j-1))
+                    t[i][j] = 1 + t[i-1][j-1];
+                else
+                    t[i][j] = Math.max(t[i-1][j], t[i][j-1]);
+            }
+        }
+        int i = m, j = n;
+        while(i > 0 && j > 0){
+            if(s.charAt(i-1) == r.charAt(j-1)){
+                str.append(s.charAt(i-1));
+                i--;j--;
+            }
+            else if(t[i-1][j] > t[i][j-1]){
+                i--;
+            }
+            else j--;
+        }
+        return str.reverse().toString();
+    }
 }
