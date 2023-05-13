@@ -10,13 +10,14 @@ public class SubSequenceDP {
             }
             //
         }
-        String S1 = "abcd", S2 = "xycd";
+        String S1 = "a", S2 = "z";
         int a = S1.length(), b = S2.length();
 //        System.out.println(longestSubsequenceDP("abcdgh", "abedfhr", "abcdgh".length(),"abedfhr".length()));
 //        System.out.println(longestSubstring("abcde", "abfce", 0, 0));
 //        System.out.println(longestCommonSubstr(S1, S2, a, b));
 //        System.out.println(lcsPrint(S1, S2, a, b));
-        System.out.println(shortestCommonSupersequence(S1,S2,a,b));
+//        System.out.println(shortestCommonSupersequence(S1,S2,a,b));
+        System.out.println(minOperations(S1, S2));
     }
     // longest common subsequence
     static int longestSubsequence(String S, String R){
@@ -135,5 +136,14 @@ public class SubSequenceDP {
     {
         int count = longestSubsequenceDP(X, Y, m, n);
         return m+n-count;
+    }
+    static int minOperations(String str1, String str2)
+    {
+        int count = longestSubsequenceDP(str1, str2, str1.length(), str2.length());
+        int deletedElement = str1.length() - count;
+        int insertedElement  = str2.length() - count;
+        System.out.println(deletedElement + "  " + insertedElement);
+            return deletedElement + insertedElement;
+
     }
 }
