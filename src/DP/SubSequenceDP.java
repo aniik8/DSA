@@ -17,7 +17,8 @@ public class SubSequenceDP {
 //        System.out.println(longestCommonSubstr(S1, S2, a, b));
 //        System.out.println(lcsPrint(S1, S2, a, b));
 //        System.out.println(shortestCommonSupersequence(S1,S2,a,b));
-        System.out.println(minOperations(S1, S2));
+//        System.out.println(minOperations(S1, S2));
+        System.out.println(longestPalindromeSubseq("agbcba"));
     }
     // longest common subsequence
     static int longestSubsequence(String S, String R){
@@ -146,7 +147,15 @@ public class SubSequenceDP {
             return deletedElement + insertedElement;
 
     }
-    static int longestPalindromicSubsequence(){
-        
+
+
+    static int longestPalindromeSubseq(String s) {
+        StringBuilder str = new StringBuilder();
+        for (int i = s.length()-1; i >= 0; i--) {
+            str.append(s.charAt(i));
+        }
+        return longestSubsequenceDP(s, str.toString(), s.length(), str.length());
     }
+
+    
 }
