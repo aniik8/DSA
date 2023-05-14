@@ -19,7 +19,8 @@ public class SubSequenceDP {
 //        System.out.println(shortestCommonSupersequence(S1,S2,a,b));
 //        System.out.println(minOperations(S1, S2));
 //        System.out.println(longestPalindromeSubseq("agbcba"));
-        System.out.println(minDistance("leetcode", "etco"));
+//        System.out.println(minDistance("leetcode", "etco"));
+        System.out.println(minInsertions("zzazz"));
     }
     // longest common subsequence
     static int longestSubsequence(String S, String R){
@@ -162,5 +163,13 @@ public class SubSequenceDP {
     static int minDistance(String word1, String word2) {
         int common = longestSubsequenceDP(word1, word2, word1.length(), word2.length());
         return (word1.length() - common) + (word2.length() - common);
+    }
+// leetcode 1312. just adding - in longest palindrome subsequence
+    static int minInsertions(String s) {
+        StringBuilder str = new StringBuilder();
+        for (int i = s.length()-1; i >= 0; i--) {
+            str.append(s.charAt(i));
+        }
+        return s.length() - longestSubsequenceDP(s, str.toString(), s.length(), str.length()) ;
     }
 }
