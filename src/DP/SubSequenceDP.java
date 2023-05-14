@@ -146,4 +146,7 @@ public class SubSequenceDP {
             return deletedElement + insertedElement;
 
     }
+    static int longestPalindromicSubsequence(){
+        
+    }
 }
