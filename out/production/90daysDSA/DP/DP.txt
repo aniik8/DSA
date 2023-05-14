@@ -16,3 +16,4 @@ https://leetcode.com/problems/coin-change/
 11. Shortest Common Supersequence - (https://practice.geeksforgeeks.org/problems/shortest-common-supersequence0322/1)
 12. Minimum number of deletions and insertions.(https://practice.geeksforgeeks.org/problems/minimum-number-of-deletions-and-insertions0209/1)
 13. (todo) Deletion - https://leetcode.com/problems/delete-operation-for-two-strings/.
+14. Longest Palindromic Subsequence - https://leetcode.com/problems/longest-palindromic-subsequence/submissions/
