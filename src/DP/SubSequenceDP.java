@@ -20,7 +20,9 @@ public class SubSequenceDP {
 //        System.out.println(minOperations(S1, S2));
 //        System.out.println(longestPalindromeSubseq("agbcba"));
 //        System.out.println(minDistance("leetcode", "etco"));
-        System.out.println(minInsertions("zzazz"));
+//        System.out.println(shortestCommonSupersequence("abac", "cab"));
+//        System.out.println(minInsertions("aba"));
+        System.out.println(LongestRepeatingSubsequence("axxzxy"));
     }
     // longest common subsequence
     static int longestSubsequence(String S, String R){
@@ -172,4 +174,50 @@ public class SubSequenceDP {
         }
         return s.length() - longestSubsequenceDP(s, str.toString(), s.length(), str.length()) ;
     }
+
+    static String shortestCommonSupersequence(String str1, String str2){
+        int m = str1.length(), n = str2.length();
+        StringBuilder str = new StringBuilder();
+        int[][] t = new int[m+1][n+1];
+        for (int i = 0; i < m + 1; i++) {
+            for (int j = 0; j < n + 1; j++) {
+                if(i == 0 || j == 0)
+                    t[i][j] = 0;
+            }
+        }
+        for (int i = 1; i < m+1; i++) {
+            for (int j = 1; j < n+1; j++) {
+                if(str1.charAt(i-1) == str2.charAt(j-1))
+                    t[i][j] = 1 + t[i-1][j-1];
+                else
+                    t[i][j] = Math.max(t[i-1][j], t[i][j-1]);
+            }
+        }
+        int i = m, j = n;
+        while(i > 0 && j > 0){
+            if(str1.charAt(i-1) == str2.charAt(j-1)){
+                str.append(str1.charAt(i-1));
+                i--;j--;
+            }
+            else if(t[i-1][j] > t[i][j-1]){
+                str.append(str1.charAt(i-1));
+                i--;
+            }
+            else {
+                str.append(str2.charAt(j-1));
+                j--;
+            }
+        }
+        while(i != 0){
+            str.append(str1.charAt(i-1));
+            i--;
+        }
+        while(j != 0){
+            str.append(str2.charAt(j-1));
+            j--;
+        }
+
+        return str.reverse().toString();
+    }
+    
 }
