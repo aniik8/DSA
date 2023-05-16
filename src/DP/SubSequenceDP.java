@@ -22,7 +22,8 @@ public class SubSequenceDP {
 //        System.out.println(minDistance("leetcode", "etco"));
 //        System.out.println(shortestCommonSupersequence("abac", "cab"));
 //        System.out.println(minInsertions("aba"));
-        System.out.println(LongestRepeatingSubsequence("axxzxy"));
+//        System.out.println(LongestRepeatingSubsequence("axxzxy"));
+        System.out.println(isSubsequence("axc", "ahbgdc"));
     }
     // longest common subsequence
     static int longestSubsequence(String S, String R){
@@ -219,6 +220,8 @@ public class SubSequenceDP {
 
         return str.reverse().toString();
     }
+
+
     // https://practice.geeksforgeeks.org/problems/longest-repeating-subsequence2004/
     static int longestrepeatingSubsequenceDP(String S, String R, int m, int n){
         int[][] t = new int[m+1][n+1];
@@ -238,7 +241,15 @@ public class SubSequenceDP {
         }
         return t[m][n];
     }
+
+
     static int LongestRepeatingSubsequence(String str){
         return longestrepeatingSubsequenceDP(str, str, str.length(), str.length());
     }
+
+    // https://leetcode.com/problems/is-subsequence/description/
+    static boolean isSubsequence(String s, String t) {
+        return s.length() == longestSubsequenceDP(s, t, s.length(), t.length());
+    }
+
 }
