@@ -18,3 +18,4 @@ https://leetcode.com/problems/coin-change/
 13. (todo) Deletion - https://leetcode.com/problems/delete-operation-for-two-strings/.
 14. Longest Palindromic Subsequence - https://leetcode.com/problems/longest-palindromic-subsequence/submissions/
 15. (Hard)easy Minimum insertion  https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
+16. Is subsequence - https://leetcode.com/problems/is-subsequence/description/
