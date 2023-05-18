@@ -20,3 +20,4 @@ https://leetcode.com/problems/coin-change/
 15. (Hard)easy Minimum insertion  https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
 16. Is subsequence - https://leetcode.com/problems/is-subsequence/description/
 17. Matrix chain memoize - https://practice.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1
+18. Min cut II / Palindromic partitioning - https://leetcode.com/problems/palindrome-partitioning-ii/

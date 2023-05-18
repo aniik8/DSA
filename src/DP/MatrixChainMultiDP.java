@@ -75,11 +75,11 @@ public class MatrixChainMultiDP {
         }
         return true;
     }
-    // Minimum cut memoize 
+    // Minimum cut memoize
     static int minCutMemoize(String s){
         return checkPalinMemoize(s, 0, s.length());
     }
-
+// problem with first input of gfg ques...
     static int checkPalinMemoize(String s, int i, int j){
         if(i >= j) return 0;
         if(t[i][j] != -1) return t[i][j];
@@ -94,4 +94,36 @@ public class MatrixChainMultiDP {
         t[i][j] = min;
         return min;
     }
+    // optimized function for check Palindrome memoize for interview bit problem
+// BASICALLy here we can see that we instead of checking the input in table from (i,k) we re checking it only one time
+// that can be a slow process.
+    static int checkPalinMemoize_Updated(String s, int i, int j){
+        if(i >= j) return 0;
+        if(t[i][j] != -1) return t[i][j];
+        if(isPalindrome(s, i, j)) return 0;
+        int min = Integer.MAX_VALUE, left, right;
+        for (int k = i; k < j-1; k++) {
+            if(t[i][k] != -1)
+                left = t[i][k];
+            else {
+                left = checkPalinMemoize_Updated(s, i, k);
+                t[i][k] = left;
+
+            }
+
+            if(t[k+1][j] != -1)
+                right = t[k+1][j];
+            else {
+                right = checkPalinMemoize_Updated(s, k + 1, j);
+                t[i][k] = right;
+            }
+            int temp = left + right + 1;
+            if(min > temp){
+                min = temp;
+            }
+        }
+        t[i][j] = min;
+        return min;
+    }
 }
+
