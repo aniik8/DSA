@@ -11,7 +11,7 @@ public class MatrixChainMultiDP {
         int[] arr = {10, 30, 5, 60};
         int N = 4;
 //        System.out.println(matrixMultiplication(N, arr));
-        System.out.println(minCut("aab"));
+        System.out.println(minCutMemoize("aaabba"));
     }
 
     static int matrixMultiplication(int N, int arr[])
@@ -56,22 +56,42 @@ public class MatrixChainMultiDP {
         if(i > j) return 0;
         if(isPalindrome(s, i, j))
             return 0;
-        int min = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
         for (int k = i; k <= j-1; k++) {
-            int temp = 1 +  checkPalin(s, i, k) + checkPalin(s,k+1, j) ;
-            if(min > temp){
+            int temp = 1 + checkPalin(s, i, k) + checkPalin(s,k+1, j) ;
+            if(temp < min){
                 min = temp;
             }
         }
         return min;
     }
     static boolean isPalindrome(String s, int i, int j ){
-        int subNum = 1;
-        for (int k = i; k < j; k++) {
-            if(s.charAt(i) != s.charAt(j-subNum)){
-                return false;
+        if(i == j)return true;
+        while(i < j){
+            if(s.charAt(i) != s.charAt(j-1)){
+                return  false;
             }
+            i++; j--;
         }
         return true;
+    }
+    // Minimum cut memoize 
+    static int minCutMemoize(String s){
+        return checkPalinMemoize(s, 0, s.length());
+    }
+
+    static int checkPalinMemoize(String s, int i, int j){
+        if(i >= j) return 0;
+        if(t[i][j] != -1) return t[i][j];
+        if(isPalindrome(s, i, j)) return 0;
+        int min  = Integer.MAX_VALUE;
+        for (int k = i; k < j-1; k++) {
+            int temp =  checkPalinMemoize(s, i, k) + checkPalinMemoize(s, k+1, j)+1;
+            if(temp < min){
+                min = temp;
+            }
+        }
+        t[i][j] = min;
+        return min;
     }
 }
