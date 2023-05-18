@@ -10,7 +10,8 @@ public class MatrixChainMultiDP {
         }
         int[] arr = {10, 30, 5, 60};
         int N = 4;
-        System.out.println(matrixMultiplication(N, arr));
+//        System.out.println(matrixMultiplication(N, arr));
+        System.out.println(minCut("aab"));
     }
 
     static int matrixMultiplication(int N, int arr[])
@@ -47,5 +48,30 @@ public class MatrixChainMultiDP {
         t[i][j] = min;
         return min;
 
+    }
+    static int minCut(String s) {
+        return checkPalin(s, 0, s.length());
+    }
+    static int checkPalin(String s, int i, int j){
+        if(i > j) return 0;
+        if(isPalindrome(s, i, j))
+            return 0;
+        int min = Integer.MIN_VALUE;
+        for (int k = i; k <= j-1; k++) {
+            int temp = 1 +  checkPalin(s, i, k) + checkPalin(s,k+1, j) ;
+            if(min > temp){
+                min = temp;
+            }
+        }
+        return min;
+    }
+    static boolean isPalindrome(String s, int i, int j ){
+        int subNum = 1;
+        for (int k = i; k < j; k++) {
+            if(s.charAt(i) != s.charAt(j-subNum)){
+                return false;
+            }
+        }
+        return true;
     }
 }
