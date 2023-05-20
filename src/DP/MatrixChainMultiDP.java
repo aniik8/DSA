@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class MatrixChainMultiDP {
     static int[][] t = new int[500][500];
-    static String s = "T|T&F^T";
+    static String s = "T|F^F&T|F^F^F^T|T&T^T|F^T^F&F^T|T^F";
     static int N = s.length();
     static int[][][] tp = new int[N+1][N+1][2];
     public static void main(String[] args) {
@@ -23,7 +23,8 @@ public class MatrixChainMultiDP {
             for (int col[] : row)
                 Arrays.fill(col, -1);
         }
-        System.out.println(countWays(s.length(), s));
+//        System.out.println(countWays(s.length(), s));
+        System.out.println(superEggDrop(1, 2));
     }
 
     static int matrixMultiplication(int N, int arr[])
@@ -160,71 +161,58 @@ public class MatrixChainMultiDP {
         int leftTrue, rightTrue, leftFalse, rightFalse;
         int temp_ans = 0;
 
-        for (int k = i + 1; k <= j - 1; k = k + 2)
-        {
+        for (int k = i + 1; k <= j - 1; k = k + 2) {
 
-             // Count number of True in left Partition
-            if(tp[i][k-1][1] != -1 ){
-                leftTrue = tp[i][k-1][1];
-            }
-              else   leftTrue = countTrueMemoize(i, k - 1, S,1, dp);
+            // Count number of True in left Partition
+            if (tp[i][k - 1][1] != -1) {
+                leftTrue = tp[i][k - 1][1];
+            } else leftTrue = countTrueMemoize(i, k - 1, S, 1, dp);
 
-                // Count number of False in left Partition
-            if(tp[i][k-1][0] != -1)
-                leftFalse = tp[i][k-1][0];
+            // Count number of False in left Partition
+            if (tp[i][k - 1][0] != -1)
+                leftFalse = tp[i][k - 1][0];
             else
-                leftFalse = countTrueMemoize( i, k - 1, S,0,dp);
+                leftFalse = countTrueMemoize(i, k - 1, S, 0, dp);
 
-                // Count number of True in right Partition
-            if(tp[k+1][j][1] != -1)
-                rightTrue = tp[k+1][j][1];
+            // Count number of True in right Partition
+            if (tp[k + 1][j][1] != -1)
+                rightTrue = tp[k + 1][j][1];
             else
-                rightTrue = countTrueMemoize(k + 1, j, S,1,dp);
+                rightTrue = countTrueMemoize(k + 1, j, S, 1, dp);
 
-                // Count number of False in right Partition
-            if(tp[k+1][j][0] != -1)
-                rightFalse = tp[k+1][j][0];
+            // Count number of False in right Partition
+            if (tp[k + 1][j][0] != -1)
+                rightFalse = tp[k + 1][j][0];
             else
-                rightFalse = countTrueMemoize(k + 1, j,S,0,dp);
+                rightFalse = countTrueMemoize(k + 1, j, S, 0, dp);
             // Evaluate AND operation
-            if (S.charAt(k) == '&')
-            {
-                if (isTrue == 1)
-                {
+            if (S.charAt(k) == '&') {
+                if (isTrue == 1) {
                     temp_ans += leftTrue * rightTrue;
-                }
-                else
-                {
+                } else {
                     temp_ans += leftTrue * rightFalse + leftFalse * rightTrue + leftFalse * rightFalse;
                 }
             }
             // Evaluate OR operation
-            else if (S.charAt(k) == '|')
-            {
-                if (isTrue == 1)
-                {
+            else if (S.charAt(k) == '|') {
+                if (isTrue == 1) {
                     temp_ans += leftTrue * rightTrue + leftTrue * rightFalse + leftFalse * rightTrue;
-                }
-                else
-                {
+                } else {
                     temp_ans += leftFalse * rightFalse;
                 }
             }
 
             // Evaluate XOR operation
-            else if (S.charAt(k) == '^')
-            {
-                if (isTrue == 1)
-                {
+            else if (S.charAt(k) == '^') {
+                if (isTrue == 1) {
                     temp_ans += leftTrue * rightFalse + leftFalse * rightTrue;
-                }
-                else
-                {
+                } else {
                     temp_ans += leftTrue * rightTrue + leftFalse * rightFalse;
                 }
             }
+
+            tp[i][j][isTrue] = temp_ans;
         }
-        tp[i][j][isTrue] = temp_ans;
         return temp_ans;
 
     }
@@ -304,5 +292,15 @@ static int countTrue(int i, int j, String S, int isTrue){
     return temp_ans;
 
 }
+    public static  int superEggDrop(int k, int n) {
+            if(n == 1) return k;
+            if(k == 0 || k == 1) return k;
+            int min = Integer.MAX_VALUE, temp;
+        for (int i = 1; i <= k; i++) {
+            temp = 1 + Math.max(superEggDrop(i-1, n-1), superEggDrop(k-i, n));
+            min = Math.min(temp, min);
+        }
+        return min;
+    }
 }
 
