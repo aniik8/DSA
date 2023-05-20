@@ -1,7 +1,12 @@
 package DP;
 
+import java.util.Arrays;
+
 public class MatrixChainMultiDP {
     static int[][] t = new int[500][500];
+    static String s = "T|T&F^T";
+    static int N = s.length();
+    static int[][][] tp = new int[N+1][N+1][2];
     public static void main(String[] args) {
         for (int i = 0; i < 500; i++) {
             for (int j = 0; j < 500; j++) {
@@ -9,10 +14,15 @@ public class MatrixChainMultiDP {
             }
         }
         int[] arr = {10, 30, 5, 60};
-        int N = 4;
-        String s = "T|T&F^T";
+
+
 //        System.out.println(matrixMultiplication(N, arr));
 //        System.out.println(minCutMemoize("aaabba"));
+         // 2 because of isTrue can only have 1 or 0
+        for (int row[][] : tp) {
+            for (int col[] : row)
+                Arrays.fill(col, -1);
+        }
         System.out.println(countWays(s.length(), s));
     }
 
@@ -129,12 +139,12 @@ public class MatrixChainMultiDP {
     }
     // Boolean Parenthesization
     static int countWays(int N, String S){
-        return countTrue(0,  N, S, 1);
+        return countTrueMemoize(0,  N-1, S, 1, tp);
     }
-    static int countTrue(int i, int j, String S, int isTrue){
+    static int countTrueMemoize(int i, int j, String S, int isTrue, int[][][] dp){
         if (i > j)
             return 0;
-
+        // base condition
         if (i == j)
         {
             if (isTrue == 1)
@@ -146,6 +156,7 @@ public class MatrixChainMultiDP {
                 return (S.charAt(i) == 'F') ? 1 : 0;
             }
         }
+        if(tp[i][j][isTrue] != -1) return tp[i][j][isTrue];
         int leftTrue, rightTrue, leftFalse, rightFalse;
         int temp_ans = 0;
 
@@ -153,35 +164,38 @@ public class MatrixChainMultiDP {
         {
 
              // Count number of True in left Partition
-                leftTrue = countTrue(i, k - 1, S,
-                        1);
+            if(tp[i][k-1][1] != -1 ){
+                leftTrue = tp[i][k-1][1];
+            }
+              else   leftTrue = countTrueMemoize(i, k - 1, S,1, dp);
 
                 // Count number of False in left Partition
-                leftFalse = countTrue( i, k - 1,
-                         S,0);
-
+            if(tp[i][k-1][0] != -1)
+                leftFalse = tp[i][k-1][0];
+            else
+                leftFalse = countTrueMemoize( i, k - 1, S,0,dp);
 
                 // Count number of True in right Partition
-                rightTrue = countTrue(k + 1, j,
-                        S,1);
+            if(tp[k+1][j][1] != -1)
+                rightTrue = tp[k+1][j][1];
+            else
+                rightTrue = countTrueMemoize(k + 1, j, S,1,dp);
 
                 // Count number of False in right Partition
-                rightFalse = countTrue(k + 1,
-                        j,S,0 );
-
+            if(tp[k+1][j][0] != -1)
+                rightFalse = tp[k+1][j][0];
+            else
+                rightFalse = countTrueMemoize(k + 1, j,S,0,dp);
             // Evaluate AND operation
             if (S.charAt(k) == '&')
             {
                 if (isTrue == 1)
                 {
-                    temp_ans  = temp_ans + leftTrue * rightTrue;
+                    temp_ans += leftTrue * rightTrue;
                 }
                 else
                 {
-                    temp_ans = temp_ans
-                            + leftTrue * rightFalse
-                            + leftFalse * rightTrue
-                            + leftFalse * rightFalse;
+                    temp_ans += leftTrue * rightFalse + leftFalse * rightTrue + leftFalse * rightFalse;
                 }
             }
             // Evaluate OR operation
@@ -189,15 +203,11 @@ public class MatrixChainMultiDP {
             {
                 if (isTrue == 1)
                 {
-                    temp_ans = temp_ans
-                            + leftTrue * rightTrue
-                            + leftTrue * rightFalse
-                            + leftFalse * rightTrue;
+                    temp_ans += leftTrue * rightTrue + leftTrue * rightFalse + leftFalse * rightTrue;
                 }
                 else
                 {
-                    temp_ans
-                            = temp_ans + leftFalse * rightFalse;
+                    temp_ans += leftFalse * rightFalse;
                 }
             }
 
@@ -206,21 +216,93 @@ public class MatrixChainMultiDP {
             {
                 if (isTrue == 1)
                 {
-                    temp_ans = temp_ans
-                            + leftTrue * rightFalse
-                            + leftFalse * rightTrue;
+                    temp_ans += leftTrue * rightFalse + leftFalse * rightTrue;
                 }
                 else
                 {
-                    temp_ans = temp_ans
-                            + leftTrue * rightTrue
-                            + leftFalse * rightFalse;
+                    temp_ans += leftTrue * rightTrue + leftFalse * rightFalse;
                 }
             }
         }
+        tp[i][j][isTrue] = temp_ans;
         return temp_ans;
 
     }
+// memoize version of the problem above
+static int countTrue(int i, int j, String S, int isTrue){
+    if (i > j)
+        return 0;
+    // base condition
+    if (i == j)
+    {
+        if (isTrue == 1)
+        {
+            return (S.charAt(i) == 'T') ? 1 : 0;
+        }
+        else
+        {
+            return (S.charAt(i) == 'F') ? 1 : 0;
+        }
+    }
+    int leftTrue, rightTrue, leftFalse, rightFalse;
+    int temp_ans = 0;
 
+    for (int k = i + 1; k <= j - 1; k = k + 2)
+    {
+
+        // Count number of True in left Partition
+        leftTrue = countTrue(i, k - 1, S,1);
+
+        // Count number of False in left Partition
+        leftFalse = countTrue( i, k - 1, S,0);
+
+
+        // Count number of True in right Partition
+        rightTrue = countTrue(k + 1, j, S,1);
+
+        // Count number of False in right Partition
+        rightFalse = countTrue(k + 1, j,S,0 );
+
+        // Evaluate AND operation
+        if (S.charAt(k) == '&')
+        {
+            if (isTrue == 1)
+            {
+                temp_ans += leftTrue * rightTrue;
+            }
+            else
+            {
+                temp_ans += leftTrue * rightFalse + leftFalse * rightTrue + leftFalse * rightFalse;
+            }
+        }
+        // Evaluate OR operation
+        else if (S.charAt(k) == '|')
+        {
+            if (isTrue == 1)
+            {
+                temp_ans += leftTrue * rightTrue + leftTrue * rightFalse + leftFalse * rightTrue;
+            }
+            else
+            {
+                temp_ans += leftFalse * rightFalse;
+            }
+        }
+
+        // Evaluate XOR operation
+        else if (S.charAt(k) == '^')
+        {
+            if (isTrue == 1)
+            {
+                temp_ans += leftTrue * rightFalse + leftFalse * rightTrue;
+            }
+            else
+            {
+                temp_ans += leftTrue * rightTrue + leftFalse * rightFalse;
+            }
+        }
+    }
+    return temp_ans;
+
+}
 }
 
