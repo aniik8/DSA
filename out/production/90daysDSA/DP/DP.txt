@@ -15,9 +15,13 @@ https://leetcode.com/problems/coin-change/
 10. print longest common subsequence - (https://www.geeksforgeeks.org/printing-longest-common-subsequence/)
 11. Shortest Common Supersequence - (https://practice.geeksforgeeks.org/problems/shortest-common-supersequence0322/1)
 12. Minimum number of deletions and insertions.(https://practice.geeksforgeeks.org/problems/minimum-number-of-deletions-and-insertions0209/1)
-13. (todo) Deletion - https://leetcode.com/problems/delete-operation-for-two-strings/.
+13.  Deletion - https://leetcode.com/problems/delete-operation-for-two-strings/.
 14. Longest Palindromic Subsequence - https://leetcode.com/problems/longest-palindromic-subsequence/submissions/
 15. (Hard)easy Minimum insertion  https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
 16. Is subsequence - https://leetcode.com/problems/is-subsequence/description/
 17. Matrix chain memoize - https://practice.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1
 18. Min cut II / Palindromic partitioning - https://leetcode.com/problems/palindrome-partitioning-ii/
+19. todo Scrambled string https://leetcode.com/problems/scramble-string/
+20. todo https://practice.geeksforgeeks.org/problems/scrambled-string/1
+21. todo https://practice.geeksforgeeks.org/problems/boolean-parenthesization5610/1
+22. todo https://leetcode.com/problems/super-egg-drop/
