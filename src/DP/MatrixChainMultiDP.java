@@ -31,7 +31,7 @@ public class MatrixChainMultiDP {
                 Arrays.fill(col, -1);
         }
 //        System.out.println(countWays(s.length(), s));
-        System.out.println(superEggDropMemoized(3, 14));
+        System.out.println(superEggDropMemoized_Optimized(3, 14));
     }
 
     static int matrixMultiplication(int N, int arr[])
@@ -317,6 +317,32 @@ static int countTrue(int i, int j, String S, int isTrue){
         int min = Integer.MAX_VALUE;
         for (int i = 1; i <= n; i++) {
             int temp = 1 + Math.max(superEggDropMemoized(k-1, i-1), superEggDropMemoized(k, n-i));
+            min = Math.min(temp, min);
+
+        }
+        tdp[n][k] = min;
+        return min;
+    }
+    // Memoized optimized
+    public static  int superEggDropMemoized_Optimized(int k, int n) {
+        if(k == 1) return n;
+        if(n == 0 || n == 1) return n;
+        if(tdp[k][n] != -1) return tdp[k][n];
+        int min = Integer.MAX_VALUE, low, high;
+        for (int i = 1; i <= n; i++) {
+            if(tdp[k-1][i-1] != -1)
+                low = tdp[k-1][i-1];
+            else {
+                low = superEggDropMemoized(k - 1, i - 1);
+                tdp[k-1][i-1] = low;
+            }
+            if(tdp[k][n-i] != -1)
+                high = tdp[k][n-i];
+            else {
+                high = superEggDropMemoized(k, n-i);
+                tdp[k-1][i-1] = high;
+            }
+            int temp = 1 + Math.max(low, high);
             min = Math.min(temp, min);
 
         }
