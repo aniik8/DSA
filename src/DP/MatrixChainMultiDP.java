@@ -31,7 +31,7 @@ public class MatrixChainMultiDP {
                 Arrays.fill(col, -1);
         }
 //        System.out.println(countWays(s.length(), s));
-        System.out.println(superEggDropMemoized_Optimized(3, 14));
+        System.out.println(solve(3, 14));
     }
 
     static int matrixMultiplication(int N, int arr[])
@@ -325,28 +325,54 @@ static int countTrue(int i, int j, String S, int isTrue){
     }
     // Memoized optimized
     public static  int superEggDropMemoized_Optimized(int k, int n) {
-        if(k == 1) return n;
-        if(n == 0 || n == 1) return n;
-        if(tdp[k][n] != -1) return tdp[k][n];
+        if (k == 1) return n;
+        if (n == 0 || n == 1) return n;
+        if (tdp[k][n] != -1) return tdp[k][n];
         int min = Integer.MAX_VALUE, low, high;
         for (int i = 1; i <= n; i++) {
-            if(tdp[k-1][i-1] != -1)
-                low = tdp[k-1][i-1];
+            if (tdp[k - 1][i - 1] != -1)
+                low = tdp[k - 1][i - 1];
             else {
                 low = superEggDropMemoized(k - 1, i - 1);
-                tdp[k-1][i-1] = low;
+                tdp[k - 1][i - 1] = low;
             }
-            if(tdp[k][n-i] != -1)
-                high = tdp[k][n-i];
+            if (tdp[k][n - i] != -1)
+                high = tdp[k][n - i];
             else {
-                high = superEggDropMemoized(k, n-i);
-                tdp[k-1][i-1] = high;
+                high = superEggDropMemoized(k, n - i);
+                tdp[k - 1][i - 1] = high;
             }
             int temp = 1 + Math.max(low, high);
             min = Math.min(temp, min);
 
         }
         tdp[n][k] = min;
+        return min;
+    }
+    static int solve(int k, int n){
+        if(k == 1) return n;
+        if(n == 0 || n == 1) return n;
+        if(tdp[k][n] != -1) return tdp[k][n];
+        int min = Integer.MAX_VALUE,temp;
+        int l=1,r=n;
+        while(l<=r)
+        {
+            int mid=(l+r)/2;
+            int left = solve(k-1,mid-1);
+            int right = solve(k,n-mid);
+            temp = 1 + Math.max(left,right);
+            if(left<right)
+            {
+                l=mid+1;
+            }
+            else
+            {
+                r=mid-1;
+            }
+            min = Math.min(min,temp);
+            tdp[k][n] = min;
+        }
+
         return min;
     }
 }
