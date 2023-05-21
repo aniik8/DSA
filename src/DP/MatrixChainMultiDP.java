@@ -6,8 +6,15 @@ public class MatrixChainMultiDP {
     static int[][] t = new int[500][500];
     static String s = "T|F^F&T|F^F^F^T|T&T^T|F^T^F&F^T|T^F";
     static int N = s.length();
+    static int[][] tdp = new int[101][10001];
+
     static int[][][] tp = new int[N+1][N+1][2];
     public static void main(String[] args) {
+        for (int i = 0; i < 101; i++) {
+            for (int j = 0; j < 10001; j++) {
+                tdp[i][j] = -1;
+            }
+        }
         for (int i = 0; i < 500; i++) {
             for (int j = 0; j < 500; j++) {
                 t[i][j] = -1;
@@ -24,7 +31,7 @@ public class MatrixChainMultiDP {
                 Arrays.fill(col, -1);
         }
 //        System.out.println(countWays(s.length(), s));
-        System.out.println(superEggDrop(1, 2));
+        System.out.println(superEggDropMemoized(3, 14));
     }
 
     static int matrixMultiplication(int N, int arr[])
@@ -292,14 +299,28 @@ static int countTrue(int i, int j, String S, int isTrue){
     return temp_ans;
 
 }
+// k floor, n eggs
     public static  int superEggDrop(int k, int n) {
-            if(n == 1) return k;
-            if(k == 0 || k == 1) return k;
-            int min = Integer.MAX_VALUE, temp;
-        for (int i = 1; i <= k; i++) {
-            temp = 1 + Math.max(superEggDrop(i-1, n-1), superEggDrop(k-i, n));
+            if(k == 1) return n;
+            if(n == 0 || n == 1) return n;
+            int min = Integer.MAX_VALUE;
+        for (int i = 1; i <= n; i++) {
+            int temp = 1 + Math.max(superEggDrop(k-1, i-1), superEggDrop(k, n-i));
             min = Math.min(temp, min);
         }
+        return min;
+    }
+    public static  int superEggDropMemoized(int k, int n) {
+        if(k == 1) return n;
+        if(n == 0 || n == 1) return n;
+        if(tdp[k][n] != -1) return tdp[k][n];
+        int min = Integer.MAX_VALUE;
+        for (int i = 1; i <= n; i++) {
+            int temp = 1 + Math.max(superEggDropMemoized(k-1, i-1), superEggDropMemoized(k, n-i));
+            min = Math.min(temp, min);
+
+        }
+        tdp[n][k] = min;
         return min;
     }
 }
