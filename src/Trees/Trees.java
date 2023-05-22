@@ -16,6 +16,20 @@ public class Trees {
         root.rightChild = insertionInTree();
         return root;
     }
+    private List<Integer> res = new ArrayList<>();
+    public List<Integer> inorderTraversal(TreeNode root) {
+        traverse(root);
+        return res;
+    }
+
+    private void traverse(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        traverse(root.leftChild);
+        res.add(root.key);
+        traverse(root.rightChild);
+    }
 }
 class TreeNode{
     TreeNode leftChild, rightChild;
