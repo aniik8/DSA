@@ -2,39 +2,44 @@ package Trees;
 import java.util.*;
 public class Trees {
     public static void main(String[] args) {
-
-    }
-    static TreeNode insertionInTree(){
-        TreeNode root = null;
-        Scanner sc = new Scanner(System.in);
-        int key = sc.nextInt();
-        root = new TreeNode(key);
-        // Now to insert left child and right child, we'll call this function again for left as well as right child;
-        System.out.println("Enter the left Child");
-        root.leftChild = insertionInTree();
-        System.out.println("Enter the right Child");
-        root.rightChild = insertionInTree();
-        return root;
-    }
-    private List<Integer> res = new ArrayList<>();
-    public List<Integer> inorderTraversal(TreeNode root) {
-        traverse(root);
-        return res;
+        BinaryTree tree = new BinaryTree();
+        tree.insert(12);
+        tree.insert(14);
+        tree.insert(19);
+        tree.insert(1);
+        tree.insert(20);
     }
 
-    private void traverse(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        traverse(root.leftChild);
-        res.add(root.key);
-        traverse(root.rightChild);
-    }
 }
 class TreeNode{
     TreeNode leftChild, rightChild;
     int key;
     TreeNode(int key){
         this.key = key;
+        this.leftChild = null;
+        this.rightChild = null;
     }
+}
+class BinaryTree{
+    TreeNode root = null;
+    BinaryTree(){
+        this.root = null;
+    }
+    public void insert(int data){
+        if(root == null){
+            root = new TreeNode(data);
+            return;
+        }
+        insertionIntree(root, data);
+    }
+    public void insertionIntree(TreeNode root, int data){
+        if(root.leftChild == null){
+            root.leftChild = new TreeNode(data);
+        }
+        else if(root.rightChild == null)
+            root.rightChild = new TreeNode(data);
+        else
+            insertionIntree(root.leftChild, data);
+    }
+    
 }
