@@ -6,8 +6,12 @@ public class Trees {
         tree.insert(12);
         tree.insert(14);
         tree.insert(19);
-        tree.insert(1);
-        tree.insert(20);
+//        tree.insert(1);
+//        tree.insert(20);
+//        tree.insert(10);
+//        tree.insert(190);
+//        BinaryTree.print(1);
+        System.out.println(BinaryTree.heightOftree(BinaryTree.root));
     }
 
 }
@@ -21,7 +25,7 @@ class TreeNode{
     }
 }
 class BinaryTree{
-    TreeNode root = null;
+    static TreeNode root = null;
     BinaryTree(){
         this.root = null;
     }
@@ -41,5 +45,25 @@ class BinaryTree{
         else
             insertionIntree(root.leftChild, data);
     }
-    
+    // Traversal of Binary tree;
+    // Level order - BFS
+    // inorder pre order post order - DFS
+    static void PrintLevelOrder(TreeNode node, int level){
+        if(node == null){
+            return;
+        }
+        else if(level == 1){
+            System.out.println(node.key);
+            return;
+        }
+        PrintLevelOrder(node.leftChild, level-1);
+        PrintLevelOrder(node.rightChild, level-1);
+    }
+    static void print(int level){
+        while(level <= 4) {
+            PrintLevelOrder(root, level);
+            level++;
+        }
+    }
+
 }
