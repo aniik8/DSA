@@ -6,12 +6,13 @@ public class Trees {
         tree.insert(12);
         tree.insert(14);
         tree.insert(19);
-//        tree.insert(1);
-//        tree.insert(20);
-//        tree.insert(10);
-//        tree.insert(190);
+        tree.insert(1);
+        tree.insert(20);
+        tree.insert(10);
+        tree.insert(190);
 //        BinaryTree.print(1);
-        System.out.println(BinaryTree.heightOftree(BinaryTree.root));
+//        System.out.println(BinaryTree.heightOftree(BinaryTree.root));
+        System.out.println(BinaryTree.levelOrder(BinaryTree.root));
     }
 
 }
@@ -65,5 +66,25 @@ class BinaryTree{
             level++;
         }
     }
-
+    public static ArrayList <Integer> levelOrder(TreeNode node)
+    {   int height = heightOftree(node);
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= height; i++) {
+            levelOrderTree(node, i, list);
+        }
+        return list;
+    }
+    public static void levelOrderTree(TreeNode node, int level, ArrayList<Integer> list){
+        if(node == null)
+            return;
+        else if(level == 1) {
+            list.add(node.key);
+            return;
+        }
+        levelOrderTree(node.leftChild, level-1, list);
+        levelOrderTree(node.rightChild, level-1, list);
+    }
+    static int heightOftree(TreeNode node){
+        return node == null ? 0 : Math.max(heightOftree(node.leftChild), heightOftree(node.rightChild))+1;
+    }
 }
