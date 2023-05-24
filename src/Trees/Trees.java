@@ -129,4 +129,24 @@ class BinaryTree{
         PostOrderTraversal(root.rightChild, list);
         list.add(root.key);
     }
+    public List<List<Integer>> levelOrderr(TreeNode node) {
+        int height = heightOftree(node);
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 1; i <= height; i++) {
+            levelOrderTrees(node, i, list);
+        }
+        return list;
+    }
+    public static void levelOrderTrees(TreeNode node, int level, List<List<Integer>> list){
+        if(node == null)
+            return;
+        else if(level == 1) {
+            List<Integer>li=new ArrayList<>();
+            li.add(node.key);
+            list.add(li);
+            return;
+        }
+        levelOrderTrees(node.leftChild, level-1, list);
+        levelOrderTrees(node.rightChild, level-1, list);
+    }
 }
