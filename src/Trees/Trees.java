@@ -101,5 +101,18 @@ class BinaryTree{
         list.add(root.key);
         inOrderTraversal(root.rightChild, list);
     }
+    static ArrayList<Integer> preorder(TreeNode root)
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        PreOrderTraversal(root, list);
+        return list;
 
+    }
+    static void PreOrderTraversal(TreeNode root, ArrayList<Integer> list){
+        if(root == null)
+            return;
+        list.add(root.key);
+        PreOrderTraversal(root.leftChild, list);
+        PreOrderTraversal(root.rightChild, list);
+    }
 }
