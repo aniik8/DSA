@@ -11,8 +11,9 @@ public class Trees {
         tree.insert(10);
         tree.insert(190);
 //        BinaryTree.print(1);
-//        System.out.println(BinaryTree.heightOftree(BinaryTree.root));
-        System.out.println(BinaryTree.levelOrder(BinaryTree.root));
+        System.out.println(BinaryTree.heightOftree(BinaryTree.root));
+//        System.out.println(BinaryTree.levelOrder(BinaryTree.root));
+        System.out.println(BinaryTree.inOrder(BinaryTree.root));
     }
 
 }
@@ -87,4 +88,18 @@ class BinaryTree{
     static int heightOftree(TreeNode node){
         return node == null ? 0 : Math.max(heightOftree(node.leftChild), heightOftree(node.rightChild))+1;
     }
+    // breadth first search
+    static ArrayList<Integer> inOrder(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+      inOrderTraversal(root, list);
+      return list;
+    }
+    static void inOrderTraversal(TreeNode root, ArrayList<Integer> list){
+        if(root == null)
+            return;
+        inOrderTraversal(root.leftChild, list);
+        list.add(root.key);
+        inOrderTraversal(root.rightChild, list);
+    }
+
 }
