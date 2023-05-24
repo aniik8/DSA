@@ -115,4 +115,18 @@ class BinaryTree{
         PreOrderTraversal(root.leftChild, list);
         PreOrderTraversal(root.rightChild, list);
     }
+    ArrayList<Integer> postOrder(TreeNode root)
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        PostOrderTraversal(root, list);
+        return list;
+    }
+    static void PostOrderTraversal(TreeNode root, ArrayList<Integer> list){
+        if(root == null)
+            return;
+
+        PostOrderTraversal(root.leftChild, list);
+        PostOrderTraversal(root.rightChild, list);
+        list.add(root.key);
+    }
 }
