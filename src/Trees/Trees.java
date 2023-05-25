@@ -149,7 +149,7 @@ class BinaryTree{
         levelOrderTrees(node.leftChild, level-1, list);
         levelOrderTrees(node.rightChild, level-1, list);
     }
-    // Diagonal Traversal of Binary Tree 
+    // Diagonal Traversal of Binary Tree
     public ArrayList<Integer> diagonal(TreeNode root)
     {
         ArrayList<Integer> list = new ArrayList<>();
@@ -173,4 +173,57 @@ class BinaryTree{
         }
         return list;
     }
+
+    // Boundary Traversal of binary tree
+    public ArrayList <Integer> boundary(TreeNode node)
+    {   ArrayList<Integer> list = new ArrayList<>();
+        if(!isLeaf(node)){
+            list.add(node.key);
+        }
+        leftNodes(node, list);
+        rightNodes(node, list);
+        addleaves(node, list);
+        return list;
+    }
+    static void leftNodes(TreeNode node, ArrayList<Integer> list){
+        node = node.leftChild;
+        while(node != null){
+            if(!isLeaf(node))
+                list.add(node.key);
+            if(node.leftChild != null)
+                node = node.leftChild;
+            else
+                node = node.rightChild;
+        }
+    }
+    static void rightNodes(TreeNode node, ArrayList<Integer> list){
+        Stack<Integer> stack = new Stack<>();
+        node = node.rightChild;
+        while(node != null){
+            if(!isLeaf(node))
+                stack.push(node.key);
+            if(node.rightChild != null)
+                node = node.rightChild;
+            else
+                node = node.leftChild;
+        }
+        // anticlockwise operation.
+        while(!stack.isEmpty()){
+            list.add(stack.peek());
+            stack.pop();
+        }
+    }
+    static void addleaves(TreeNode node, ArrayList<Integer> list){
+            if(node == null)
+                return;
+            if(isLeaf(node)){
+                list.add(node.key);
+            }
+            addleaves(node.leftChild, list);
+            addleaves(node.rightChild, list);
+    }
+    static boolean isLeaf(TreeNode node){
+        return node.leftChild == null && node.rightChild == null;
+    }
+
 }
