@@ -149,4 +149,28 @@ class BinaryTree{
         levelOrderTrees(node.leftChild, level-1, list);
         levelOrderTrees(node.rightChild, level-1, list);
     }
+    // Diagonal Traversal of Binary Tree 
+    public ArrayList<Integer> diagonal(TreeNode root)
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        TreeNode node = root;
+        while(node != null){
+            list.add(node.key);
+            if(node.leftChild != null)
+                queue.add(node.leftChild);
+            if(node.rightChild != null)
+                node = node.rightChild;
+            else{
+                if(!queue.isEmpty()) {
+                    node = queue.peek();
+                    queue.remove();
+                }else{
+                    node = null;
+                }
+
+            }
+        }
+        return list;
+    }
 }
