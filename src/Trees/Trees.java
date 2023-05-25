@@ -225,5 +225,22 @@ class BinaryTree{
     static boolean isLeaf(TreeNode node){
         return node.leftChild == null && node.rightChild == null;
     }
+    // Zigzag traversal of binary tree -- just this function is changed a bit other than that everything is same
+    public static void zigzagOrderTree(TreeNode node, int level, ArrayList<Integer> list,boolean leftorright){
+        if(node == null)
+            return;
+        else if(level == 1) {
+            list.add(node.key);
+            return;
+        }
+        if(!leftorright)
+        {zigzagOrderTree(node.rightChild, level-1, list,leftorright);
+            zigzagOrderTree(node.leftChild, level-1, list,leftorright);
+
+        }
+        else{
+            zigzagOrderTree(node.leftChild, level-1, list,leftorright);
+            zigzagOrderTree(node.rightChild, level-1, list,leftorright);
+        }
 
 }
