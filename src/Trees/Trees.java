@@ -251,9 +251,9 @@ class BinaryTree{
         queue.add(root);
         while(!queue.isEmpty()){
             int n = queue.size();
-            for(int i = 1; i <= n; i++){
+            for(int i = 0; i < n; i++){
                 TreeNode node= queue.poll();
-                if(i == 1)
+                if(i == 0)
                     list.add(node.key);
                 if(node.leftChild != null)
                     queue.add(root.leftChild);
@@ -262,6 +262,28 @@ class BinaryTree{
             }
         }
         // Your code here
+        return list;
+    }
+
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if(root==null)return list;
+
+        Queue<TreeNode> queue = new LinkedList();
+        queue.add(root);
+        while(queue.isEmpty()==false){
+            int n = queue.size();
+            for(int i = 1; i <= n; i++){
+                TreeNode node = queue.poll();
+                if(i == 1)
+                    list.add(node.key);
+                if(node.rightChild != null)
+                    queue.add(node.rightChild);
+                if(node.leftChild != null)
+                    queue.add(node.leftChild);
+            }
+
+        }
         return list;
     }
 }
