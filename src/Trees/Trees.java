@@ -181,8 +181,9 @@ class BinaryTree{
             list.add(node.key);
         }
         leftNodes(node, list);
-        rightNodes(node, list);
         addleaves(node, list);
+        rightNodes(node, list);
+
         return list;
     }
     static void leftNodes(TreeNode node, ArrayList<Integer> list){
@@ -226,21 +227,41 @@ class BinaryTree{
         return node.leftChild == null && node.rightChild == null;
     }
     // Zigzag traversal of binary tree -- just this function is changed a bit other than that everything is same
-    public static void zigzagOrderTree(TreeNode node, int level, ArrayList<Integer> list,boolean leftorright){
-        if(node == null)
+    public static void zigzagOrderTree(TreeNode node, int level, ArrayList<Integer> list,boolean leftorright) {
+        if (node == null)
             return;
-        else if(level == 1) {
+        else if (level == 1) {
             list.add(node.key);
             return;
         }
-        if(!leftorright)
-        {zigzagOrderTree(node.rightChild, level-1, list,leftorright);
-            zigzagOrderTree(node.leftChild, level-1, list,leftorright);
+        if (!leftorright) {
+            zigzagOrderTree(node.rightChild, level - 1, list, leftorright);
+            zigzagOrderTree(node.leftChild, level - 1, list, leftorright);
 
+        } else {
+            zigzagOrderTree(node.leftChild, level - 1, list, leftorright);
+            zigzagOrderTree(node.rightChild, level - 1, list, leftorright);
         }
-        else{
-            zigzagOrderTree(node.leftChild, level-1, list,leftorright);
-            zigzagOrderTree(node.rightChild, level-1, list,leftorright);
+    }
+    // left view of an array list
+    ArrayList<Integer> leftView(TreeNode root)
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int n = queue.size();
+            for(int i = 1; i <= n; i++){
+                TreeNode node= queue.poll();
+                if(i == 1)
+                    list.add(node.key);
+                if(node.leftChild != null)
+                    queue.add(root.leftChild);
+                if(node.rightChild != null)
+                    queue.add(root.rightChild);
+            }
         }
-
+        // Your code here
+        return list;
+    }
 }
