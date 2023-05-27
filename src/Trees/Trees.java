@@ -286,4 +286,38 @@ class BinaryTree{
         }
         return list;
     }
+    static ArrayList<Integer> topView(TreeNode root)
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        Map<Integer, Integer> topViewMap = new TreeMap<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<Integer> horizontalDistances = new LinkedList<>();
+
+        queue.add(root);
+        horizontalDistances.add(0);
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            int horizontalDistance = horizontalDistances.poll();
+
+            if (!topViewMap.containsKey(horizontalDistance)) {
+                topViewMap.put(horizontalDistance, node.key);
+            }
+
+            if (node.leftChild != null) {
+                queue.add(node.leftChild);
+                horizontalDistances.add(horizontalDistance - 1);
+            }
+
+            if (node.rightChild != null) {
+                queue.add(node.rightChild);
+                horizontalDistances.add(horizontalDistance + 1);
+            }
+        }
+
+        for (int value : topViewMap.values()) {
+            list.add(value);
+        }
+        return list;
+    }
 }
