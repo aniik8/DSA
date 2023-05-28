@@ -395,5 +395,32 @@ class BinaryTree{
 
         return left+right;
     }
+    // inorder is giving error so using preorder (giving error for 1 N 2  2 N 1)
+    boolean isIdentical(TreeNode root1, TreeNode root2)
+    {
+        ArrayList<Integer> list1 = new ArrayList<>();
+        ArrayList<Integer> list2 = new ArrayList<>();
+        inTree1(root1, list1);
+        inTree2(root2, list2);
+        if(list1.size() != list2.size())
+            return false;
+        return list1.equals(list2);
+    }
+    void inTree1(TreeNode root1,ArrayList<Integer> list1){
+        if(root1 == null)
+            return;
+        list1.add(root1.key);
+        inTree1(root1.leftChild,list1);
+        inTree1(root1.rightChild,list1);
+
+    }
+    void inTree2(TreeNode root2,ArrayList<Integer> list2){
+        if(root2 == null)
+            return;
+        list2.add(root2.key);
+        inTree2(root2.leftChild, list2);
+        inTree2(root2.rightChild, list2);
+
+    }
 }
 //https://chaturbate.com/liza_wilsoon/
