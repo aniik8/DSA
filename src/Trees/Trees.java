@@ -350,4 +350,27 @@ class BinaryTree{
         }
         return list;
     }
+    int diameter(TreeNode root) {
+        // Your code here
+        if(root == null)
+            return 0;
+        int left = diameter(root.leftChild);
+        int right = diameter(root.rightChild);
+        int heights = heightOftree(root.leftChild) + heightOftree(root.rightChild)+1;
+        return Math.max(heights, Math.max(left, right));
+    }
+    // sum tree
+//    boolean isSumTree(TreeNode root)
+//    {
+//        return root.key == sumSubtree(root, 0, 0);
+//    }
+//    int sumSubtree(TreeNode root, int leftSum, int rightSum){
+//         if(root == null)
+//             return 0;
+//         if(root.rightChild == null)
+//             return 0;
+//         sumSubtree(root.leftChild, leftSum+root.leftChild.key, rightSum);
+//         sumSubtree(root.rightChild, leftSum,rightSum+root.rightChild.key);
+//         return leftSum+rightSum;
+//    }
 }
