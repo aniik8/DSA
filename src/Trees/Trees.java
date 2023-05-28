@@ -373,4 +373,16 @@ class BinaryTree{
 //         sumSubtree(root.rightChild, leftSum,rightSum+root.rightChild.key);
 //         return leftSum+rightSum;
 //    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null) return root;
+        if(root.key == p.key || root.key == q.key)return root;
+
+        TreeNode left = lowestCommonAncestor(root.leftChild, p, q);
+        TreeNode right = lowestCommonAncestor(root.rightChild, p, q);
+
+        if(left == null) return right;
+        if(right == null) return left;
+
+        return root;
+    }
 }
