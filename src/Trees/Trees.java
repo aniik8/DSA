@@ -359,20 +359,20 @@ class BinaryTree{
         int heights = heightOftree(root.leftChild) + heightOftree(root.rightChild)+1;
         return Math.max(heights, Math.max(left, right));
     }
-    // sum tree
-//    boolean isSumTree(TreeNode root)
-//    {
-//        return root.key == sumSubtree(root, 0, 0);
-//    }
-//    int sumSubtree(TreeNode root, int leftSum, int rightSum){
-//         if(root == null)
-//             return 0;
-//         if(root.rightChild == null)
-//             return 0;
-//         sumSubtree(root.leftChild, leftSum+root.leftChild.key, rightSum);
-//         sumSubtree(root.rightChild, leftSum,rightSum+root.rightChild.key);
-//         return leftSum+rightSum;
-//    }
+
+    boolean isSumTree(TreeNode root)
+    {
+        return root.key == sumSubtree(root, 0, 0);
+    }
+    int sumSubtree(TreeNode root, int leftSum, int rightSum){
+         if(root == null)
+             return 0;
+         if(root.rightChild == null)
+             return 0;
+         sumSubtree(root.leftChild, leftSum+root.leftChild.key, rightSum);
+         sumSubtree(root.rightChild, leftSum,rightSum+root.rightChild.key);
+         return leftSum+rightSum;
+    }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null) return root;
         if(root.key == p.key || root.key == q.key)return root;
