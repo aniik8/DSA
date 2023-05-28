@@ -385,4 +385,15 @@ class BinaryTree{
 
         return root;
     }
+    public int sumofNodes(TreeNode root){
+        if(root == null)
+            return 0;
+        if(root.leftChild == null && root.rightChild == null)
+            return root.key;
+        int left = sumofNodes(root.leftChild);
+        int right = sumofNodes(root.rightChild);
+
+        return left+right;
+    }
 }
+//https://chaturbate.com/liza_wilsoon/
