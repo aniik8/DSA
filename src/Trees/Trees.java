@@ -407,20 +407,33 @@ class BinaryTree{
         return list1.equals(list2);
     }
     void inTree1(TreeNode root1,ArrayList<Integer> list1){
-        if(root1 == null)
+        if(root1 == null) {
+            list1.add(0);
             return;
+        }
         list1.add(root1.key);
         inTree1(root1.leftChild,list1);
         inTree1(root1.rightChild,list1);
 
     }
     void inTree2(TreeNode root2,ArrayList<Integer> list2){
-        if(root2 == null)
+        if(root2 == null) {
+            list2.add(0);
             return;
+        }
         list2.add(root2.key);
         inTree2(root2.leftChild, list2);
         inTree2(root2.rightChild, list2);
 
+
     }
+    // is same tree using recursion
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null || q==null )
+            return p==q;
+
+        return (p.key==q.key) && isSameTree(p.leftChild,q.leftChild) && isSameTree(p.rightChild,q.rightChild);
+    }
+    
 }
 //https://chaturbate.com/liza_wilsoon/
