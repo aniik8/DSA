@@ -434,6 +434,15 @@ class BinaryTree{
 
         return (p.key==q.key) && isSameTree(p.leftChild,q.leftChild) && isSameTree(p.rightChild,q.rightChild);
     }
-    
+    // is symmertic
+    public boolean isSymmetric(TreeNode root) {
+        return isSymmetryOrNot(root.leftChild, root.rightChild);
+
+    }
+    boolean isSymmetryOrNot(TreeNode p, TreeNode q){
+        if(p==null || q==null )
+        { return p==q;}
+        return (p.key==q.key) && isSymmetryOrNot(p.leftChild,q.rightChild) && isSymmetryOrNot(p.rightChild,q.leftChild);
+    }
 }
 //https://chaturbate.com/liza_wilsoon/
