@@ -444,5 +444,18 @@ class BinaryTree{
         { return p==q;}
         return (p.key==q.key) && isSymmetryOrNot(p.leftChild,q.rightChild) && isSymmetryOrNot(p.rightChild,q.leftChild);
     }
+    public boolean isBalanced(TreeNode root) {
+        if(root == null)
+            return true;
+        return checkBalance(root) != -1;
+    }
+    int checkBalance(TreeNode root){
+        if(root == null)
+            return 0;
+        int left = checkBalance(root.leftChild)+1;
+        int right = checkBalance(root.rightChild)+1;
+        if(Math.abs(left - right) > 1)
+            return -1;
+        return Math.max(left, right);
+    }
 }
-//https://chaturbate.com/liza_wilsoon/
