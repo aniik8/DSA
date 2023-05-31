@@ -458,4 +458,11 @@ class BinaryTree{
             return -1;
         return Math.max(left, right);
     }
+    // has path sum
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        traversal(root,targetSum);
+        return res;
+    }
+    
+    }
 }
