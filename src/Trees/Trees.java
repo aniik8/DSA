@@ -463,6 +463,16 @@ class BinaryTree{
         traversal(root,targetSum);
         return res;
     }
-    
+    boolean res = false;
+    public void traversal(TreeNode root, int targetSum) {
+        if(root != null) {
+            root.key = targetSum-root.key;
+            if(root.leftChild == null && root.rightChild == null && root.key == 0) {
+                res = true;
+                return;
+            }
+            traversal(root.leftChild, root.key);
+            traversal(root.rightChild, root.key);
+        }
     }
 }
