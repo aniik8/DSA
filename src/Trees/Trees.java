@@ -18,12 +18,12 @@ public class Trees {
 
 }
 class TreeNode{
-    TreeNode leftChild, rightChild;
-    int key;
+    TreeNode left, right;
+    int data;
     TreeNode(int key){
-        this.key = key;
-        this.leftChild = null;
-        this.rightChild = null;
+        this.data = key;
+        this.left = null;
+        this.right = null;
     }
 }
 class BinaryTree{
@@ -39,13 +39,13 @@ class BinaryTree{
         insertionIntree(root, data);
     }
     public void insertionIntree(TreeNode root, int data){
-        if(root.leftChild == null){
-            root.leftChild = new TreeNode(data);
+        if(root.left == null){
+            root.left = new TreeNode(data);
         }
-        else if(root.rightChild == null)
-            root.rightChild = new TreeNode(data);
+        else if(root.right == null)
+            root.right = new TreeNode(data);
         else
-            insertionIntree(root.leftChild, data);
+            insertionIntree(root.left, data);
     }
     // Traversal of Binary tree;
     // Level order - BFS
@@ -55,11 +55,11 @@ class BinaryTree{
             return;
         }
         else if(level == 1){
-            System.out.println(node.key);
+            System.out.println(node.data);
             return;
         }
-        PrintLevelOrder(node.leftChild, level-1);
-        PrintLevelOrder(node.rightChild, level-1);
+        PrintLevelOrder(node.left, level-1);
+        PrintLevelOrder(node.right, level-1);
     }
     static void print(int level){
         while(level <= 4) {
@@ -79,14 +79,14 @@ class BinaryTree{
         if(node == null)
             return;
         else if(level == 1) {
-            list.add(node.key);
+            list.add(node.data);
             return;
         }
-        levelOrderTree(node.leftChild, level-1, list);
-        levelOrderTree(node.rightChild, level-1, list);
+        levelOrderTree(node.left, level-1, list);
+        levelOrderTree(node.right, level-1, list);
     }
     static int heightOftree(TreeNode node){
-        return node == null ? 0 : Math.max(heightOftree(node.leftChild), heightOftree(node.rightChild))+1;
+        return node == null ? 0 : Math.max(heightOftree(node.left), heightOftree(node.right))+1;
     }
     // breadth first search
     static ArrayList<Integer> inOrder(TreeNode root) {
@@ -97,9 +97,9 @@ class BinaryTree{
     static void inOrderTraversal(TreeNode root, ArrayList<Integer> list){
         if(root == null)
             return;
-        inOrderTraversal(root.leftChild, list);
-        list.add(root.key);
-        inOrderTraversal(root.rightChild, list);
+        inOrderTraversal(root.left, list);
+        list.add(root.data);
+        inOrderTraversal(root.right, list);
     }
     static ArrayList<Integer> preorder(TreeNode root)
     {
@@ -111,9 +111,9 @@ class BinaryTree{
     static void PreOrderTraversal(TreeNode root, ArrayList<Integer> list){
         if(root == null)
             return;
-        list.add(root.key);
-        PreOrderTraversal(root.leftChild, list);
-        PreOrderTraversal(root.rightChild, list);
+        list.add(root.data);
+        PreOrderTraversal(root.left, list);
+        PreOrderTraversal(root.right, list);
     }
     ArrayList<Integer> postOrder(TreeNode root)
     {
@@ -125,9 +125,9 @@ class BinaryTree{
         if(root == null)
             return;
 
-        PostOrderTraversal(root.leftChild, list);
-        PostOrderTraversal(root.rightChild, list);
-        list.add(root.key);
+        PostOrderTraversal(root.left, list);
+        PostOrderTraversal(root.right, list);
+        list.add(root.data);
     }
     public List<List<Integer>> levelOrderr(TreeNode node) {
         int height = heightOftree(node);
@@ -142,12 +142,12 @@ class BinaryTree{
             return;
         else if(level == 1) {
             List<Integer>li=new ArrayList<>();
-            li.add(node.key);
+            li.add(node.data);
             list.add(li);
             return;
         }
-        levelOrderTrees(node.leftChild, level-1, list);
-        levelOrderTrees(node.rightChild, level-1, list);
+        levelOrderTrees(node.left, level-1, list);
+        levelOrderTrees(node.right, level-1, list);
     }
     // Diagonal Traversal of Binary Tree
     public ArrayList<Integer> diagonal(TreeNode root)
@@ -156,11 +156,11 @@ class BinaryTree{
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         TreeNode node = root;
         while(node != null){
-            list.add(node.key);
-            if(node.leftChild != null)
-                queue.add(node.leftChild);
-            if(node.rightChild != null)
-                node = node.rightChild;
+            list.add(node.data);
+            if(node.left != null)
+                queue.add(node.left);
+            if(node.right != null)
+                node = node.right;
             else{
                 if(!queue.isEmpty()) {
                     node = queue.peek();
@@ -178,7 +178,7 @@ class BinaryTree{
     public ArrayList <Integer> boundary(TreeNode node)
     {   ArrayList<Integer> list = new ArrayList<>();
         if(!isLeaf(node)){
-            list.add(node.key);
+            list.add(node.data);
         }
         leftNodes(node, list);
         addleaves(node, list);
@@ -187,26 +187,26 @@ class BinaryTree{
         return list;
     }
     static void leftNodes(TreeNode node, ArrayList<Integer> list){
-        node = node.leftChild;
+        node = node.left;
         while(node != null){
             if(!isLeaf(node))
-                list.add(node.key);
-            if(node.leftChild != null)
-                node = node.leftChild;
+                list.add(node.data);
+            if(node.left != null)
+                node = node.left;
             else
-                node = node.rightChild;
+                node = node.right;
         }
     }
     static void rightNodes(TreeNode node, ArrayList<Integer> list){
         Stack<Integer> stack = new Stack<>();
-        node = node.rightChild;
+        node = node.right;
         while(node != null){
             if(!isLeaf(node))
-                stack.push(node.key);
-            if(node.rightChild != null)
-                node = node.rightChild;
+                stack.push(node.data);
+            if(node.right != null)
+                node = node.right;
             else
-                node = node.leftChild;
+                node = node.left;
         }
         // anticlockwise operation.
         while(!stack.isEmpty()){
@@ -218,29 +218,29 @@ class BinaryTree{
             if(node == null)
                 return;
             if(isLeaf(node)){
-                list.add(node.key);
+                list.add(node.data);
             }
-            addleaves(node.leftChild, list);
-            addleaves(node.rightChild, list);
+            addleaves(node.left, list);
+            addleaves(node.right, list);
     }
     static boolean isLeaf(TreeNode node){
-        return node.leftChild == null && node.rightChild == null;
+        return node.left == null && node.right == null;
     }
     // Zigzag traversal of binary tree -- just this function is changed a bit other than that everything is same
     public static void zigzagOrderTree(TreeNode node, int level, ArrayList<Integer> list,boolean leftorright) {
         if (node == null)
             return;
         else if (level == 1) {
-            list.add(node.key);
+            list.add(node.data);
             return;
         }
         if (!leftorright) {
-            zigzagOrderTree(node.rightChild, level - 1, list, leftorright);
-            zigzagOrderTree(node.leftChild, level - 1, list, leftorright);
+            zigzagOrderTree(node.right, level - 1, list, leftorright);
+            zigzagOrderTree(node.left, level - 1, list, leftorright);
 
         } else {
-            zigzagOrderTree(node.leftChild, level - 1, list, leftorright);
-            zigzagOrderTree(node.rightChild, level - 1, list, leftorright);
+            zigzagOrderTree(node.left, level - 1, list, leftorright);
+            zigzagOrderTree(node.right, level - 1, list, leftorright);
         }
     }
     // left view of an array list
@@ -254,11 +254,11 @@ class BinaryTree{
             for(int i = 0; i < n; i++){
                 TreeNode node= queue.poll();
                 if(i == 0)
-                    list.add(node.key);
-                if(node.leftChild != null)
-                    queue.add(root.leftChild);
-                if(node.rightChild != null)
-                    queue.add(root.rightChild);
+                    list.add(node.data);
+                if(node.left != null)
+                    queue.add(root.left);
+                if(node.right != null)
+                    queue.add(root.right);
             }
         }
         // Your code here
@@ -276,11 +276,11 @@ class BinaryTree{
             for(int i = 1; i <= n; i++){
                 TreeNode node = queue.poll();
                 if(i == 1)
-                    list.add(node.key);
-                if(node.rightChild != null)
-                    queue.add(node.rightChild);
-                if(node.leftChild != null)
-                    queue.add(node.leftChild);
+                    list.add(node.data);
+                if(node.right != null)
+                    queue.add(node.right);
+                if(node.left != null)
+                    queue.add(node.left);
             }
 
         }
@@ -301,16 +301,16 @@ class BinaryTree{
             int horizontalDistance = horizontalDistances.poll();
 
             if (!topViewMap.containsKey(horizontalDistance)) {
-                topViewMap.put(horizontalDistance, node.key);
+                topViewMap.put(horizontalDistance, node.data);
             }
 
-            if (node.leftChild != null) {
-                queue.add(node.leftChild);
+            if (node.left != null) {
+                queue.add(node.left);
                 horizontalDistances.add(horizontalDistance - 1);
             }
 
-            if (node.rightChild != null) {
-                queue.add(node.rightChild);
+            if (node.right != null) {
+                queue.add(node.right);
                 horizontalDistances.add(horizontalDistance + 1);
             }
         }
@@ -333,14 +333,14 @@ class BinaryTree{
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
             int horizontalDistance = horizontalDistances.poll();
-            bottomViewMap.put(horizontalDistance, node.key);
+            bottomViewMap.put(horizontalDistance, node.data);
 
-            if (node.leftChild != null) {
-                queue.add(node.leftChild);
+            if (node.left != null) {
+                queue.add(node.left);
                 horizontalDistances.add(horizontalDistance - 1);
             }
-            if (node.rightChild != null) {
-                queue.add(node.rightChild);
+            if (node.right != null) {
+                queue.add(node.right);
                 horizontalDistances.add(horizontalDistance + 1);
             }
         }
@@ -354,31 +354,31 @@ class BinaryTree{
         // Your code here
         if(root == null)
             return 0;
-        int left = diameter(root.leftChild);
-        int right = diameter(root.rightChild);
-        int heights = heightOftree(root.leftChild) + heightOftree(root.rightChild)+1;
+        int left = diameter(root.left);
+        int right = diameter(root.right);
+        int heights = heightOftree(root.left) + heightOftree(root.right)+1;
         return Math.max(heights, Math.max(left, right));
     }
 
     boolean isSumTree(TreeNode root)
     {
-        return root.key == sumSubtree(root, 0, 0);
+        return root.data == sumSubtree(root, 0, 0);
     }
     int sumSubtree(TreeNode root, int leftSum, int rightSum){
          if(root == null)
              return 0;
-         if(root.rightChild == null)
+         if(root.right == null)
              return 0;
-         sumSubtree(root.leftChild, leftSum+root.leftChild.key, rightSum);
-         sumSubtree(root.rightChild, leftSum,rightSum+root.rightChild.key);
+         sumSubtree(root.left, leftSum+root.left.data, rightSum);
+         sumSubtree(root.right, leftSum,rightSum+root.right.data);
          return leftSum+rightSum;
     }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null) return root;
-        if(root.key == p.key || root.key == q.key)return root;
+        if(root.data == p.data || root.data == q.data)return root;
 
-        TreeNode left = lowestCommonAncestor(root.leftChild, p, q);
-        TreeNode right = lowestCommonAncestor(root.rightChild, p, q);
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
 
         if(left == null) return right;
         if(right == null) return left;
@@ -388,10 +388,10 @@ class BinaryTree{
     public int sumofNodes(TreeNode root){
         if(root == null)
             return 0;
-        if(root.leftChild == null && root.rightChild == null)
-            return root.key;
-        int left = sumofNodes(root.leftChild);
-        int right = sumofNodes(root.rightChild);
+        if(root.left == null && root.right == null)
+            return root.data;
+        int left = sumofNodes(root.left);
+        int right = sumofNodes(root.right);
 
         return left+right;
     }
@@ -411,9 +411,9 @@ class BinaryTree{
             list1.add(0);
             return;
         }
-        list1.add(root1.key);
-        inTree1(root1.leftChild,list1);
-        inTree1(root1.rightChild,list1);
+        list1.add(root1.data);
+        inTree1(root1.left,list1);
+        inTree1(root1.right,list1);
 
     }
     void inTree2(TreeNode root2,ArrayList<Integer> list2){
@@ -421,9 +421,9 @@ class BinaryTree{
             list2.add(0);
             return;
         }
-        list2.add(root2.key);
-        inTree2(root2.leftChild, list2);
-        inTree2(root2.rightChild, list2);
+        list2.add(root2.data);
+        inTree2(root2.left, list2);
+        inTree2(root2.right, list2);
 
 
     }
@@ -432,17 +432,17 @@ class BinaryTree{
         if(p==null || q==null )
             return p==q;
 
-        return (p.key==q.key) && isSameTree(p.leftChild,q.leftChild) && isSameTree(p.rightChild,q.rightChild);
+        return (p.data ==q.data) && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
     }
     // is symmertic
     public boolean isSymmetric(TreeNode root) {
-        return isSymmetryOrNot(root.leftChild, root.rightChild);
+        return isSymmetryOrNot(root.left, root.right);
 
     }
     boolean isSymmetryOrNot(TreeNode p, TreeNode q){
         if(p==null || q==null )
         { return p==q;}
-        return (p.key==q.key) && isSymmetryOrNot(p.leftChild,q.rightChild) && isSymmetryOrNot(p.rightChild,q.leftChild);
+        return (p.data ==q.data) && isSymmetryOrNot(p.left,q.right) && isSymmetryOrNot(p.right,q.left);
     }
     public boolean isBalanced(TreeNode root) {
         if(root == null)
@@ -452,8 +452,8 @@ class BinaryTree{
     int checkBalance(TreeNode root){
         if(root == null)
             return 0;
-        int left = checkBalance(root.leftChild)+1;
-        int right = checkBalance(root.rightChild)+1;
+        int left = checkBalance(root.left)+1;
+        int right = checkBalance(root.right)+1;
         if(Math.abs(left - right) > 1)
             return -1;
         return Math.max(left, right);
@@ -466,13 +466,14 @@ class BinaryTree{
     boolean res = false;
     public void traversal(TreeNode root, int targetSum) {
         if(root != null) {
-            root.key = targetSum-root.key;
-            if(root.leftChild == null && root.rightChild == null && root.key == 0) {
+            root.data = targetSum-root.data;
+            if(root.left == null && root.right == null && root.data == 0) {
                 res = true;
                 return;
             }
-            traversal(root.leftChild, root.key);
-            traversal(root.rightChild, root.key);
+            traversal(root.left, root.data);
+            traversal(root.right, root.data);
         }
     }
+
 }
