@@ -1,6 +1,7 @@
 package Trees;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class TreeQues {
@@ -44,5 +45,35 @@ public class TreeQues {
         findPath(root.left, target - root.data);
         findPath(root.right, target - root.data);
 
+    }
+    // here we are using preorder array just to add our element in tree and inorder array to carry out who gonna be the
+    // on the left subtree and who gonna be on the right subtree.
+    private int preIndex; // Global variable to keep track of current index in preorder traversal
+    private HashMap<Integer, Integer> indexMap;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        indexMap = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            indexMap.put(inorder[i], i);
+        }
+        preIndex = 0; // Initialize the preIndex to 0
+        return buildTreeHelper(preorder, inorder, 0, inorder.length - 1);
+    }
+    private TreeNode buildTreeHelper(int[] preorder, int[] inorder, int inStart, int inEnd) {
+        if (inStart > inEnd) {
+            return null; // Base case: No more nodes to construct
+        }
+
+        int rootValue = preorder[preIndex]; // The current value in preorder traversal is the root of the current subtree
+        TreeNode root = new TreeNode(rootValue);
+
+        int inIndex = indexMap.get(rootValue); // Find the index of the root in the inorder traversal
+
+        preIndex++; // Move to the next element in preorder traversal
+
+        // Recursively construct the left and right subtrees
+        root.left = buildTreeHelper(preorder, inorder, inStart, inIndex - 1);
+        root.right = buildTreeHelper(preorder, inorder, inIndex + 1, inEnd);
+
+        return root;
     }
 }
