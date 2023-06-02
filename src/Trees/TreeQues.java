@@ -29,13 +29,9 @@ public class TreeQues {
     public int pathSumIII(TreeNode root, int targetSum) {
         if(root == null)
             return 0;
-
-        TreeNode temp1 = root;
-        TreeNode temp2 = root;
         findPath(root, targetSum);
-        findPath(temp1.left, targetSum);
-        findPath(temp2.right, targetSum);
-
+        pathSumIII(root.left, targetSum);
+        pathSumIII(root.right, targetSum);
         return count;
     }
     public void findPath(TreeNode root, int target){
