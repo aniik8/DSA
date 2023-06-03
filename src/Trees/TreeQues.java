@@ -3,6 +3,7 @@ package Trees;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TreeQues {
     public static void main(String[] args) {
@@ -73,6 +74,38 @@ public class TreeQues {
         // Recursively construct the left and right subtrees
         root.left = buildTreeHelper(preorder, inorder, inStart, inIndex - 1);
         root.right = buildTreeHelper(preorder, inorder, inIndex + 1, inEnd);
+
+        return root;
+    }
+    public TreeNode buildTreepost(int[] inorder, int[] postorder) {
+        // Create a map to store the index of each element in the inorder array
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+
+        return buildTreeHelper(inorder, postorder, map, 0, inorder.length - 1, 0, postorder.length - 1);
+    }
+
+    private TreeNode buildTreeHelper(int[] inorder, int[] postorder, Map<Integer, Integer> map, int inStart, int inEnd, int postStart, int postEnd) {
+        if (inStart > inEnd || postStart > postEnd) {
+            return null;
+        }
+
+        // The root of the current subtree is the last element in the postorder array
+        int rootValue = postorder[postEnd];
+        TreeNode root = new TreeNode(rootValue);
+
+        // Find the index of the root in the inorder array
+        int rootIndex = map.get(rootValue);
+
+        // Determine the sizes of the left and right subtrees
+        int leftSubtreeSize = rootIndex - inStart;
+        int rightSubtreeSize = inEnd - rootIndex;
+
+        // Recursively build the left and right subtrees
+        root.left = buildTreeHelper(inorder, postorder, map, inStart, rootIndex - 1, postStart, postStart + leftSubtreeSize - 1);
+        root.right = buildTreeHelper(inorder, postorder, map, rootIndex + 1, inEnd, postEnd - rightSubtreeSize, postEnd - 1);
 
         return root;
     }
