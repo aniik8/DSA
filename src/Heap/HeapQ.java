@@ -23,4 +23,21 @@ public class HeapQ {
         }
         return pq.peek();
     }
+    // Geeks for geeks  Question
+    public static int kthSmallest(int[] arr, int l, int r, int k)
+    {
+        PriorityQueue<Integer> pq= new PriorityQueue<>(Collections.reverseOrder());
+        int n = r-l+1, a = 0;
+        for (int i = 0; i < n; i++) {
+            pq.add(arr[i]);
+            a++;
+            if(a > k)
+            {
+                pq.poll();
+                a--;
+            }
+
+        }
+        return pq.peek();
+    }
 }
