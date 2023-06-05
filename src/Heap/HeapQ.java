@@ -87,7 +87,10 @@ public class HeapQ {
         }
         return array;
     }
-    // LeetCode 658
+    // LeetCode 658 -- using binary search.
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+
+    }
 }
 
 
