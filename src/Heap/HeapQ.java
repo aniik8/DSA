@@ -89,8 +89,41 @@ public class HeapQ {
     }
     // LeetCode 658 -- using binary search.
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int left = 0;
+        int right = arr.length - k;
 
-    }
+        // Perform binary search to find the starting index of the subarray
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (x - arr[mid] > arr[mid + k] - x) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        for (int i = left; i < left + k; i++) {
+            result.add(arr[i]);
+        }
+        return result;
+        }
+        // Top K frequent elements 347
+        public int[] topKFrequent(int[] nums, int k) {
+            HashMap<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                map.getOrDefault(nums[i], map.get(nums[i]+1));
+            }
+            PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> (map.get(b) - (map.get(a))));
+            priorityQueue.addAll(map.keySet());
+
+            int[] arr = new int[k];
+            for (int i = 0; i < k; i++) {
+                arr[i] = priorityQueue.poll();
+            }
+            return  arr;
+        }
+
 }
 
 
