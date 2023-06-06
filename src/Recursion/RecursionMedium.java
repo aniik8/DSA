@@ -1,4 +1,4 @@
-import javax.security.auth.Subject;
+package Recursion;
 import java.util.*;
 
 public class RecursionMedium {

@@ -4,11 +4,11 @@ import java.util.*;
 //        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 public class HeapQ {
     public static void main(String[] args) {
-      int[] arr = {12, 16, 22, 30, 35, 39, 42,
-              45, 48, 50, 53, 55, 56};
-        System.out.println(findKthLargest(arr, 4));
-        System.out.println(nearlySorted(arr, 5, 2));
-        System.out.println(Arrays.toString(printKClosest(arr, arr.length, 4, 35)));
+      int[] arr = {1,1,2,2,2,3};
+//        System.out.println(findKthLargest(arr, 4));
+//        System.out.println(nearlySorted(arr, 5, 2));
+//        System.out.println(Arrays.toString(printKClosest(arr, arr.length, 4, 35)));
+        System.out.println(Arrays.toString(frequencySort(arr)));
     }
     // 3,2,1,5,6,4
     // 4, 5, 6
@@ -69,6 +69,7 @@ public class HeapQ {
     static int[] printKClosest(int[] arr, int n, int k, int x) {
         int[] array = new int[k];
         int a = 0;
+        List<Integer> list = new ArrayList<>();
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k, new Comparator<Integer>() {
             @Override
             public int compare(Integer a, Integer b) {
@@ -123,7 +124,31 @@ public class HeapQ {
             }
             return  arr;
         }
+        // leetcode 1636
+     static public int[] frequencySort(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
 
+         for (int i = 0; i < nums.length; i++) {
+             if(!map.containsKey(nums[i])){
+                 map.put(nums[i], 1);
+             }else map.put(nums[i], map.get(nums[i])+1);
+         }
+         int[] arr = new int[nums.length];
+         int i = 0;
+         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> (
+                  map.get(a) != map.get(b)
+                         ? map.get(b) - map.get(a)
+                         : a - b));
+         priorityQueue.addAll(map.keySet());
+         while(priorityQueue.size() > 0){
+             int num = priorityQueue.poll();
+             int limit = map.get(num);
+             for (int j = 0; j < limit; j++) {
+                 arr[i++] = num;
+             }
+         }
+         return arr;
+    }
 }
 
 
