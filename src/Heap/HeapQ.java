@@ -8,7 +8,8 @@ public class HeapQ {
 //        System.out.println(findKthLargest(arr, 4));
 //        System.out.println(nearlySorted(arr, 5, 2));
 //        System.out.println(Arrays.toString(printKClosest(arr, arr.length, 4, 35)));
-        System.out.println(Arrays.toString(frequencySort(arr)));
+        /*System.out.println(Arrays.toString(frequencySort(arr)));*/
+        System.out.println(frequencySort("tree"));
     }
     // 3,2,1,5,6,4
     // 4, 5, 6
@@ -137,7 +138,7 @@ public class HeapQ {
          int i = 0;
          PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a, b) -> (
                   map.get(a) != map.get(b)
-                         ? map.get(b) - map.get(a)
+                         ? map.get(a) - map.get(b)
                          : a - b));
          priorityQueue.addAll(map.keySet());
          while(priorityQueue.size() > 0){
@@ -148,6 +149,32 @@ public class HeapQ {
              }
          }
          return arr;
+    }
+    // Input: s = "tree"
+    // Output: "eert"
+    static public String frequencySort(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            if(!map.containsKey(s.charAt(i))){
+                map.put(s.charAt(i), 1);
+            }else map.put(s.charAt(i), map.get(s.charAt(i))+1);
+        }
+        String str = "";
+        int i = 0;
+        PriorityQueue<Character> priorityQueue = new PriorityQueue<>((a, b) -> (
+                map.get(a) != map.get(b)
+                        ? map.get(b) - map.get(a)
+                        : a - b));
+        priorityQueue.addAll(map.keySet());
+        while(priorityQueue.size() > 0){
+            char ch = priorityQueue.poll();
+            int limit = map.get(ch);
+            for (int j = 0; j < limit; j++) {
+                str += ch;
+            }
+        }
+        return str;
     }
 }
 
