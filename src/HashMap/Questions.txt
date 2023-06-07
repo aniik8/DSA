@@ -6,3 +6,4 @@
 7. Frequency count - leetcode 1636 - https://leetcode.com/problems/sort-array-by-increasing-frequency/description/
 8. frequency count - https://leetcode.com/problems/sort-characters-by-frequency/
 9. k closest points from origin https://leetcode.com/problems/k-closest-points-to-origin/description/
+10. Minimum cost of ropes - https://practice.geeksforgeeks.org/problems/minimum-cost-of-ropes-1587115620/1
