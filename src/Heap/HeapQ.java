@@ -225,6 +225,32 @@ public class HeapQ {
         }
         return sum;
     }
+
+    public static long minSum(int arr[], int n) {
+        if (n == 1) {
+            return arr[0];
+        }
+        if (n == 2) {
+            return arr[0] + arr[1];
+        }
+        Arrays.sort(arr);
+
+        long n1 = 0;
+        long n2 = 0;
+
+        for (int i = 0; i < n; ) {
+            n1 = (n1) * 10 + (long) (arr[i]);
+            i++;
+            if (i == n) {
+                break;
+            }
+            n2 = (n2) * 10 + (long) (arr[i]);
+            i++;
+        }
+        return n1 + n2;
+
+
+    }
 }
 
 
