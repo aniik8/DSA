@@ -218,8 +218,10 @@ public class HeapQ {
         }
         long sum = 0;
         while(priorityQueue.size() >=2){
-            sum += priorityQueue.poll() + priorityQueue.poll();
-            priorityQueue.add(sum);
+            long a = priorityQueue.poll();
+            long b = priorityQueue.poll();
+            sum +=  a+ b;
+            priorityQueue.add(a+b);
         }
         return sum;
     }
