@@ -4,7 +4,7 @@ import java.util.*;
 //        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 public class HeapQ {
     public static void main(String[] args) {
-      long[] arr = {4, 3, 2, 6};
+      int[] arr = {1,6,1};
       int[][] point = {{1,3}, {-2,2}};
 //        System.out.println(findKthLargest(arr, 4));
 //        System.out.println(nearlySorted(arr, 5, 2));
@@ -12,7 +12,8 @@ public class HeapQ {
         /*System.out.println(Arrays.toString(frequencySort(arr)));*/
 //        System.out.println(frequencySort("tree"));
 //        System.out.println(Arrays.toString(kClosest(point,1)));
-        System.out.println(minCost(arr, arr.length));
+//        System.out.println(minCost(arr, arr.length));
+        System.out.println(smallestDistancePair(arr, 3));
     }
     // 3,2,1,5,6,4
     // 4, 5, 6
@@ -248,8 +249,21 @@ public class HeapQ {
             i++;
         }
         return n1 + n2;
-
-
+    }
+    public static int smallestDistancePair(int[] nums, int k) {
+        // 1,3,1
+        // 1,3,1
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i+1; j < len; j++) {
+                priorityQueue.add(Math.abs(nums[i]- nums[j]));
+            }
+        }
+        while(priorityQueue.size() > k){
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek();
     }
 }
 

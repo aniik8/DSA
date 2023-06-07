@@ -7,3 +7,4 @@
 8. frequency count - https://leetcode.com/problems/sort-characters-by-frequency/
 9. k closest points from origin https://leetcode.com/problems/k-closest-points-to-origin/description/
 10. Minimum cost of ropes - https://practice.geeksforgeeks.org/problems/minimum-cost-of-ropes-1587115620/1
+11.  Find K-th Smallest Pair Distance  - https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/
