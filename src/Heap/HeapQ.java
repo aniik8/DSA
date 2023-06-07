@@ -5,11 +5,13 @@ import java.util.*;
 public class HeapQ {
     public static void main(String[] args) {
       int[] arr = {1,1,2,2,2,3};
+      int[][] point = {{1,3}, {-2,2}};
 //        System.out.println(findKthLargest(arr, 4));
 //        System.out.println(nearlySorted(arr, 5, 2));
 //        System.out.println(Arrays.toString(printKClosest(arr, arr.length, 4, 35)));
         /*System.out.println(Arrays.toString(frequencySort(arr)));*/
-        System.out.println(frequencySort("tree"));
+//        System.out.println(frequencySort("tree"));
+        System.out.println(Arrays.toString(kClosest(point,1)));
     }
     // 3,2,1,5,6,4
     // 4, 5, 6
@@ -175,6 +177,36 @@ public class HeapQ {
             }
         }
         return str;
+    }
+
+    // K closest point to origin
+    // [[1,3],[-2,2]]
+    public static int[][] kClosest(int[][] points, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int[][] pointFromOrigin = new int[k][points[0].length];
+        System.out.println("points" + Arrays.toString(points[1]));
+        int distance = 0;
+        for (int i = 0; i < points.length; i++) {
+            for(int j = 0; j < points[i].length; j++){
+
+                distance += Math.pow(points[i][j], 2);
+            }
+            map.put(i, distance);
+            distance = 0;
+        }
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((a,b) -> map.get(a) - map.get(b));
+        priorityQueue.addAll(map.keySet());
+//        while(priorityQueue.size() > 0){
+//            System.out.println(Arrays.toString(points[priorityQueue.poll()]));
+//        }
+
+        for (int i = 0; i < k; i++) {
+            System.out.println(Arrays.toString(points[priorityQueue.peek()]));
+            pointFromOrigin[i] = (points[priorityQueue.poll()]);
+        }
+
+
+        return pointFromOrigin;
     }
 }
 
