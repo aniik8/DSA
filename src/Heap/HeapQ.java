@@ -4,14 +4,15 @@ import java.util.*;
 //        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 public class HeapQ {
     public static void main(String[] args) {
-      int[] arr = {1,1,2,2,2,3};
+      long[] arr = {4, 3, 2, 6};
       int[][] point = {{1,3}, {-2,2}};
 //        System.out.println(findKthLargest(arr, 4));
 //        System.out.println(nearlySorted(arr, 5, 2));
 //        System.out.println(Arrays.toString(printKClosest(arr, arr.length, 4, 35)));
         /*System.out.println(Arrays.toString(frequencySort(arr)));*/
 //        System.out.println(frequencySort("tree"));
-        System.out.println(Arrays.toString(kClosest(point,1)));
+//        System.out.println(Arrays.toString(kClosest(point,1)));
+        System.out.println(minCost(arr, arr.length));
     }
     // 3,2,1,5,6,4
     // 4, 5, 6
@@ -207,6 +208,20 @@ public class HeapQ {
 
 
         return pointFromOrigin;
+    }
+    // Minimum Cost of ropes
+    static long minCost(long arr[], int n)
+    {
+        PriorityQueue<Long> priorityQueue = new PriorityQueue<>();
+        for (int i = 0; i < arr.length; i++) {
+            priorityQueue.add(arr[i]);
+        }
+        long sum = 0;
+        while(priorityQueue.size() >=2){
+            sum += priorityQueue.poll() + priorityQueue.poll();
+            priorityQueue.add(sum);
+        }
+        return sum;
     }
 }
 
