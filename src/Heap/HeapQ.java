@@ -265,6 +265,11 @@ public class HeapQ {
         }
         return priorityQueue.peek();
     }
+    // GFG
+    public static long sumBetweenTwoKth(long A[], long N, long K1, long K2)
+    {
+        long n1 = kKnumber(A, N, K1);
+    }
 }
 
 
