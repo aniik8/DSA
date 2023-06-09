@@ -297,6 +297,21 @@ public class HeapQ {
 
         return ans;
     }
+    // usingg sorting
+    static int sumBetweenTwoKth_sort(int arr[],
+                                int k1, int k2)
+    {
+        // Sort the given array
+        Arrays.sort(arr);
+
+        // Below code is equivalent to
+        int result = 0;
+
+        for (int i = k1; i < k2 - 1; i++)
+            result += arr[i];
+
+        return result;
+    }
 }
 
 
