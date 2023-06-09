@@ -268,7 +268,34 @@ public class HeapQ {
     // GFG
     public static long sumBetweenTwoKth(long A[], long N, long K1, long K2)
     {
-        long n1 = kKnumber(A, N, K1);
+        PriorityQueue<Long> maxH = new PriorityQueue<>(
+                Collections.reverseOrder());
+
+        // Using this for loop we eliminate the extra
+        // elements which are greater than K2'th smallest
+        // element as they are not required for us
+
+        for (int i = 0; i < N; i++) {
+
+            maxH.add(A[i]);
+
+            if (maxH.size() > K2) {
+                maxH.remove();
+            }
+        }
+        // popping out the K2'th smallest element
+        maxH.remove();
+
+        long ans = 0;
+        // adding the elements to ans until we reach the
+        // K1'th smallest element
+        while (maxH.size() > K1) {
+
+            ans += maxH.peek();
+            maxH.remove();
+        }
+
+        return ans;
     }
 }
 
