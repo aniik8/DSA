@@ -312,6 +312,33 @@ public class HeapQ {
 
         return result;
     }
+    static int kthLargestSum(int arr[], int N, int K)
+    {
+        int sum[] = new int[N + 1];
+        sum[0] = 0;
+        sum[1] = arr[0];
+        for (int i = 2; i <= N; i++)
+            sum[i] = sum[i - 1] + arr[i - 1];
+        PriorityQueue<Integer> Q
+                = new PriorityQueue<Integer>();
+
+        for (int i = 1; i <= N; i++) {
+            for (int j = i; j <= N; j++) {
+                int x = sum[j] - sum[i - 1];
+
+                if (Q.size() < K)
+                    Q.add(x);
+
+                else {
+                    if (Q.peek() < x) {
+                        Q.poll();
+                        Q.add(x);
+                    }
+                }
+            }
+        }
+        return Q.poll();
+    }
 }
 
 
