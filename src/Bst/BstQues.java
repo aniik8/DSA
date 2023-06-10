@@ -16,5 +16,27 @@ public class BstQues {
         }
         return sum;
     }
+    // Memoized
+    static int[] t = new int[20];
+    public int numTreesMemoized(int n) {
+        for(int i = 0; i < 20; i++){
+            t[i] = 0;
+
+        }
+        return returnNumTrees(n, t);
+    }
+    public int returnNumTrees(int n, int[] t){
+        if(n <= 1)
+            return 1;
+        if(t[n] != 0)
+            return t[n];
+
+        for(int i = 1; i <=n;i++){
+
+            t[n] += returnNumTrees(i-1, t) * returnNumTrees(n - i,t);
+        }
+        return t[n];
+    }
+
 }
 
