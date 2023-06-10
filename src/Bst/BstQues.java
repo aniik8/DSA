@@ -1,5 +1,7 @@
 package Bst;
 
+import java.util.*;
+
 public class BstQues {
     public static void main(String[] args) {
 
@@ -37,6 +39,19 @@ public class BstQues {
         }
         return t[n];
     }
+    // Kth smallest element in bst using inorder traversal
 
+    static int kthSmallest(Tree root, int k) {
+        List<Integer> list = new ArrayList<>();
+        inorderTraversal(root, list);
+        return list.get(k);
+    }
+    static void inorderTraversal(Tree root, List<Integer> list){
+        if(root == null)
+            return;
+        inorderTraversal(root.left, list);
+        list.add(root.val);
+        inorderTraversal(root.right, list);
+    }
 }
 
