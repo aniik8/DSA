@@ -23,4 +23,14 @@ public class BstGfG {
         list.add(root.val);
         checkIsBst(root.right, list);
     }
+    // min value in bst - microsoft
+    int minValue(Tree node) {
+        if(node == null) return -1;
+        int val = node.val;
+        while(node != null){
+            val = node.val;
+            node = node.left;
+        }
+        return val;
+    }
 }
