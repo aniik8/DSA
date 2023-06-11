@@ -33,4 +33,19 @@ public class BstGfG {
         }
         return val;
     }
+    boolean isBalanced(Tree root)
+    {
+        int left = height(root.left);
+        int right = height(root.right);
+        int k =Math.abs(left-right);
+        if(k > 1)
+            return false;
+        else return true;
+    }
+    int height(Tree root)
+    {
+        if (root == null)
+            return 0;
+        return Math.max(height(root.left), height(root.right))+1;
+    }
 }
