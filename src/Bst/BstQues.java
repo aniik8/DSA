@@ -53,5 +53,33 @@ public class BstQues {
         list.add(root.val);
         inorderTraversal(root.right, list);
     }
+    //
+    public void recoverTree(Tree root) {
+        Tree leftNode = root;
+        recoverTreeRecursive(leftNode);
+    }
+    public void recoverTreeRecursive(Tree rootNode){
+        if(rootNode == null)
+            return;
+        if(rootNode.left == null && rootNode.right == null)
+            return;
+        if(rootNode.val > rootNode.left.val)
+            recoverTreeRecursive(rootNode.left);
+        else{
+            int temp = rootNode.val;
+            rootNode.val = rootNode.left.val;
+            rootNode.left.val = temp;
+            return;
+        }
+        if(rootNode.val < rootNode.right.val)
+            recoverTreeRecursive(rootNode.right);
+        else{
+            int temp = rootNode.val;
+            rootNode.val = rootNode.right.val;
+            rootNode.right.val = temp;
+            return;
+        }
+    }
+
 }
 
