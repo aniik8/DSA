@@ -48,4 +48,20 @@ public class BstGfG {
             return 0;
         return Math.max(height(root.left), height(root.right))+1;
     }
+    // Kth largest
+    public int kthLargest(Tree root,int K)
+    {
+        List<Integer> list = new ArrayList<>();
+        inorderTraversal(root, list,K);
+        return list.get(list.size()-K-1);
+    }
+    void inorderTraversal(Tree root,  List<Integer> list, int k){
+        if(root == null)
+            return;
+        inorderTraversal(root.left, list, k);
+        list.add(root.val);
+        if(list.size() == k)
+            return;
+        inorderTraversal(root.right, list, k);
+    }
 }
