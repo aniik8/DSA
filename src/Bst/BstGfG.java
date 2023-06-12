@@ -64,4 +64,18 @@ public class BstGfG {
             return;
         inorderTraversal(root.right, list, k);
     }
+
+    //Lowest common ancestor in BST
+    Tree LCA(Tree root, int n1, int n2)
+    {
+        // code here.
+        if (root == null || root.val == n1 || root.val == n2)
+            return root;
+
+        Tree l =  LCA(root.left, n1, n2);
+        Tree r = LCA(root.right, n1, n2);
+
+        if (l != null && r != null)
+            return root;
+        return l == null ? r : l;    }
 }
