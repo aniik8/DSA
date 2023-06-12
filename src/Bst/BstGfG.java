@@ -104,5 +104,29 @@ public class BstGfG {
 
         if (l != null && r != null)
             return root;
-        return l == null ? r : l;    }
+        return l == null ? r : l;
+    }
+    // Count BST nodes that lie in a given range
+    int getCount(Tree root,int l, int h)
+    {
+        List<Integer> list = new ArrayList<>();
+        inorder(root, list);
+        int count = 0;
+        for(int i = 0; i < list.size();i++){
+            if(list.get(i) >= l && list.get(i) <= h )
+            {
+                count++;
+
+            }
+        }
+
+        return count;
+    }
+    static void inorder(Tree root, List <Integer> list){
+        if(root == null)
+            return;
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
+    }
 }
