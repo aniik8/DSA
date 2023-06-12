@@ -6,6 +6,33 @@ public class BstGfG {
     public static void main(String[] args) {
 
     }
+    // insertion in bst
+    Tree insert(Tree root, int Key) {
+        Tree curr = root;
+        while(curr != null)
+        {
+            if(curr.val < Key){
+
+                if(curr.right == null){
+                    Tree n = new Tree(Key);
+                    curr.right = n;
+                    break;
+                }
+                curr = curr.right;
+            }
+            else if(curr.val > Key){
+                if(curr.left == null){
+                    Tree n = new Tree(Key);
+                    curr.left = n;
+                    break;
+                }
+                curr = curr.left;
+
+            }
+            else return root;
+        }
+        return root;
+    }
     boolean isBST(Tree root)
     {
         List<Integer> list = new ArrayList<>();
