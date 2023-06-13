@@ -5,3 +5,5 @@
 5. lowest common ancestor in bst = https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-bst/1
 6. Insert in bst - https://practice.geeksforgeeks.org/problems/insert-a-node-in-a-bst/1 (Paytm Accolite Amazon Microsoft Samsung)
 7. Count BST nodes that lie in a given range - https://practice.geeksforgeeks.org/problems/count-bst-nodes-that-lie-in-a-given-range/1
+todo https://practice.geeksforgeeks.org/problems/largest-bst/1
+todo https://practice.geeksforgeeks.org/problems/predecessor-and-successor/1

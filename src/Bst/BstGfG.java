@@ -129,4 +129,22 @@ public class BstGfG {
         list.add(root.val);
         inorder(root.right, list);
     }
+    static int largestBst(Tree root)
+
+    { boolean check=true;
+        ArrayList<Integer> arr=new ArrayList<Integer>();
+        inorder(root,arr);
+        for(int i=0;i<arr.size()-1;i++){
+            if(arr.get(i)>=arr.get(i+1)){
+                check=false;
+                break;
+            }
+        }
+        int ans=1;
+        if(check==false){
+            ans=Math.max(largestBst(root.left),largestBst(root.right));
+        }
+        else ans=arr.size();
+        return ans;
+    }
 }
