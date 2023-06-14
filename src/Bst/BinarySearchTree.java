@@ -40,6 +40,7 @@ public class BinarySearchTree {
         }
         return min;
     }
+
 }
 
 class Tree{

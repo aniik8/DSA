@@ -134,17 +134,21 @@ public class BstGfG {
     { boolean check=true;
         ArrayList<Integer> arr=new ArrayList<Integer>();
         inorder(root,arr);
+        int sum = 0;
         for(int i=0;i<arr.size()-1;i++){
             if(arr.get(i)>=arr.get(i+1)){
                 check=false;
                 break;
+            }else{
+                sum += arr.get(i);
             }
         }
         int ans=1;
-        if(check==false){
-            ans=Math.max(largestBst(root.left),largestBst(root.right));
+        if(check==false) {
+            sum = 0;
+            ans = Math.max(largestBst(root.left), largestBst(root.right));
         }
-        else ans=arr.size();
-        return ans;
+        return sum;
     }
+
 }
