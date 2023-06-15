@@ -4,7 +4,8 @@ import java.util.*;
 
 public class BstGfG {
     public static void main(String[] args) {
-
+        int[] num = {3,2,1};
+        System.out.println(Arrays.toString(leafNodes(num, num.length)));
     }
     // insertion in bst
     Tree insert(Tree root, int Key) {
@@ -151,4 +152,35 @@ public class BstGfG {
         return sum;
     }
 
+    public int[] leafNodes(int arr[], int N)
+    {  ArrayList<Integer> list = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
+        stack.push(arr[0]);
+        for(int i = 1; i < N; i++){
+            if(arr[i] < stack.peek())
+            {
+                stack.push(arr[i]);
+            }else{
+                int temp = stack.peek();
+                int count = 0;
+                while(!stack.isEmpty() && arr[i] > stack.peek()){
+                    stack.pop();
+                    count++;
+                }
+                stack.push(arr[i]);
+                if(count >= 2)
+                {
+                    list.add(temp);
+
+                }
+            }
+        }
+        list.add(stack.peek());
+        int[] nums = new int[list.size()];
+        int index = 0;
+        for(int i: list){
+            nums[index++] = i;
+        }
+        return nums;
+    }
 }

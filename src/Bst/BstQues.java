@@ -90,5 +90,12 @@ public class BstQues {
         }
         return true;
     }
+    static void inorder(Tree root, List <Integer> list){
+        if(root == null)
+            return;
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
+    }
 }
 
