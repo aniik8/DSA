@@ -152,7 +152,7 @@ public class BstGfG {
         return sum;
     }
 
-    public int[] leafNodes(int arr[], int N)
+    public static int[] leafNodes(int arr[], int N)
     {  ArrayList<Integer> list = new ArrayList<>();
         Stack<Integer> stack = new Stack<>();
         stack.push(arr[0]);

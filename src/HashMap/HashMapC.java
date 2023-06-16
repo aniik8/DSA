@@ -1,11 +1,12 @@
 package HashMap;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class HashMapC {
     public static void main(String[] args) {
-        int[] arr = {1,3,1,-1,3};
-        System.out.println(singleNumber(arr));
+//        int[] arr = {2,2,1};
+//        System.out.println(singleNumberr(arr));
     }
     public static int singleNumber(int[] nums) {
         int n = nums.length;
@@ -66,4 +67,7 @@ public class HashMapC {
         }
         return ans;
     }
+//    public boolean uniqueOccurrences(int[] arr) {
+//        HashSet
+//    }
 }
