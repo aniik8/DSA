@@ -61,4 +61,20 @@ public class GraphBasics {
 
         printAdjList(adj);
     }
+    // printing graph by using arrayList
+        public ArrayList<ArrayList<Integer>> printGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+            ArrayList<ArrayList<Integer>> a1 = new ArrayList<ArrayList<Integer>> ();
+            for(int i=0;i<adj.size();i++)
+            {
+                ArrayList<Integer> a= new ArrayList<Integer>();
+                a.add(i);
+                for(int j=0;j<adj.get(i).size();j++)
+                {
+                    a.add(adj.get(i).get(j));
+                }
+                a1.add(a);
+            }
+            return a1;
+        }
+
 }
