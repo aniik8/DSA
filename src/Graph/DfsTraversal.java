@@ -27,29 +27,31 @@ public class DfsTraversal {
 
     }
 
-        public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
-            boolean[] visited = new boolean[V];
-            ArrayList<Integer> dfsTraversal = new ArrayList<>();
+    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        boolean[] visited = new boolean[V];
+        ArrayList<Integer> dfsTraversal = new ArrayList<>();
 
-            Stack<Integer> stack = new Stack<>();
-            stack.push(0); // Start from vertex 0
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0); // Start from vertex 0
 
-            while (!stack.isEmpty()) {
-                int vertex = stack.pop();
+        while (!stack.isEmpty()) {
+            int vertex = stack.pop();
 
-                if (!visited[vertex]) {
-                    visited[vertex] = true;
-                    dfsTraversal.add(vertex);
+            if (!visited[vertex]) {
+                visited[vertex] = true;
+                dfsTraversal.add(vertex);
 
-                    for (int neighbor : adj.get(vertex)) {
-                        if (!visited[neighbor]) {
-                            stack.push(neighbor);
-                        }
+                ArrayList<Integer> neighbors = adj.get(vertex);
+                for (int i = neighbors.size() - 1; i >= 0; i--) {
+                    int neighbor = neighbors.get(i);
+                    if (!visited[neighbor]) {
+                        stack.push(neighbor);
                     }
                 }
             }
-
-            return dfsTraversal;
         }
+
+        return dfsTraversal;
+    }
 
 }
