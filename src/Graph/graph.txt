@@ -1,4 +1,4 @@
 1. print adjacency list https://practice.geeksforgeeks.org/problems/print-adjacency-list-1587115620/1
 2. bfs
 3. DFS
-4. To detect cycle in a Graph using dfs.
+4. To detect cycle in a Graph using dfs- https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1

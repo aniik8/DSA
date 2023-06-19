@@ -87,4 +87,33 @@ public class DfsTraversal {
         return false;
     }
 
+    // Detecting Cycle in Directed graph
+    // Why the previous approach don't work in this case? because for some cases like 0 -> 1 <- 2 , it'll detect cycle
+    // which is not present so, here we'll use a stack named as onstack which will keep record of the nodes in the stack
+    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
+        boolean[] visited = new boolean[V];
+        boolean[] onstack = new boolean[V];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < V; i++) {
+            if(!visited[i]){
+               stack.push(i);
+               while(!stack.isEmpty()){
+                   int vertex = stack.pop();
+                   visited[vertex] = true;
+                   onstack[vertex] = true;
+                   ArrayList<Integer> neighbours = adj.get(vertex);
+                   for (int neighbour : neighbours){
+                       if(!visited[neighbour]){
+                           stack.push(neighbour);
+                       }else if(onstack[neighbour]){
+                           return true;
+                       }
+                   }
+                   onstack[vertex] = false;
+
+               }
+            }
+        }
+        return false;
+    }
 }
