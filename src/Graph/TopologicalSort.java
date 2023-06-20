@@ -27,4 +27,10 @@ public class TopologicalSort {
         }
         stack.push(v);
     }
+
+    // kahn's algorithm --- aks
+
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj){
+
+    }
 }
