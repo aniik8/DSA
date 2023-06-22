@@ -66,4 +66,30 @@ public class PrimsAlgorithm {
         return cost;
 
     }
+    static int spanningTree(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj){
+        boolean[] vis = new boolean[V];
+        PriorityQueue<Pair> queue = new PriorityQueue<>();
+        queue.add(new Pair(0,0));
+        int ans = 0;
+        while(queue.size() != 0){
+            Pair current = queue.remove();
+            int u = current.v;
+            if(vis[u]){
+                continue;
+            }
+            ans = current.wt;
+            vis[u] = true;
+            ArrayList<ArrayList<Integer>> neighbor = adj.get(u);
+            for (ArrayList<Integer> list :
+                    neighbor) {
+                int vertex = list.get(0);
+                int weight = list.get(1);
+                if(vis[vertex] == false){
+                    queue.add(new Pair(vertex, weight));
+                }
+            }
+        }
+        return ans;
+
+    }
 }
