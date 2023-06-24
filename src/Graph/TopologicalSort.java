@@ -31,7 +31,7 @@ public class TopologicalSort {
     // kahn's algorithm --- aks
     // this algorithm uses the topological sort using bfs where we first check the incoming degree(or indegree) of
     // each node element. 2. now we'll see that the element who have the indegree of 0, gets added to the queue
-    // 3. until our queue is not empty we'll add the current queue front element and and we'll check it's neighbor
+    // 3. until our queue is not empty we'll add the current queue front element and  we'll check it's neighbor
     // if the neighbor have a indegree of 0 (--indegree[neighbor] == 0) then add the neighbor to the queue)
     static int[] topoSortBFS(int V, ArrayList<ArrayList<Integer>> adj){
         Queue<Integer> queue = new LinkedList<>();

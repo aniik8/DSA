@@ -77,7 +77,7 @@ public class PrimsAlgorithm {
             if(vis[u]){
                 continue;
             }
-            ans = current.wt;
+            ans += current.wt;
             vis[u] = true;
             ArrayList<ArrayList<Integer>> neighbor = adj.get(u);
             for (ArrayList<Integer> list :
