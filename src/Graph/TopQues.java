@@ -76,4 +76,36 @@ public class TopQues {
         onStack[V] = false;
         return false;
     }
+    // Can finish 2 -- course schedule 2
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        boolean[] visited  =new boolean[numCourses];
+        Stack<Integer> stack = new Stack<>();
+        List<List<Integer>> adj = new ArrayList<>(numCourses);
+        for (int[] num :
+                prerequisites) {
+            adj.get(num[1]).add(num[0]);
+        }
+        for (int i = 0; i < numCourses; i++) {
+            if(!visited[i]){
+                if(dfsTopo(adj, stack, i, visited)){
+                    return new int[0];
+                }
+            }
+        }
+        if(stack.isEmpty())
+            return new int[0];
+    }
+    static boolean dfsTopo(List<List<Integer>> adj,  Stack<Integer> stack, int v, boolean[] visited){
+        visited[v] = true;
+        for (int neighbor :
+                adj.get(v)) {
+            if (!visited[neighbor])
+                if(dfsTopo(adj, stack, neighbor, visited)){
+                    return true;
+                }
+        }
+        stack.push(v);
+        return false;
+    }
 }
+
