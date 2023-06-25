@@ -79,6 +79,7 @@ public class TopQues {
     // Can finish 2 -- course schedule 2
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         boolean[] visited  =new boolean[numCourses];
+        int[] arr = new int[numCourses];
         Stack<Integer> stack = new Stack<>();
         List<List<Integer>> adj = new ArrayList<>(numCourses);
         for (int[] num :
@@ -94,6 +95,13 @@ public class TopQues {
         }
         if(stack.isEmpty())
             return new int[0];
+        else{
+            int i = 0;
+            while(!stack.isEmpty()){
+                arr[i++] = stack.pop();
+            }
+        }
+        return arr;
     }
     static boolean dfsTopo(List<List<Integer>> adj,  Stack<Integer> stack, int v, boolean[] visited){
         visited[v] = true;
