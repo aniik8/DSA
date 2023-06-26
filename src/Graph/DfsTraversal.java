@@ -131,5 +131,23 @@ public class DfsTraversal {
         }
         return false;
     }
-
+// is cycle in an undirected graph recursive
+    public boolean isCyclic_recursive(int V, ArrayList<ArrayList<Integer>> adj){
+        boolean[] visited = new boolean[V];
+        for (int i = 0; i < V; i++) {       // it'll have disconnected components as well
+            if (dfs_cycle(visited, adj, -1, i))
+                return true;
+        }
+        return false;
+    }
+    public boolean dfs_cycle(boolean[] visited, ArrayList<ArrayList<Integer>> adj, int parent, int v){
+        visited[v] = true;
+        for (int neighbor : adj.get(v)) {
+            if (!visited[neighbor]){
+                if(dfs_cycle(visited, adj, v, neighbor)) return true;
+            }else if(parent != neighbor)
+                return true;
+        }
+        return false;
+    }
 }
