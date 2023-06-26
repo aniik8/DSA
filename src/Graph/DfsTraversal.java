@@ -26,7 +26,8 @@ public class DfsTraversal {
         }
 
     }
-
+// iterative solution of dfs
+// this is based on the dfs problem of gfg where we need to run loop reversely so that we can have our correct answer
     public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
         boolean[] visited = new boolean[V];
         ArrayList<Integer> dfsTraversal = new ArrayList<>();
@@ -55,6 +56,20 @@ public class DfsTraversal {
         return dfsTraversal;
     }
 
+//  Dfs traversal recursive
+    public static ArrayList<Integer> dfsRecursive(int V, ArrayList<ArrayList<Integer>> adj){
+        boolean[] visited = new boolean[V];
+        ArrayList<Integer> list = new ArrayList<>();
+        dfs(0, list, visited, adj);
+        return list;
+    }
+    static void dfs(int v, ArrayList<Integer> list, boolean[] visited, ArrayList<ArrayList<Integer>> adj){
+        visited[v] = true;
+        list.add(v);
+        for (int x :adj.get(v)) {
+            dfs(x, list, visited, adj);
+        }
+    }
     // DFS traversal similar problem ---> Detect a cycle in a graph
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
 
@@ -116,4 +131,5 @@ public class DfsTraversal {
         }
         return false;
     }
+
 }

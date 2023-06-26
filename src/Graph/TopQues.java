@@ -140,7 +140,7 @@ public class TopQues {
 
 
         for(int i=ans.length-1;i>=0;i--){
-            ans[i]=stack.pop();
+//            ans[i]=stack.pop();
         }
         return ans;
     }

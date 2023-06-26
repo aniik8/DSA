@@ -29,4 +29,27 @@ public class BfsTraversal {
         }
         return arr;
     }
+
+    public ArrayList<Integer> bfsOfGraphs(int V, ArrayList<ArrayList<Integer>> adj) {
+        // array list
+        // queue
+        // boolean array
+        boolean[] visited = new boolean[V];     // to check if a particular vertex is visited or not
+        LinkedList<Integer> list = new LinkedList<>();  // to add the neighbours
+        ArrayList<Integer> arr = new ArrayList<>();     // our final answer
+        visited[0] = true;
+        list.add(0);
+        while (!list.isEmpty()) {
+            int x = list.poll();
+            arr.add(x);
+            for (int neighbor :
+                    adj.get(x)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    list.add(neighbor);
+                }
+            }
+        }
+        return arr;
+    }
 }
