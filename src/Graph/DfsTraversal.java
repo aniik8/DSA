@@ -150,4 +150,27 @@ public class DfsTraversal {
         }
         return false;
     }
+    // recursive code for detecting cycle in directing graph
+    public boolean isCyclicDirected(int V, ArrayList<ArrayList<Integer>> adj){
+        boolean[] visited = new boolean[V];
+        boolean[] onStack = new boolean[V];
+        for (int i = 0; i < V; i++) {
+            if(dfs_directed_cycle(i, adj, visited, onStack))
+                return true;
+              }
+        return false;
+    }
+    static boolean dfs_directed_cycle(int v, ArrayList<ArrayList<Integer>> adj, boolean[] visited, boolean[] onStack){
+        visited[v] = true;
+        onStack[v] = true;
+        for (int neighbor : adj.get(v)) {
+                if(!visited[neighbor])
+                {   if(dfs_directed_cycle(neighbor, adj, visited, onStack))
+                        return true;
+                }else if(onStack[neighbor])
+                        return true;
+        }
+        onStack[v] = false;
+        return false;
+    }
 }
