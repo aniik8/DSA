@@ -2,8 +2,8 @@ package Graph;
 import java.util.*;
 public class TopQues {
     public static void main(String[] args) {
-        int[][] prerequisites = {{1,0}, {0,1}};
-        System.out.println(cannFinish(2, prerequisites));
+        int[][] prerequisites = {{1,0}};
+        System.out.println(Arrays.toString(findOrder(2, prerequisites)));
     }
 
     /*
@@ -41,6 +41,7 @@ public class TopQues {
         }
         stack.push(V);
     }
+    //by using cycle detection in dfs, this problem can be solved easily..
     static boolean canFinish(int numCourses, int[][] prerequisites){
         boolean[] visited = new boolean[numCourses];
         boolean[] onStack = new boolean[numCourses];
@@ -77,18 +78,23 @@ public class TopQues {
         return false;
     }
     // Can finish 2 -- course schedule 2
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
+    public static int[] findOrder(int numCourses, int[][] prerequisites) {
         boolean[] visited  =new boolean[numCourses];
         int[] arr = new int[numCourses];
+        boolean[] onStack = new boolean[numCourses];
         Stack<Integer> stack = new Stack<>();
-        List<List<Integer>> adj = new ArrayList<>(numCourses);
-        for (int[] num :
-                prerequisites) {
-            adj.get(num[1]).add(num[0]);
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            adj.add(new ArrayList<>());
+        }
+        for (int[] num : prerequisites) {
+            int u=num[0];
+            int v=num[1];
+            adj.get(u).add(v);
         }
         for (int i = 0; i < numCourses; i++) {
             if(!visited[i]){
-                if(dfsTopo(adj, stack, i, visited)){
+                if(dfsTopo(adj, stack, i, visited, onStack)){
                     return new int[0];
                 }
             }
@@ -103,33 +109,38 @@ public class TopQues {
         }
         return arr;
     }
-    static boolean dfsTopo(List<List<Integer>> adj,  Stack<Integer> stack, int v, boolean[] visited){
+    static boolean dfsTopo(ArrayList<ArrayList<Integer>> adj,  Stack<Integer> stack, int v, boolean[] visited,
+                           boolean[] onStack){
         visited[v] = true;
+        onStack[v] = true;
         for (int neighbor :
                 adj.get(v)) {
-            if (!visited[neighbor])
-                if(dfsTopo(adj, stack, neighbor, visited)){
+            if (!visited[neighbor]) {
+                if (dfsTopo(adj, stack, neighbor, visited, onStack)) {
                     return true;
-                }
+                } else if (onStack[neighbor])
+                    return false;
+            }
+
         }
+        onStack[v] = false;
         stack.push(v);
         return false;
     }
     public int[] findOrder2(int numCourses, int[][] prerequisites) {
-        boolean visited[]=new boolean[numCourses];
-        boolean dfsVisited[]=new boolean[numCourses];
-        Stack stack=new Stack<>();
-
+        boolean[] visited =new boolean[numCourses];
+        boolean[] dfsVisited =new boolean[numCourses];
+        Stack<Integer> stack=new Stack<>();
         List<List<Integer>> adjList=new ArrayList<>();
-        for(int i=0;i<numCourses;i++){
+        for(int i=0;i< numCourses;i++){
             adjList.add(new ArrayList<>());
         }
-        for(int edge[]:prerequisites){
+        for(int[] edge:prerequisites){
             int u=edge[0];
             int v=edge[1];
             adjList.get(u).add(v);
         }
-        int ans[]=new int[numCourses];
+        int[] ans=new int[numCourses];
         for(int i=0;i<numCourses;i++){
             if(!visited[i]){
                 if(topSort(i,adjList,visited,dfsVisited,stack)){
@@ -140,7 +151,8 @@ public class TopQues {
 
 
         for(int i=ans.length-1;i>=0;i--){
-//            ans[i]=stack.pop();
+            ans[i]=stack.peek();
+            stack.pop();
         }
         return ans;
     }

@@ -37,8 +37,7 @@ public class TopologicalSort {
         Queue<Integer> queue = new LinkedList<>();
         int[] indegree = new int[V];
         for(ArrayList<Integer> list: adj){
-            for (Integer e :
-                    list) {
+            for (Integer e : list) {
                 indegree[e]++;
             }
         }
