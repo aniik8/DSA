@@ -32,6 +32,61 @@ public class Dijkstra {
         }
         return distance;
     }
+    // shortest path from one node to another - return the path
+    public static List<Integer> shortestPath(int n, int m, int edges[][]) {
+        // converting the adjacency matrix to list
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            adj.add(new ArrayList<>());
+        }
+        for (int i = 0; i < m; i++) {
+            adj.get(edges[i][0]).add(new Pair(edges[i][1], edges[i][2]));
+            adj.get(edges[i][1]).add(new Pair(edges[i][0], edges[i][2]));
+        }
+        PriorityQueue<Pair> priorityQueue = new PriorityQueue<>((x, y) -> x.distance - y.distance);
+        int[] distance = new int[n+1];
+        int[] parent = new int[n+1];
+        // filling the distance array with infinite value and parent array with 1
+        for (int i = 0; i < n; i++) {
+            distance[i] = Integer.MAX_VALUE;
+            parent[i] = i;
+        }
+        distance[1] = 0;
+        priorityQueue.add(new Pair(0, 1));
+        // normal dijkstra implementation just added a functionality of parent[adjEdge]
+        while(!priorityQueue.isEmpty()){
+            int dis=priorityQueue.peek().distance;
+            int node=priorityQueue.peek().node;
+            priorityQueue.remove();
+            for(Pair it:adj.get(node)){
+                int edgeweight=it.distance;
+                int adjedge=it.node;
+                if(dis+edgeweight<distance[adjedge]){
+                    distance[adjedge]=dis+edgeweight;
+                    priorityQueue.add(new Pair(dis+edgeweight,adjedge));
+                    parent[adjedge] = node;
+                }
+            }
+        }
+        // if a node is unreachable then, put -1 in that place
+        List<Integer> list = new ArrayList<>();
+        if(distance[n] == Integer.MAX_VALUE)
+        {
+            list.add(-1);
+            return list;
+        }
+        // this will add the node from parent array as from dry run we see that parent array will have path to our
+        // solution
+        int node = n;
+        while(parent[node] != node){
+            list.add(node);
+            node = parent[node];
+        }
+        list.add(1);
+        // reversing the list
+        Collections.reverse(list);
+        return list;
+    }
 }
 class pair {
     int a, distance;
