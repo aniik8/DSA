@@ -2,7 +2,9 @@ package Graph;
 import java.util.*;
 public class Dijkstra {
     public static void main(String[] args) {
-
+    int[][] edges = {{1,2,2}, {2,5,5}, {2,3,4}, {1,4,1},{4,3,3},{3,5,1}};
+    int n = 5, m= 6;
+        System.out.println((shortestPath(n, m, edges)));
     }
     static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S)
     {
@@ -78,6 +80,7 @@ public class Dijkstra {
         // this will add the node from parent array as from dry run we see that parent array will have path to our
         // solution
         int node = n;
+        System.out.println(Arrays.toString(parent));
         while(parent[node] != node){
             list.add(node);
             node = parent[node];
@@ -141,3 +144,4 @@ class Solution
 
     }
 }
+//https://leetcode.com/problems/shortest-path-visiting-all-nodes/
