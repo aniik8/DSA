@@ -16,8 +16,9 @@ public class StackQues {
 //        stack.push(9);
 //        System.out.println(stack.peek());
 //        stack.isEmpty();
-        long[] num = {10, 5, 11, 6, 20, 12} ;
-        System.out.println(Arrays.toString(nextLargerElementLeft(num, num.length)));
+        int[] num = {100,80,60,70,60,75,85} ;
+//        System.out.println(Arrays.toString(nextLargerElementLeft(num, num.length)));
+        System.out.println(Arrays.toString(calculateSpan(num, num.length)));
     }
     // stack questions. From GFG and leetcode
     // 1. Identification of stack
@@ -66,6 +67,20 @@ public class StackQues {
             stack.push(arr[i]);
         }
         return array;
+    }
+
+    // Stock span problem
+    public static int[] calculateSpan(int price[], int n){
+        Stack<Integer> stack = new Stack<>();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            while(!stack.isEmpty() && price[stack.peek()] <= price[i]) stack.pop();
+            if(stack.isEmpty())
+                arr[i] = i+1;
+            else arr[i] = i - stack.peek();
+            stack.push(i);
+        }
+        return arr;
     }
 }
 // 1. Stack implementation using array.
