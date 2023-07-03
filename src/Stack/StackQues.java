@@ -1,5 +1,6 @@
 package Stack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
@@ -82,6 +83,7 @@ public class StackQues {
         }
         return arr;
     }
+
 }
 // 1. Stack implementation using array.
 class StackOperation{
@@ -98,6 +100,7 @@ class StackOperation{
         else{
             displayFull();
         }
+
     }
     //pop element from stack
     void pop(){
@@ -129,5 +132,49 @@ class StackOperation{
     }
     void displayStack(){
         System.out.println(Arrays.toString(stack));
+    }
+}
+
+// MIn stack leetcode
+class MinStack {
+    int minEle = Integer.MAX_VALUE;
+    private static int top;
+    private static int minTop;
+    private static ArrayList<Integer> stack;
+    private static ArrayList<Integer> minElement;
+    public MinStack() {
+        stack = new ArrayList<>();
+        minElement = new ArrayList<>();
+        top=-1;
+        minTop = -1;
+    }
+
+    public void push(int val) {
+        stack.add(val);
+        if(val <= minEle)
+        {
+            minElement.add(val);
+            minEle = val;
+            minTop++;
+        }
+        top++;
+    }
+
+    public void pop() {
+        if(stack.get(top) == minElement.get(minTop))
+        {
+            minElement.remove(minTop);
+            minTop--;
+        }
+        stack.remove(top);
+        top--;
+    }
+
+    public int top() {
+        return stack.get(top);
+    }
+
+    public int getMin() {
+        return minElement.get(minTop);
     }
 }

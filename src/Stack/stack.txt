@@ -1,0 +1,6 @@
+1. Nearest Greater right - https://practice.geeksforgeeks.org/problems/next-larger-element-1587115620/1
+2. Nearest greater left -
+3. Stock span problem - https://practice.geeksforgeeks.org/problems/stock-span-problem-1587115621/1
+4. Nearest smallest left
+5. Nearest Smallest right -
+6. Min Stack - https://leetcode.com/problems/min-stack/description/
