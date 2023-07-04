@@ -2,6 +2,7 @@ package Stack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public class StackQues {
@@ -83,7 +84,24 @@ public class StackQues {
         }
         return arr;
     }
+    static List<Integer> leftSmaller(int n, int a[])
+    {   Stack<Integer> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if(stack.size() == 0) list.add(-1);
+            else if(stack.size() > 0 && a[i] > stack.peek())
+                list.add(stack.peek());
+            else if(stack.size() > 0 && a[i] <= stack.peek()){
+                while(stack.size() > 0 && a[i] <= stack.peek())
+                    stack.pop();
+                if(stack.size() == 0) list.add(-1);
+                else list.add(stack.peek());
 
+            }
+            stack.push(a[i]);
+        }
+        return list;
+    }
 }
 // 1. Stack implementation using array.
 class StackOperation{
