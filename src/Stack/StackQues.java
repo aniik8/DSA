@@ -18,9 +18,10 @@ public class StackQues {
 //        stack.push(9);
 //        System.out.println(stack.peek());
 //        stack.isEmpty();
-        int[] num = {100,80,60,70,60,75,85} ;
+        int[] num = {3, 8, 5, 2, 25};
 //        System.out.println(Arrays.toString(nextLargerElementLeft(num, num.length)));
-        System.out.println(Arrays.toString(calculateSpan(num, num.length)));
+        System.out.println(Arrays.toString(help_classmate(num, num.length)));
+//        System.out.println(Arrays.toString(calculateSpan(num, num.length)));
     }
     // stack questions. From GFG and leetcode
     // 1. Identification of stack
@@ -70,7 +71,16 @@ public class StackQues {
         }
         return array;
     }
-
+    // stock span II
+    // {3, 4, 1, 5}
+    public static int stockBuyAndSell(int n, int[] prices) {
+        int count = 0;
+        for (int i = 0; i < prices.length-1; i++) {
+            if(prices[i] < prices[i+1])
+                count += Math.abs(prices[i] - prices[i+1]);
+        }
+        return count;
+    }
     // Stock span problem
     public static int[] calculateSpan(int price[], int n){
         Stack<Integer> stack = new Stack<>();
@@ -84,46 +94,52 @@ public class StackQues {
         }
         return arr;
     }
+    // {1, 6, 2}
     static List<Integer> leftSmaller(int n, int a[])
-    {   Stack<Integer> stack = new Stack<>();
+    {
+        Stack<Integer> stack = new Stack<>();
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            if(stack.size() == 0) list.add(-1);
-            else if(stack.size() > 0 && a[i] > stack.peek())
+            if(stack.isEmpty())
+                list.add(-1);
+            else if(stack.size() > 0 && stack.peek() < a[i])
                 list.add(stack.peek());
-            else if(stack.size() > 0 && a[i] <= stack.peek()){
-                while(stack.size() > 0 && a[i] <= stack.peek())
+            else if(stack.size() > 0 && stack.peek() >= a[i]){
+                while(stack.size() > 0 && stack.peek() >= a[i]){
                     stack.pop();
-                if(stack.size() == 0) list.add(-1);
+                }
+                if(stack.isEmpty()) list.add(-1);
                 else list.add(stack.peek());
-
             }
             stack.push(a[i]);
         }
         return list;
     }
+    //roll number appears after him
+    // {3, 8, 5, 2, 25}
+    // 2 5 2 -1 -1
+    // dont't forget to do the modification like reversing the array
     static int[] help_classmate(int[] arr, int n)
-    {   Stack<Integer> stack = new Stack<>();
-        int[] array = new int[arr.length];
-        int a = arr.length-1;
-        for (int i = n-1; i >=0 ; i--) {
-            if(stack.size() == 0)
-                array[a--] = -1;
-            else if(stack.size() > 0 && arr[i] > stack.peek()){
-                array[a--] = stack.peek();
-            }else if(stack.size() > 0 && arr[i] <= stack.peek()){
-                while(stack.size() > 0 && arr[i] <= stack.peek())
-                {
+    {
+        Stack<Integer> stack = new Stack<>();
+        int[] students = new int[n];
+        int a = 0;
+        for (int i = arr.length-1; i >= 0 ; i--) {
+            if(stack.isEmpty())
+                students[a++] = -1;
+            else if(stack.size() > 0 && stack.peek() < arr[i])
+                students[a++] = stack.peek();
+            else if(stack.size() > 0 && stack.peek() >= arr[i]) {
+                while(stack.size() > 0 && stack.peek() >= arr[i]){
                     stack.pop();
                 }
-                if(stack.size() == 0) array[a--] = -1;
-                else array[a--] = stack.peek();
+                if(stack.isEmpty()) students[a++] = -1;
+                else students[a++] = stack.peek();
 
             }
             stack.push(arr[i]);
         }
-        return array;
-        // Your code goes here
+        return students;
     }
 }
 // 1. Stack implementation using array.
@@ -175,6 +191,7 @@ class StackOperation{
         System.out.println(Arrays.toString(stack));
     }
 }
+
 
 // MIn stack leetcode
 class MinStack {
