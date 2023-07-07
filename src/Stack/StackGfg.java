@@ -71,7 +71,7 @@ class pair{
     }
 
 }
-/ delimiter class
+// delimiter class
 class delimiterChecker{
     private int maxLength;
     private int topList;
