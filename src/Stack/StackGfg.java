@@ -4,30 +4,62 @@ import java.util.Stack;
 
 public class StackGfg
 {
+    // 0 1 1 0 0 1 1 0 1 1 0 1 1 1 1 0
     public static void main(String[] args) {
-        int M[][] = {{0,1},
-                     {1,0},
+        int M[][] = {{0,1,1,0},
+                     {0,1,1,0},
+                     {1,1,0,1},
+                     {1,1,1,0}
                      };
         System.out.println(celebrity(M, M.length));
     }
     static int celebrity(int M[][], int n)
     {
-        System.out.println(M.length + " " + M[0].length);
-
-        Stack<pair> stack = new Stack<>();
+        Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < M.length; i++) {
             for (int j = 0; j < M[i].length; j++) {
+                if(i == j && M[i][j] == 1)
+                    return -1;
                 if(M[i][j] == 1) {
-                    if (!stack.isEmpty()) {
-                        System.out.println(stack.peek().j == j);
-                        if (stack.peek().j == j)
-                            return j;
+                    if(stack.contains(j)) {
+                        for (int k = 0; k < M[j].length; k++) {
+                            if (M[j][k] != 0)
+                                return -1;
+                        }
+                        return j;
                     }
-                    stack.push(new pair(i, j));
+                    else
+                        stack.push(j);
                 }
             }
         }
         return -1;
+    }
+    // celebrity o(n) solution
+    static int celebrityII(int M[][], int n)
+    {
+        //initializing two pointers for two corners.
+        int a = 0;
+        int b = n-1;
+
+        //we keep moving till the a<b.
+        while(a<b)
+        {
+            if(M[a][b] == 1)
+                a++;
+            else
+                b--;
+        }
+
+        //checking if a is actually a celebrity or not.
+        for(int i=0; i<n; i++)
+        {
+            //if any person doesn't know a or a knows any person, we return -1.
+            if((i != a) && (M[a][i]==1 || M[i][a] == 0))
+                return -1;
+        }
+        //if we reach here a is celebrity so we return a.
+        return a;
     }
     // is valid parenthesis
     public boolean isValid(String s) {
