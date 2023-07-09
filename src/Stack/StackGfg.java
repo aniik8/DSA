@@ -16,25 +16,40 @@ public class StackGfg
     static int celebrity(int M[][], int n)
     {
         Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < M.length; i++) {
-            for (int j = 0; j < M[i].length; j++) {
-                if(i == j && M[i][j] == 1)
-                    return -1;
-                if(M[i][j] == 1) {
-                    if(stack.contains(j)) {
-                        for (int k = 0; k < M[j].length; k++) {
-                            if (M[j][k] != 0)
-                                return -1;
-                        }
-                        return j;
-                    }
-                    else
-                        stack.push(j);
-                }
+        for(int i=0;i<n;i++){
+            stack.push(i);
+        }
+        while(stack.size()>1){
+            int a = stack.peek();
+            stack.pop();
+            int b = stack.peek();
+            stack.pop();
+            if(M[a][b]==1){
+                stack.push(b);
+            }
+            else{
+                stack.push(a);
             }
         }
-        return -1;
+        int ans = stack.peek();
+        stack.pop();
+
+        for (int i=0;i<n;i++){
+            if(i!=ans){
+                if(M[ans][i]==1 || M[i][ans]==0){
+                    return -1;
+                }
+            }
+
+        }
+
+        return ans;
+
+
     }
+
+
+
     // celebrity o(n) solution
     static int celebrityII(int M[][], int n)
     {
