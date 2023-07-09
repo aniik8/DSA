@@ -187,3 +187,38 @@ class GfG
         stack.push(x);
     }
 }
+//  special stack
+class GfG2{
+    public void push(int a,Stack<Integer> s)
+    {
+        s.push(a);
+    }
+    public int pop(Stack<Integer> s)
+    {
+        if(isEmpty(s))
+            return -1;
+        int poppedElement = s.pop();
+        return poppedElement;
+    }
+    public int min(Stack<Integer> s)
+    {
+        if(isEmpty(s))
+            return -1;
+        int minEle = s.pop();
+        while(s.size() > 0){
+            if(s.peek() < minEle){
+                minEle = s.peek();
+            }
+            s.pop();
+        }
+        return minEle;
+    }
+    public boolean isFull(Stack<Integer>s, int n)
+    {
+        return s.size() == n;
+    }
+    public boolean isEmpty(Stack<Integer>s)
+    {
+        return s.size() == 0;
+    }
+}
