@@ -144,3 +144,46 @@ class delimiterChecker{
     {
         return topList == maxLength;
     }}
+
+class GfG
+{
+    int minEle;
+    Stack<Integer> stack;
+
+    // Constructor
+    GfG()
+    {
+        stack = new Stack<>();
+        minEle = Integer.MAX_VALUE;
+    }
+
+    /*returns min element from stack*/
+    int getMin()
+    {if (stack.isEmpty()) {
+        return -1;
+    }
+        return minEle;
+    }
+
+    /*returns poped element from stack*/
+    int pop()
+    {
+        if (stack.isEmpty()) {
+            return -1;
+        }
+        int poppedElement = stack.pop();
+        if (poppedElement == minEle) {
+            minEle = stack.pop();
+        }
+        return poppedElement;
+    }
+
+    /*push element x into the stack*/
+    void push(int x)
+    { if (x <= minEle) {
+        stack.push(minEle);
+        minEle = x;
+    }
+        stack.push(x);
+    }
+}
