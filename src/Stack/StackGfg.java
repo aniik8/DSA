@@ -11,7 +11,8 @@ public class StackGfg
                      {1,1,0,1},
                      {1,1,1,0}
                      };
-        System.out.println(celebrity(M, M.length));
+//        System.out.println(celebrity(M, M.length));
+        System.out.println(reverseWords("pqr.mno"));
     }
     static int celebrity(int M[][], int n)
     {
@@ -33,23 +34,41 @@ public class StackGfg
         }
         int ans = stack.peek();
         stack.pop();
-
         for (int i=0;i<n;i++){
             if(i!=ans){
                 if(M[ans][i]==1 || M[i][ans]==0){
                     return -1;
                 }
             }
-
         }
-
         return ans;
-
-
     }
 
 
-
+// "i.like.this.program.very.much"
+    static String reverseWords(String S)
+    {
+     StringBuilder str = new StringBuilder();
+     Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < S.length(); i++) {
+            if(S.charAt(i) == '.')
+            {
+                while(stack.size() > 0)
+                {
+                    str.append(stack.pop());
+                }
+                str.append('.');
+            }
+            else{
+                stack.push(S.charAt(i));
+            }
+        }
+        while(stack.size() > 0)
+        {
+            str.append(stack.pop());
+        }
+        return str.toString();
+    }
     // celebrity o(n) solution
     static int celebrityII(int M[][], int n)
     {

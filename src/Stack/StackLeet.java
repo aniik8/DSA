@@ -17,13 +17,18 @@ public class StackLeet {
         // iterating through the string now
         for (int i = 0; i < s.length(); i++) {
             map.put(s.charAt(i), map.get(s.charAt(i))-1);
+            // if our alphabet is already existed before in our string then no need to push that again
             if(visited.contains(s.charAt(i))) continue;
+            // check all the condition together, if stack is not empty + if our top of the stack is greater than current
+            // + our stack.peek have it's frequency > 0 only then remove the popped element from the visited set
             while(!stack.isEmpty() && stack.peek() > s.charAt(i) && map.get(stack.peek()) > 0){
                 visited.remove(stack.pop());
             }
+            // push the current smaller character into the stack and visited...
             stack.push(s.charAt(i));
             visited.add(s.charAt(i));
         }
+        // just to reverse the string, we are using the string-builder.
         while(!stack.isEmpty()){
             stringBuilder.append(stack.pop());
         }
