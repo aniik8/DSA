@@ -3,6 +3,8 @@ import java.util.*;
 public class StackLeet {
     public static void main(String[] args) {
         System.out.println(removeDuplicateLetters("bcabc"));
+        int[] arr = {1,0,1,-4,-3};
+        System.out.println(find132pattern(arr));
     }
     static String removeDuplicateLetters(String s) {
         String str = "";
@@ -33,5 +35,48 @@ public class StackLeet {
             stringBuilder.append(stack.pop());
         }
         return stringBuilder.reverse().toString();
+    }
+    // find if nearest smaller left and nearest smaller right exist of any element.
+    /// remember these two condition for bug fixing
+    // i < j < k and nums[i] < nums[k] < nums[j].
+    static boolean find132pattern(int[] nums) {
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        int[] arrayLeft = new int[nums.length];
+        int[] arrayRight = new int[nums.length];
+        int a = 0, b = nums.length-1;
+        for (int i  = 0; i< nums.length; i++){
+            if(stack.isEmpty())
+                arrayLeft[a++] = -1;
+            else if(stack.size() > 0 && stack.peek() < nums[i])
+                arrayLeft[a++] = stack.peek();
+            else if(stack.size() > 0 && stack.peek() >= nums[i]){
+                while(stack.size() > 0 && stack.peek() >= nums[i])
+                    stack.pop();
+                if(stack.isEmpty()) arrayLeft[a++] = -1;
+                else arrayLeft[a++] = stack.peek();
+            }
+            stack.push(nums[i]);
+        }
+        for (int i  = nums.length-1; i >= 0; i--){
+            if(stack2.isEmpty())
+                arrayRight[b--] = -1;
+            else if(stack2.size() > 0 && stack2.peek() < nums[i])
+                arrayRight[b--] = stack.peek();
+            else if(stack2.size() > 0 && stack2.peek() >= nums[i]){
+                while(stack2.size() > 0 && stack2.peek() >= nums[i])
+                    stack2.pop();
+                if(stack2.isEmpty()) arrayLeft[b--] = -1;
+                else arrayRight[b--] = stack2.peek();
+            }
+            stack2.push(nums[i]);
+        }
+        System.out.println(Arrays.toString(arrayLeft));
+        System.out.println(Arrays.toString(arrayRight));
+        for (int i = 0; i < nums.length; i++) {
+            if(arrayLeft[i] != -1 && arrayRight[i] != -1)
+                return true;
+        }
+        return false;
     }
 }
