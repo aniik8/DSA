@@ -3,7 +3,7 @@ import java.util.*;
 public class StackLeet {
     public static void main(String[] args) {
         System.out.println(removeDuplicateLetters("bcabc"));
-        int[] arr = {1,0,1,-4,-3};
+        int[] arr = {-2,1,1,-2,1,1};
         System.out.println(find132pattern(arr));
     }
     static String removeDuplicateLetters(String s) {
@@ -38,35 +38,40 @@ public class StackLeet {
     }
     // find if nearest smaller left and nearest smaller right exist of any element.
     /// remember these two condition for bug fixing
-    // i < j < k and nums[i] < nums[k] < nums[j].
+    // i < j < k and nums[i] < nums[k] < nums[j]. (nearest greatest right i guess)
+    // [-2,1,1,-2,1,1]
+    //
     static boolean find132pattern(int[] nums) {
         Stack<Integer> stack = new Stack<>();
         Stack<Integer> stack2 = new Stack<>();
+        int minVal = Integer.MIN_VALUE;
         int[] arrayLeft = new int[nums.length];
         int[] arrayRight = new int[nums.length];
         int a = 0, b = nums.length-1;
         for (int i  = 0; i< nums.length; i++){
             if(stack.isEmpty())
-                arrayLeft[a++] = -1;
+                arrayLeft[a++] = minVal;
             else if(stack.size() > 0 && stack.peek() < nums[i])
                 arrayLeft[a++] = stack.peek();
             else if(stack.size() > 0 && stack.peek() >= nums[i]){
                 while(stack.size() > 0 && stack.peek() >= nums[i])
                     stack.pop();
-                if(stack.isEmpty()) arrayLeft[a++] = -1;
+                if(stack.isEmpty()) arrayLeft[a++] = minVal;
                 else arrayLeft[a++] = stack.peek();
             }
             stack.push(nums[i]);
         }
         for (int i  = nums.length-1; i >= 0; i--){
             if(stack2.isEmpty())
-                arrayRight[b--] = -1;
+                arrayRight[b--] = minVal;
             else if(stack2.size() > 0 && stack2.peek() < nums[i])
-                arrayRight[b--] = stack.peek();
-            else if(stack2.size() > 0 && stack2.peek() >= nums[i]){
-                while(stack2.size() > 0 && stack2.peek() >= nums[i])
+                arrayRight[b--] = stack2.peek();
+            else if(stack2.size() > 0 && stack2.peek() >= nums[i])
+            {
+                while(stack2.size() > 0 && stack2.peek() >= nums[i]) {
                     stack2.pop();
-                if(stack2.isEmpty()) arrayLeft[b--] = -1;
+                }
+                if(stack2.isEmpty()) arrayRight[b--] = minVal;
                 else arrayRight[b--] = stack2.peek();
             }
             stack2.push(nums[i]);
@@ -74,9 +79,36 @@ public class StackLeet {
         System.out.println(Arrays.toString(arrayLeft));
         System.out.println(Arrays.toString(arrayRight));
         for (int i = 0; i < nums.length; i++) {
-            if(arrayLeft[i] != -1 && arrayRight[i] != -1)
-                return true;
+            if(arrayLeft[i] != minVal && arrayRight[i] != minVal)
+            {   if(arrayLeft[i] < arrayRight[i])
+                    return true;
+            }
         }
         return false;
+    }
+    //  Next Greater Element I
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Stack<Integer> st = new Stack<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int[] ans = new int[nums2.length];
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            while (!st.isEmpty() && nums2[i] >= st.peek()) {
+                st.pop();
+            }
+            int nextGreater;
+            if (st.isEmpty()) {
+                nextGreater = -1;
+            } else {
+                nextGreater = st.peek();
+            }
+            map.put(nums2[i], nextGreater);
+            st.push(nums2[i]);
+        }
+
+        int[] fina = new int[nums1.length];
+        for (int i = 0; i < fina.length; i++) {
+            fina[i] = map.get(nums1[i]);
+        }
+        return fina;
     }
 }
