@@ -12,8 +12,11 @@ public class StackGfg
                      {1,1,1,0}
                      };
 //        System.out.println(celebrity(M, M.length));
-        System.out.println(reverseWords("pqr.mno"));
-        System.out.println(findMaxLen("))()(()"));
+//        System.out.println(reverseWords("pqr.mno"));
+//        System.out.println(findMaxLen("))()(()"));
+        System.out.println(solve(10, 20, "lrrfrrprgprpppppmurr"));
+        // 6 8
+        //orzprqrd
     }
     static int celebrity(int M[][], int n)
     {
@@ -90,6 +93,34 @@ public class StackGfg
             }
         }
         return max;
+    }
+    // string rp or pr
+    // "abppprrr"
+    // my approach - non p and r should not be pushed in the stack
+    // if stack top is p - check or push p until we'll find r
+    // if stack top is r - check or push r until we'll find p
+    // "prpptppr"
+
+    static long solve(int X,int Y, String S)
+    {
+        Stack<Character> stack = new Stack<>();
+        int rp = 0;
+        int pr = 0;
+        for(int i = 0; i < S.length(); i++){
+          if(stack.isEmpty())
+              stack.push(S.charAt(i));
+          else if(S.charAt(i) == 'p' && stack.peek() == 'r')
+                    {
+                        rp++; stack.pop();
+                    }
+          else if(S.charAt(i) == 'r' && stack.peek() == 'p'){
+                        pr++; stack.pop();
+                    }
+          else{
+              stack.push(S.charAt(i));
+            }
+        }
+        return (pr * X + rp * Y);
     }
     // celebrity o(n) solution
     static int celebrityII(int M[][], int n)
