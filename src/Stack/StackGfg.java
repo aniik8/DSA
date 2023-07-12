@@ -13,6 +13,7 @@ public class StackGfg
                      };
 //        System.out.println(celebrity(M, M.length));
         System.out.println(reverseWords("pqr.mno"));
+        System.out.println(findMaxLen("))()(()"));
     }
     static int celebrity(int M[][], int n)
     {
@@ -69,13 +70,33 @@ public class StackGfg
         }
         return str.toString();
     }
+    // Max length valid parenthesis
+    static int findMaxLen(String S) {
+        Stack<Integer> stack = new Stack<>();
+        int count = 0;
+        int max = 0;
+        stack.push(-1);
+        for (int i = 0; i < S.length(); i++) {
+            if(S.charAt(i) == '(')
+                stack.push(i);
+            else{
+                stack.pop();
+                if(stack.isEmpty()) {
+                    stack.push(i);
+                }
+                else{
+                    max = Math.max(max, i - stack.peek());
+                }
+            }
+        }
+        return max;
+    }
     // celebrity o(n) solution
     static int celebrityII(int M[][], int n)
     {
         //initializing two pointers for two corners.
         int a = 0;
         int b = n-1;
-
         //we keep moving till the a<b.
         while(a<b)
         {
@@ -84,7 +105,6 @@ public class StackGfg
             else
                 b--;
         }
-
         //checking if a is actually a celebrity or not.
         for(int i=0; i<n; i++)
         {

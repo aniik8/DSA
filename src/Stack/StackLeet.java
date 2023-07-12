@@ -3,8 +3,9 @@ import java.util.*;
 public class StackLeet {
     public static void main(String[] args) {
         System.out.println(removeDuplicateLetters("bcabc"));
-        int[] arr = {-2,1,1,-2,1,1};
-        System.out.println(find132pattern(arr));
+        int[] arr = {73,74,75,71,69,72,76,73};
+//        System.out.println(find132pattern(arr));
+        System.out.println(Arrays.toString(dailyTemperatures(arr)));
     }
     static String removeDuplicateLetters(String s) {
         String str = "";
@@ -110,5 +111,34 @@ public class StackLeet {
             fina[i] = map.get(nums1[i]);
         }
         return fina;
+    }
+    // 739 daily temperature
+    // [73,74,75,71,69,72,76,73]
+    // [1,1,4,2,1,1,0,0]
+    // return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a
+    // warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+    // Approach -- next greater element right index - index of current in the array
+    public static int[] dailyTemperatures(int[] temperatures) {
+        Stack<Integer> stack = new Stack<>();
+        int[] days = new int[temperatures.length];
+
+        for (int i = temperatures.length-1; i >= 0; i--) {
+            if(stack.isEmpty())
+                days[i] = 0;
+            else if(stack.size() > 0){
+                if(temperatures[stack.peek()] > temperatures[i]){
+                    days[i] = stack.peek() - i;
+                }
+                else{
+                    while(stack.size() > 0 && temperatures[stack.peek()] <= temperatures[i]){
+                        stack.pop();
+                    }
+                    if(stack.isEmpty()) days[i] = 0;
+                    else days[i] = stack.peek() - i;
+                }
+            }
+            stack.push(i);
+        }
+        return days;
     }
 }
