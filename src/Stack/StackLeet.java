@@ -148,7 +148,7 @@ public class StackLeet {
         int n = nums.length;
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < nums.length*2; i++) {
-            if(!stack.isEmpty() && stack.peek() < nums[i % n])
+            while(!stack.isEmpty() && stack.peek() < nums[i % n])
                 answer[stack.pop()] = nums[i%n];
             if(i < n)
                 stack.push(i);
