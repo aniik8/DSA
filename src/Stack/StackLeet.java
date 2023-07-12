@@ -1,4 +1,5 @@
 package Stack;
+import javax.swing.*;
 import java.util.*;
 public class StackLeet {
     public static void main(String[] args) {
@@ -140,5 +141,18 @@ public class StackLeet {
             stack.push(i);
         }
         return days;
+    }
+    // 503 Next greater element
+    public int[] nextGreaterElements(int[] nums) {
+        int[] answer = new int[nums.length];
+        int n = nums.length;
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < nums.length*2; i++) {
+            if(!stack.isEmpty() && stack.peek() < nums[i % n])
+                answer[stack.pop()] = nums[i%n];
+            if(i < n)
+                stack.push(i);
+        }
+        return answer;
     }
 }
