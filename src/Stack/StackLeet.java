@@ -3,10 +3,11 @@ import javax.swing.*;
 import java.util.*;
 public class StackLeet {
     public static void main(String[] args) {
-        System.out.println(removeDuplicateLetters("bcabc"));
-        int[] arr = {73,74,75,71,69,72,76,73};
-//        System.out.println(find132pattern(arr));
-        System.out.println(Arrays.toString(dailyTemperatures(arr)));
+//        System.out.println(removeDuplicateLetters("bcabc"));
+//        int[] arr = {73,74,75,71,69,72,76,73};
+////        System.out.println(find132pattern(arr));
+//        System.out.println(Arrays.toString(dailyTemperatures(arr)));
+        System.out.println(decodeString("3[a]2[bc"));
     }
     static String removeDuplicateLetters(String s) {
         String str = "";
@@ -154,5 +155,35 @@ public class StackLeet {
                 stack.push(i);
         }
         return answer;
+    }
+    // 394. Decode String
+    // "3[a]2[bc]"
+    public static String decodeString(String s) {
+        Stack<String> stack = new Stack<>();
+//        StringBuilder str = new StringBuilder("");
+        String str = "";
+        StringBuilder result = new StringBuilder();
+        for (int i = s.length()-1; i >= 0 ; i--) {
+            {
+                if (Character.isAlphabetic(s.charAt(i)))
+                {   str += s.charAt(i);
+                    stack.push(str);
+                }
+                else if (s.charAt(i) == ']') {
+                    result.append(stack.pop());
+                    str = "";
+                }
+                else if (Character.isDigit(s.charAt(i))) {
+                    int n = s.charAt(i) - '0';
+                    System.out.println(n);
+                    while (n != 0) {
+                        result.append(stack.peek());
+                        n--;
+                    }
+                }
+
+            }
+        }
+        return result.reverse().toString();
     }
 }
