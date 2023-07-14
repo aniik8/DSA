@@ -2,6 +2,8 @@ package Stack;
 import java.util.*;
 import java.util.Stack;
 
+import static Stack.twoStacks.trappingWater;
+
 public class StackGfg
 {
     // 0 1 1 0 0 1 1 0 1 1 0 1 1 1 1 0
@@ -11,10 +13,13 @@ public class StackGfg
                      {1,1,0,1},
                      {1,1,1,0}
                      };
+        int[] arr = {4,2,0,3,2,5};
 //        System.out.println(celebrity(M, M.length));
 //        System.out.println(reverseWords("pqr.mno"));
 //        System.out.println(findMaxLen("))()(()"));
         System.out.println(solve(10, 20, "lrrfrrprgprpppppmurr"));
+        System.out.println(trappingWater(arr, arr.length));
+
         // 6 8
         //orzprqrd
     }
@@ -294,39 +299,66 @@ class GfG2{
 }
 // two stack using single array
 
-class twoStacks
-{   int top1;
+class twoStacks {
+    int top1;
     int top2;
     int[] arr;
+
     //Function to push an integer into the stack1.
-    twoStacks(){
+    twoStacks() {
         arr = new int[100];
         top1 = -1;
-        top2 = (arr.length/2) -1;
+        top2 = (arr.length / 2) - 1;
     }
-    void push1(int x)
-    {
-        if(top1 >= (arr.length/2))
+
+    void push1(int x) {
+        if (top1 >= (arr.length / 2))
             return;
 
         arr[++top1] = x;
     }
+
     //Function to push an integer into the stack2.
-    void push2(int x)
-    {
+    void push2(int x) {
         arr[++top2] = x;
     }
+
     //Function to remove an element from top of the stack1.
-    int pop1()
-    {   if(top1 < 0)
-        return -1;
+    int pop1() {
+        if (top1 < 0)
+            return -1;
         return arr[top1--];
     }
+
     //Function to remove an element from top of the stack2.
-    int pop2()
-    {   if(top2 <= (arr.length/2) -1)
-        return -1;
+    int pop2() {
+        if (top2 <= (arr.length / 2) - 1)
+            return -1;
         return arr[top2--];
     }
-}
 
+    // gfg trapping rain water
+    // maxLeft, max right
+    // min(maxLeft , maxRIght) - length_of_that and sum
+    static long trappingWater(int arr[], int n) {
+        int[] maxLeft = new int[n];
+        int[] maxRight = new int[n];
+        long sum = 0;
+        maxLeft[0] = arr[0];
+        maxRight[n - 1] = arr[n - 1];
+        int maxleft = maxLeft[0], maxright = arr[n - 1];
+        // calculate the maxLeft for each element
+        for (int i = 1; i < n; i++) {
+            maxleft = Math.max(maxleft, arr[i]);
+            maxLeft[i] = maxleft;
+        }
+        for (int i = n - 2; i >= 0; i--) {
+            maxright = Math.max(maxright, arr[i]);
+            maxRight[i] = maxright;
+        }
+        for (int i = 0; i < n; i++) {
+            sum += Math.min(maxLeft[i], maxRight[i]) - arr[i];
+        }
+        return sum;
+    }
+}

@@ -4,11 +4,10 @@ import java.util.*;
 public class StackLeet {
     public static void main(String[] args) {
 //        System.out.println(removeDuplicateLetters("bcabc"));
-        long[] arr = {7,2,8,9,1,3,6,5};
+
 ////        System.out.println(find132pattern(arr));
 //        System.out.println(Arrays.toString(dailyTemperatures(arr)));
 //        System.out.println(decodeString("3[a]2[bc]"));
-        System.out.println(getMaxArea(arr, arr.length));
     }
     static String removeDuplicateLetters(String s) {
         String str = "";
@@ -239,5 +238,6 @@ public class StackLeet {
 
         return max;
     }
+
 
 }
