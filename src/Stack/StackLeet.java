@@ -4,10 +4,11 @@ import java.util.*;
 public class StackLeet {
     public static void main(String[] args) {
 //        System.out.println(removeDuplicateLetters("bcabc"));
-//        int[] arr = {73,74,75,71,69,72,76,73};
+        long[] arr = {7,2,8,9,1,3,6,5};
 ////        System.out.println(find132pattern(arr));
 //        System.out.println(Arrays.toString(dailyTemperatures(arr)));
-        System.out.println(decodeString("3[a]2[bc"));
+//        System.out.println(decodeString("3[a]2[bc]"));
+        System.out.println(getMaxArea(arr, arr.length));
     }
     static String removeDuplicateLetters(String s) {
         String str = "";
@@ -157,33 +158,86 @@ public class StackLeet {
         return answer;
     }
     // 394. Decode String
-    // "3[a]2[bc]"
+    // "3[a]2[bc"  ==== abcabccdcdcdef
+    //                  abcabccdcdcdcdef
     public static String decodeString(String s) {
         Stack<String> stack = new Stack<>();
-//        StringBuilder str = new StringBuilder("");
-        String str = "";
-        StringBuilder result = new StringBuilder();
-        for (int i = s.length()-1; i >= 0 ; i--) {
+        Stack<Integer> count = new Stack<>();
+        int index = 0;
+        String result = "";
+        // 4 cases -
+        while(index < s.length()){
+            if(Character.isDigit(s.charAt(index)))
             {
-                if (Character.isAlphabetic(s.charAt(i)))
-                {   str += s.charAt(i);
-                    stack.push(str);
+                int num = 0;
+                while(Character.isDigit(s.charAt(index))){
+                    num =  10 * num + (s.charAt(index) - '0');
                 }
-                else if (s.charAt(i) == ']') {
-                    result.append(stack.pop());
-                    str = "";
-                }
-                else if (Character.isDigit(s.charAt(i))) {
-                    int n = s.charAt(i) - '0';
-                    System.out.println(n);
-                    while (n != 0) {
-                        result.append(stack.peek());
-                        n--;
-                    }
-                }
-
+                count.push(num);
+                index += 1;
             }
+            else if(s.charAt(index) == ']'){
+                StringBuilder stringBuilder = new StringBuilder(stack.pop());
+                int nums = count.pop();
+                for (int i = 0; i < nums; i++) {
+                    stringBuilder.append(result);
+                }
+                result = stringBuilder.toString();
+                index += 1;
+            }
+            else if(s.charAt(index) == '['){
+                stack.push(result);
+                result = "";
+                index += 1;
+            }else{
+                result += s.charAt(index);
+                index += 1;
+            }
+            index++;
         }
-        return result.reverse().toString();
+        return result;
     }
+    // Nearest smallest left
+    // nearest smallest right.
+    // area = (right - left - 1) * (weight of current)
+    public static long getMaxArea(long hist[], long n)
+    {   Stack<Integer> stack = new Stack<>();
+        int h = hist.length;
+        int[] left_arr = new int[h];
+        int[] right_arr = new int[h];
+        long[] area = new long[h];
+        long max = Integer.MIN_VALUE;
+        for (int i = 0; i < h; i++) {
+
+
+            while (stack.size() > 0 && hist[stack.peek()] >= hist[i]) {
+                stack.pop();
+            }
+
+            if (stack.size() == 0) left_arr[i] = -1;
+            else left_arr[i] = stack.peek();
+            stack.push(i);
+        }
+        stack = new Stack<>();
+        int a = h - 1;
+        for (int i = h - 1; i >= 0; i--) {
+
+            while (stack.size() > 0 && hist[stack.peek()] >= hist[i]) {
+                stack.pop();
+            }
+
+
+            if (stack.size() == 0) right_arr[a--] = h;
+            else right_arr[a--] = stack.peek();
+
+            stack.push(i);
+        }
+        for (int i = 0; i < h; i++) {
+            area[i] = (right_arr[i] - (left_arr[i]) - 1) * hist[i];
+            max = Math.max(max, area[i]);
+        }
+
+        return max;
+    }
+
 }
