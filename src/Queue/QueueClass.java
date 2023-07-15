@@ -1,7 +1,7 @@
 package Queue;
 
-import java.util.LinkedList;
-import java.util.Queue;
+//import java.util.LinkedList;
+import java.util.*;
 
 public class QueueClass {
     public static void main(String[] args) {
@@ -117,5 +117,45 @@ class MyStack2 {
 
     public boolean empty() {
         return queue.isEmpty();
+    }
+}
+class MyQueue {
+    Stack<Integer> stack1;
+    Stack<Integer> stack2;
+    public MyQueue() {
+        stack1 = new Stack<>();
+        stack2 = new Stack<>();
+    }
+
+    public void push(int x) {
+        stack1.push(x);
+    }
+
+    public int pop(){
+        while(!(stack1.isEmpty())){
+            stack2.push(stack1.pop());
+        }
+        int removed = stack2.pop();
+
+        while(!(stack2.isEmpty())){
+            stack1.push(stack2.pop());
+        }
+        return removed;
+    }
+
+    public int peek(){
+        while(!(stack1.isEmpty())){
+            stack2.push(stack1.pop());
+        }
+        int peekEle = stack2.peek();
+
+        while(!(stack2.isEmpty())){
+            stack1.push(stack2.pop());
+        }
+        return peekEle;
+    }
+
+    public boolean empty() {
+        return (stack1.empty() && stack2.empty());
     }
 }
