@@ -15,10 +15,10 @@ public class StackGfg
                      };
         int[] arr = {4,2,0,3,2,5};
 //        System.out.println(celebrity(M, M.length));
-//        System.out.println(reverseWords("pqr.mno"));
+        System.out.println(reverseWords("i.like.this.program.very.much"));
 //        System.out.println(findMaxLen("))()(()"));
-        System.out.println(solve(10, 20, "lrrfrrprgprpppppmurr"));
-        System.out.println(trappingWater(arr, arr.length));
+//        System.out.println(solve(10, 20, "lrrfrrprgprpppppmurr"));
+//        System.out.println(trappingWater(arr, arr.length));
 
         // 6 8
         //orzprqrd
@@ -58,6 +58,7 @@ public class StackGfg
     static String reverseWords(String S)
     {
      StringBuilder str = new StringBuilder();
+     String str2 = "abcd";
      Stack<Character> stack = new Stack<>();
         for (int i = 0; i < S.length(); i++) {
             if(S.charAt(i) == '.')
@@ -76,7 +77,7 @@ public class StackGfg
         {
             str.append(stack.pop());
         }
-        return str.toString();
+        return str.reverse().toString();
     }
     // Max length valid parenthesis
     static int findMaxLen(String S) {
