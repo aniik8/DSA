@@ -7,7 +7,7 @@ public class HashMapC {
     public static void main(String[] args) {
 //        int[] arr = {2,2,1};
 //        System.out.println(singleNumberr(arr));
-        System.out.println(firstUniqChar("dddccdbba"));
+        System.out.println(firstUniqChar2("dddccdbba"));
     }
     static int firstUniqChar(String s) {
         HashMap<Character, Integer> map = new HashMap<>();
@@ -20,6 +20,13 @@ public class HashMapC {
         for (int i = 0; i < s.length(); i++) {
             if(map.get(s.charAt(i)) == 1)
                 return s.indexOf(s.charAt(i));
+        }
+        return -1;
+    }
+    static int firstUniqChar2(String s){
+        for (int i = 0; i < s.length(); i++) {
+            if(s.indexOf(s.charAt(i)) == s.lastIndexOf(s.charAt(i)))
+                return i;
         }
         return -1;
     }
