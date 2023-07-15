@@ -88,3 +88,34 @@ class MyStack {
         return queue.isEmpty() && helper.isEmpty();
     }
 }
+class MyStack2 {
+    Queue<Integer> queue;
+    public int latest;
+    public int temp;
+    public int top = -1;
+    public MyStack2() {
+        queue = new LinkedList<>();
+    }
+
+    public void push(int x) {
+        temp = top;
+        top = x;
+        queue.add(top);
+    }
+
+    public int pop() {
+        latest = -1;
+        while(latest != temp){
+            queue.add(queue.poll());
+        }
+        latest = queue.poll();
+        return latest;
+    }
+    public int top(){
+        return top;
+    }
+
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+}
