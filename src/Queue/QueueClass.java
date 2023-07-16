@@ -5,13 +5,40 @@ import java.util.*;
 
 public class QueueClass {
     public static void main(String[] args) {
-        QueueA queueobj = new QueueA(5);
-        queueobj.enqueue(2);
-        queueobj.enqueue(10);
-        queueobj.enqueue(23);
-        queueobj.enqueue(32);
-        queueobj.enqueue(0);
-        System.out.println(queueobj.isFull());
+//        QueueA queueobj = new QueueA(5);
+//        queueobj.enqueue(2);
+//        queueobj.enqueue(10);
+//        queueobj.enqueue(23);
+//        queueobj.enqueue(32);
+//        queueobj.enqueue(0);
+//        System.out.println(queueobj.isFull());
+        System.out.println(FirstNonRepeating("tcpmxaixsswjelbswxytyhbwjinuhxhvpwaybmdhndafszoghpyzdahiqsgluufqcekjk"));
+    }
+    // gfg
+    // yewaahkpuo
+    // yyyyyyyyyy
+    // yyyyyyyyyy
+    static String FirstNonRepeating(String A)
+    {
+        HashMap<Character, Integer> map = new HashMap<>();
+        Queue<Character> queue = new LinkedList<>();
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < A.length(); i++) {
+            map.put(A.charAt(i), map.getOrDefault(A.charAt(i), 0)+1);
+            queue.add(A.charAt(i));
+            while(!queue.isEmpty()){
+                char ch = queue.peek();
+                if(map.get(ch) > 1)
+                    queue.poll();
+                else
+                    break;
+            }
+            if(queue.isEmpty())
+                str.append('#');
+            else
+                str.append(queue.peek());
+        }
+        return str.toString();
     }
 }
 // insertion at the end and deletion at the front
