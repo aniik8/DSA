@@ -12,7 +12,9 @@ public class QueueClass {
 //        queueobj.enqueue(32);
 //        queueobj.enqueue(0);
 //        System.out.println(queueobj.isFull());
-        System.out.println(FirstNonRepeating("tcpmxaixsswjelbswxytyhbwjinuhxhvpwaybmdhndafszoghpyzdahiqsgluufqcekjk"));
+        int[] arr = {1,0,0,1,1,1,0,1,0,0,1,1,1,1,0,1,0,0,0,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1,0,1},
+                sandw = {1,1,1,0,1,1,0,0,0,0,1,1,0,0,0,1,1,0,0,1,0,1,1,1,0,0,0,0,1,1,0,1,0,1,1,1};
+        System.out.println(countStudents(arr, sandw));
     }
     // gfg
     // yewaahkpuo
@@ -39,6 +41,59 @@ public class QueueClass {
                 str.append(queue.peek());
         }
         return str.toString();
+    }
+    // 1700 number of students unable to eat
+    public static int countStudents(int[] students, int[] sandwiches) {
+        Queue<Integer> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
+        int[] visited = new int[sandwiches.length];
+        for (int i = sandwiches.length-1; i >= 0 ; i--) {
+            stack.push(sandwiches[i]);
+            queue.add(sandwiches.length-1 -  i);
+        }
+        System.out.println(stack);
+        System.out.println(queue);
+        while(true){
+            if(students[queue.peek()]== stack.peek())
+            {
+                queue.remove();
+                stack.pop();
+            }else{
+                visited[queue.peek()]++;
+                queue.add(queue.peek());
+                queue.remove();
+                if(visited[queue.peek()] > stack.size()){
+                    break;
+                }
+            }
+        }
+        return stack.size();
+    }
+    // count students approach 2
+    public int countStudents2(int[] students, int[] sandwiches) {
+        Queue<Integer> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = sandwiches.length-1; i >= 0 ; i--) {
+            stack.push(sandwiches[i]);
+            queue.add(sandwiches.length-1 -  i);
+        }
+        int count = 0;
+        while(stack.size() != 0){
+            if(students[queue.peek()]== stack.peek())
+            {   count = 0;
+                queue.remove();
+                stack.pop();
+            }else{
+
+                queue.add(queue.peek());
+                queue.remove();
+                count++;
+            }
+            if(count == queue.size())
+                return count;
+        }
+        return 0;
     }
 }
 // insertion at the end and deletion at the front
