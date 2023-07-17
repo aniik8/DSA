@@ -53,7 +53,7 @@ public class QueueClass {
         }
         System.out.println(stack);
         System.out.println(queue);
-        while(true){
+        while(!stack.isEmpty()){
             if(students[queue.peek()]== stack.peek())
             {
                 queue.remove();
@@ -62,7 +62,7 @@ public class QueueClass {
                 visited[queue.peek()]++;
                 queue.add(queue.peek());
                 queue.remove();
-                if(visited[queue.peek()] > stack.size()){
+                if(visited[queue.peek()] == queue.size()){
                     break;
                 }
             }
