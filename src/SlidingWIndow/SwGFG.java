@@ -3,9 +3,9 @@ import java.util.*;
 
 public class SwGFG {
     public static void main(String[] args) {
-        long[] arr= {12, -1, -7, 8, -15, 30, 16, 28};
-
-        System.out.println(Arrays.toString(printFirstNegativeInteger(arr, 8, 3)));
+        int[] arr= {1, 2, 3, 1, 4, 5 ,2,3,6};
+//        System.out.println(Arrays.toString(printFirstNegativeInteger(arr, 8, 3)));
+        System.out.println(max_of_subarrays(arr, 9,3));
     }
     // maximum sum subarray of size k
     static long maximumSumSubarray(int K, List<Integer> Arr,int N){
@@ -55,5 +55,48 @@ public class SwGFG {
             }
         }
         return negative;
+    }
+// Count occurences of anagrams
+//    static int search(String pat, String txt) {
+//        int i = 0, j = 0, count = 0;
+//        int K = pat.length();
+//        StringBuilder str = new StringBuilder();
+//        while(j  < txt.length()){
+//            str.append(txt.charAt(j));
+//            if(j - i + 1 < K){
+//                j++;
+//            }else if(j - i + 1 == K){
+//
+//            }
+//        }
+//    }
+    // {1, 2, 3, 1, 4, 5 ,2,3,6}
+    static ArrayList <Integer> max_of_subarrays(int arr[], int n, int k)
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        int i = 0, j = 0;
+        Deque<Integer> deque = new LinkedList<>();
+        while(j < n){
+            if(deque.isEmpty()){
+                deque.add(arr[j]);
+            }
+            else{
+                while(deque.size() > 0 && deque.peekLast() < arr[j]){
+                    deque.removeLast();
+                }
+                deque.add(arr[j]);
+            }
+            if(j - i + 1 < k)
+                j++;
+            else if(j - i + 1 == k){
+                list.add(deque.peek());
+                if(arr[i] == deque.peek())
+                    deque.removeFirst();
+                i++;
+                j++;
+
+            }
+        }
+        return list;
     }
 }
