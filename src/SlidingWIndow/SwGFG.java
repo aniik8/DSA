@@ -8,7 +8,8 @@ public class SwGFG {
 //        System.out.println(Arrays.toString(printFirstNegativeInteger(arr, 8, 3)));
 //        System.out.println(max_of_subarrays(arr, 9,3));
 //        System.out.println((int)findMaxAverage(nums, 1));
-        System.out.println(countGoodSubstrings("xyzzaz"));
+//        System.out.println(countGoodSubstrings("xyzzaz"));
+        System.out.println(divisorSubstrings(430043, 2));
     }
     // maximum sum subarray of size k
     static long maximumSumSubarray(int K, List<Integer> Arr,int N){
@@ -150,5 +151,31 @@ public class SwGFG {
         }
         return count;
     }
-    //
+    //2269. Find the K-Beauty of a Number
+    static int divisorSubstrings(int num, int k) {
+        int i = 0, j = 0,  len = num, count = 0;
+        StringBuilder str = new StringBuilder();
+
+        while(len != 0){
+            str.append(len % 10);
+            len /= 10;
+        }
+
+        String stri = str.reverse().toString();
+//        System.out.println(stri);
+        while(j < stri.length()){
+            if(j - i + 1 < k)
+                j++;
+            else if(j - i + 1 == k){
+                int n = Integer.parseInt(stri.substring(i, (j+1)));
+                if(n != 0){
+                    if(num % n == 0)
+                        count++;
+                }
+                i++;
+                j++;
+            }
+    }
+        return count;
+}
 }
