@@ -4,8 +4,11 @@ import java.util.*;
 public class SwGFG {
     public static void main(String[] args) {
         int[] arr= {1, 2, 3, 1, 4, 5 ,2,3,6};
+        int[] nums = {-1};
 //        System.out.println(Arrays.toString(printFirstNegativeInteger(arr, 8, 3)));
-        System.out.println(max_of_subarrays(arr, 9,3));
+//        System.out.println(max_of_subarrays(arr, 9,3));
+//        System.out.println((int)findMaxAverage(nums, 1));
+        System.out.println(countGoodSubstrings("xyzzaz"));
     }
     // maximum sum subarray of size k
     static long maximumSumSubarray(int K, List<Integer> Arr,int N){
@@ -99,4 +102,53 @@ public class SwGFG {
         }
         return list;
     }
+// Leetcode 643
+    static  public double findMaxAverage(int[] nums, int k) {
+        int i = 0, j = 0;
+        double sum = 0, maximum_average = -10001.00000, average = -100001;
+        while(j < nums.length){
+            sum += nums[j];
+            if(j - i + 1 < k)
+                j++;
+            else if(j - i + 1 == k){
+//                System.out.println(sum / k);
+                maximum_average = Math.max(maximum_average, sum / k);
+                sum -= nums[i];
+//                System.out.println(maximum_average);
+                i++;
+                j++;
+            }
+        }
+        return maximum_average;
+    }
+// leetcode 1876
+    static public int countGoodSubstrings(String s) {
+        int k = 3, i = 0, j = 0, n = s.length(), count= 0;
+        int[] arr = new int[26];
+        int index;
+        while(j < n){
+            index = s.charAt(j) - 'a';
+           arr[index]++;
+           if(arr[index] > 1){
+               while(arr[index] > 1){
+                   int ind = s.charAt(i) - 'a';
+                   arr[ind]--;
+                   i++;
+               }
+           }
+               if(j - i +1 < k){
+                   j++;
+               }
+               else if(j - i + 1 == k){
+                   count++;
+                   index = s.charAt(i) - 'a';
+                   arr[index]--;
+                   i++;
+                   j++;
+               }
+
+        }
+        return count;
+    }
+    //
 }
