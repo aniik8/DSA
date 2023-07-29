@@ -12,9 +12,9 @@ public class QueueClass {
 //        queueobj.enqueue(32);
 //        queueobj.enqueue(0);
 //        System.out.println(queueobj.isFull());
-        int[] arr = {1,0,0,1,1,1,0,1,0,0,1,1,1,1,0,1,0,0,0,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1,0,1},
-                sandw = {1,1,1,0,1,1,0,0,0,0,1,1,0,0,0,1,1,0,0,1,0,1,1,1,0,0,0,0,1,1,0,1,0,1,1,1};
-        System.out.println(countStudents(arr, sandw));
+        int[] arr = {1,1,1,0,0,1},
+                sandw = {1,0,0,0,1,1};
+        System.out.println(countStudents3(arr, sandw));
     }
     // gfg
     // yewaahkpuo
@@ -94,6 +94,31 @@ public class QueueClass {
                 return count;
         }
         return 0;
+    }
+    public static int countStudents3(int[] students, int[] sandwiches){
+        Stack<Integer> st=new Stack<>();
+        Queue<Integer> q=new LinkedList<>();
+        int x=0;
+        for(int i=0;i<students.length;i++){
+            q.add(students[i]);
+        }
+        for(int i=sandwiches.length-1;i>=0;i--){
+            st.push(sandwiches[i]);
+            System.out.println("i am working " + i);
+        }
+        while(st.size()>0)
+        {
+            if(q.peek()==st.peek()){
+                st.pop();
+                q.remove();
+                x++;
+            }
+            else{
+                q.add(q.remove());
+            }
+        }
+        int ans=students.length-x;
+        return ans;
     }
 }
 // insertion at the end and deletion at the front
