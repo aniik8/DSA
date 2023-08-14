@@ -164,8 +164,6 @@ public class DynamicProgramming {
         int minI = (int)Math.pow(10,9);
         for(int s=0; s<=total/2; s++)
             if(prev[s]) minI = Math.min(minI, Math.abs((total - s) - s));
-
-
         return minI;
     }
 }
