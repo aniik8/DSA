@@ -6,6 +6,7 @@ public class DP2 {
     public static void main(String[] args) {
         int[] nums = {10, 8};
 //        System.out.println(minDifference(nums));
+        System.out.println(longestCommonSubsequence2("abcde", "ace"));
     }
     static int boundedKnapsack(int[] weight, int[] value, int W, int n){
         if(n == 0 || W == 0)
@@ -83,8 +84,35 @@ public class DP2 {
     }
     return (range - 2 * num);
     }
-   //
-   public int longestCommonSubsequence(String text1, String text2) {
+   // lcs
+   static int longestCommonSubsequence(String text1, String text2) {
+        if(text1.length() == 0  ||  text2.length() == 0)
+            return 0;
+        else if(text2.charAt(0) == text2.charAt(0))
+            return 1 + longestCommonSubsequence(text1.substring(1), text2.substring(1));
+        return Math.max(longestCommonSubsequence(text1.substring(1), text2), longestCommonSubsequence(text1, text2.substring(1)));
+   }
+   // memoization
+    static int longestCommonSubsequence2(String text1, String text2){
+        int[][] t = new int[text1.length()+1][text2.length()+1];
+        for (int i = 0; i <= text1.length(); i++) {
+            for (int j = 0; j <= text2.length(); j++) {
+                t[i][j] = -1;
+            }
+        }
+        return longestCommonSubsequencehelper(text1,text2, t, text1.length(), text2.length());
+    }
+   static int longestCommonSubsequencehelper(String text1, String text2, int[][] t, int m, int n) {
+       if(n == 0  || m == 0)
+           return 0;
+       if(t[m][n] != -1)
+           return t[m][n];
+       if(text1.charAt(m-1) == text2.charAt(n-1))
+           return t[m][n] = 1 + longestCommonSubsequencehelper(text1, text2,t, m-1, n-1);
+       else
+       return t[m][n] = Math.max(longestCommonSubsequencehelper(text1, text2, t, m, n-1),
+               longestCommonSubsequencehelper(text1, text2, t, m-1, n));
+
 
    }
 }
