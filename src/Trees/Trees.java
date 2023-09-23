@@ -19,9 +19,9 @@ public class Trees {
 }
 class TreeNode{
     TreeNode left, right;
-    int data;
+    int val;
     TreeNode(int key){
-        this.data = key;
+        this.val = key;
         this.left = null;
         this.right = null;
     }
@@ -55,7 +55,7 @@ class BinaryTree{
             return;
         }
         else if(level == 1){
-            System.out.println(node.data);
+            System.out.println(node.val);
             return;
         }
         PrintLevelOrder(node.left, level-1);
@@ -79,7 +79,7 @@ class BinaryTree{
         if(node == null)
             return;
         else if(level == 1) {
-            list.add(node.data);
+            list.add(node.val);
             return;
         }
         levelOrderTree(node.left, level-1, list);
@@ -98,7 +98,7 @@ class BinaryTree{
         if(root == null)
             return;
         inOrderTraversal(root.left, list);
-        list.add(root.data);
+        list.add(root.val);
         inOrderTraversal(root.right, list);
     }
     static ArrayList<Integer> preorder(TreeNode root)
@@ -111,7 +111,7 @@ class BinaryTree{
     static void PreOrderTraversal(TreeNode root, ArrayList<Integer> list){
         if(root == null)
             return;
-        list.add(root.data);
+        list.add(root.val);
         PreOrderTraversal(root.left, list);
         PreOrderTraversal(root.right, list);
     }
@@ -127,7 +127,7 @@ class BinaryTree{
 
         PostOrderTraversal(root.left, list);
         PostOrderTraversal(root.right, list);
-        list.add(root.data);
+        list.add(root.val);
     }
     public List<List<Integer>> levelOrderr(TreeNode node) {
         int height = heightOftree(node);
@@ -142,7 +142,7 @@ class BinaryTree{
             return;
         else if(level == 1) {
             List<Integer>li=new ArrayList<>();
-            li.add(node.data);
+            li.add(node.val);
             list.add(li);
             return;
         }
@@ -156,7 +156,7 @@ class BinaryTree{
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         TreeNode node = root;
         while(node != null){
-            list.add(node.data);
+            list.add(node.val);
             if(node.left != null)
                 queue.add(node.left);
             if(node.right != null)
@@ -178,7 +178,7 @@ class BinaryTree{
     public ArrayList <Integer> boundary(TreeNode node)
     {   ArrayList<Integer> list = new ArrayList<>();
         if(!isLeaf(node)){
-            list.add(node.data);
+            list.add(node.val);
         }
         leftNodes(node, list);
         addleaves(node, list);
@@ -190,7 +190,7 @@ class BinaryTree{
         node = node.left;
         while(node != null){
             if(!isLeaf(node))
-                list.add(node.data);
+                list.add(node.val);
             if(node.left != null)
                 node = node.left;
             else
@@ -202,7 +202,7 @@ class BinaryTree{
         node = node.right;
         while(node != null){
             if(!isLeaf(node))
-                stack.push(node.data);
+                stack.push(node.val);
             if(node.right != null)
                 node = node.right;
             else
@@ -218,7 +218,7 @@ class BinaryTree{
             if(node == null)
                 return;
             if(isLeaf(node)){
-                list.add(node.data);
+                list.add(node.val);
             }
             addleaves(node.left, list);
             addleaves(node.right, list);
@@ -231,7 +231,7 @@ class BinaryTree{
         if (node == null)
             return;
         else if (level == 1) {
-            list.add(node.data);
+            list.add(node.val);
             return;
         }
         if (!leftorright) {
@@ -254,7 +254,7 @@ class BinaryTree{
             for(int i = 0; i < n; i++){
                 TreeNode node= queue.poll();
                 if(i == 0)
-                    list.add(node.data);
+                    list.add(node.val);
                 if(node.left != null)
                     queue.add(root.left);
                 if(node.right != null)
@@ -276,7 +276,7 @@ class BinaryTree{
             for(int i = 1; i <= n; i++){
                 TreeNode node = queue.poll();
                 if(i == 1)
-                    list.add(node.data);
+                    list.add(node.val);
                 if(node.right != null)
                     queue.add(node.right);
                 if(node.left != null)
@@ -301,7 +301,7 @@ class BinaryTree{
             int horizontalDistance = horizontalDistances.poll();
 
             if (!topViewMap.containsKey(horizontalDistance)) {
-                topViewMap.put(horizontalDistance, node.data);
+                topViewMap.put(horizontalDistance, node.val);
             }
 
             if (node.left != null) {
@@ -333,7 +333,7 @@ class BinaryTree{
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
             int horizontalDistance = horizontalDistances.poll();
-            bottomViewMap.put(horizontalDistance, node.data);
+            bottomViewMap.put(horizontalDistance, node.val);
 
             if (node.left != null) {
                 queue.add(node.left);
@@ -362,20 +362,20 @@ class BinaryTree{
 
     boolean isSumTree(TreeNode root)
     {
-        return root.data == sumSubtree(root, 0, 0);
+        return root.val == sumSubtree(root, 0, 0);
     }
     int sumSubtree(TreeNode root, int leftSum, int rightSum){
          if(root == null)
              return 0;
          if(root.right == null)
              return 0;
-         sumSubtree(root.left, leftSum+root.left.data, rightSum);
-         sumSubtree(root.right, leftSum,rightSum+root.right.data);
+         sumSubtree(root.left, leftSum+root.left.val, rightSum);
+         sumSubtree(root.right, leftSum,rightSum+root.right.val);
          return leftSum+rightSum;
     }
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null) return root;
-        if(root.data == p.data || root.data == q.data)return root;
+        if(root.val == p.val || root.val == q.val)return root;
 
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
@@ -389,7 +389,7 @@ class BinaryTree{
         if(root == null)
             return 0;
         if(root.left == null && root.right == null)
-            return root.data;
+            return root.val;
         int left = sumofNodes(root.left);
         int right = sumofNodes(root.right);
 
@@ -411,7 +411,7 @@ class BinaryTree{
             list1.add(0);
             return;
         }
-        list1.add(root1.data);
+        list1.add(root1.val);
         inTree1(root1.left,list1);
         inTree1(root1.right,list1);
 
@@ -421,7 +421,7 @@ class BinaryTree{
             list2.add(0);
             return;
         }
-        list2.add(root2.data);
+        list2.add(root2.val);
         inTree2(root2.left, list2);
         inTree2(root2.right, list2);
 
@@ -432,7 +432,7 @@ class BinaryTree{
         if(p==null || q==null )
             return p==q;
 
-        return (p.data ==q.data) && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+        return (p.val ==q.val) && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
     }
     // is symmertic
     public boolean isSymmetric(TreeNode root) {
@@ -442,7 +442,7 @@ class BinaryTree{
     boolean isSymmetryOrNot(TreeNode p, TreeNode q){
         if(p==null || q==null )
         { return p==q;}
-        return (p.data ==q.data) && isSymmetryOrNot(p.left,q.right) && isSymmetryOrNot(p.right,q.left);
+        return (p.val ==q.val) && isSymmetryOrNot(p.left,q.right) && isSymmetryOrNot(p.right,q.left);
     }
     public boolean isBalanced(TreeNode root) {
         if(root == null)
@@ -466,14 +466,40 @@ class BinaryTree{
     boolean res = false;
     public void traversal(TreeNode root, int targetSum) {
         if(root != null) {
-            root.data = targetSum-root.data;
-            if(root.left == null && root.right == null && root.data == 0) {
+            root.val = targetSum-root.val;
+            if(root.left == null && root.right == null && root.val == 0) {
                 res = true;
                 return;
             }
-            traversal(root.left, root.data);
-            traversal(root.right, root.data);
+            traversal(root.left, root.val);
+            traversal(root.right, root.val);
         }
     }
-
+// ---------------------------------------------------------------------------------------------------------------------
+public List<Double> averageOfLevels(TreeNode root) {
+    List<Double>  currentResult = new ArrayList<>();
+    Queue<TreeNode> queue = new LinkedList<>();
+    queue.offer(root);
+    if(root == null)
+        return currentResult;
+    double sum = 0;
+    while(queue.size() != 0){
+        int queueSize = queue.size();
+        for(int i = 0;i < queueSize; i++){
+            TreeNode currentNode = queue.poll();
+            if(currentNode.left != null)
+            {
+                queue.offer(currentNode.left);
+            }
+            if(currentNode.right != null)
+            {
+                queue.offer(currentNode.right);
+            }
+            sum += currentNode.val;
+        }
+        currentResult.add(sum/queueSize);
+        sum = 0;
+    }
+    return currentResult;
+}
 }

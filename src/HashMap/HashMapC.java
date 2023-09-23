@@ -7,7 +7,8 @@ public class HashMapC {
     public static void main(String[] args) {
 //        int[] arr = {2,2,1};
 //        System.out.println(singleNumberr(arr));
-        System.out.println(firstUniqChar2("dddccdbba"));
+//        System.out.println(firstUniqChar2("dddccdbba"));
+        System.out.println(checkCharacter("AbDcE", "ABE"));
     }
     static int firstUniqChar(String s) {
         HashMap<Character, Integer> map = new HashMap<>();
@@ -89,8 +90,17 @@ public class HashMapC {
         }
         return ans;
     }
-
-//    public boolean uniqueOccurrences(int[] arr) {
-//        HashSet
-//    }
+    // "AbDcE", "ABF"
+    static String checkCharacter(String str1, String str2){
+        HashMap<Integer, Character> map = new HashMap<>();
+        for(int i = 0; i < str1.length(); i++){
+            map.put(i, str1.charAt(i));
+        }
+        for(int i = 0; i < str2.length();i++){
+            if(!(map.containsValue(str2.charAt(i))) && !(map.containsValue(Character.toLowerCase(str2.charAt(i))))){
+                return "NO";
+            }
+        }
+        return "YES";
+    }
 }

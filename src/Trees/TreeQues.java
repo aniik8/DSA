@@ -18,13 +18,13 @@ public class TreeQues {
     public void findPath(TreeNode root, ArrayList<Integer> path,List<List<Integer>> list, int target ){
         if(root == null)
             return;
-        path.add(root.data);
-        if(root.data == target && root.left == null && root.right == null){
+        path.add(root.val);
+        if(root.val == target && root.left == null && root.right == null){
             list.add(path);
             return;
         }
-        findPath(root.left, new ArrayList<>(path), list, target - root.data);
-        findPath(root.right, new ArrayList<>(path), list, target - root.data);
+        findPath(root.left, new ArrayList<>(path), list, target - root.val);
+        findPath(root.right, new ArrayList<>(path), list, target - root.val);
     }
     // 2. Path Sum III (Bugs inside it)
     int count = 0;
@@ -40,11 +40,11 @@ public class TreeQues {
         if(root == null)
             return;
 
-        if(root.data == target){
+        if(root.val == target){
             count++;
         }
-        findPath(root.left, target - root.data);
-        findPath(root.right, target - root.data);
+        findPath(root.left, target - root.val);
+        findPath(root.right, target - root.val);
 
     }
     // here we are using preorder array just to add our element in tree and inorder array to carry out who gonna be the

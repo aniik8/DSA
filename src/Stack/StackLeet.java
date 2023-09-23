@@ -8,6 +8,8 @@ public class StackLeet {
 ////        System.out.println(find132pattern(arr));
 //        System.out.println(Arrays.toString(dailyTemperatures(arr)));
 //        System.out.println(decodeString("3[a]2[bc]"));
+        String str = "((A + B) - C * ( D / E)) + F";
+        System.out.println(infix_to_postFix(str));
     }
     static String removeDuplicateLetters(String s) {
         String str = "";
@@ -239,5 +241,50 @@ public class StackLeet {
         return max;
     }
 
+    static int precedence(char cha){
+        switch(cha){
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            case '^':
+                return 3;
+        }
+        return -1;
+    }
+    public static String infix_to_postFix(String st){
+        Stack<Character> stack = new Stack<>();
+        StringBuilder str = new StringBuilder();
+        for(int i = 0; i < st.length(); i++){
+            char ch = st.charAt(i);
+            if(Character.isDigit(ch) || Character.isLetter(ch)){
+                str.append(ch);
+            }else if(ch == '('){
+                stack.push(ch);
+            }else if(ch == ')'){
+                while(!stack.isEmpty() && stack.peek() != '('){
+                    str.append(stack.pop());
+                }
+                if(!stack.isEmpty())
+                    stack.pop();
+            }
+            else if(ch == ' '){
+                continue;
+            }
+            else{
+                while(!stack.isEmpty() && precedence(ch) <= precedence(stack.peek())){
+                    str.append(stack.pop());
+                }
+                stack.push(ch);
+            }
+        }
+        while(!stack.isEmpty()){
+            str.append(stack.pop());
+        }
+        System.out.println(str);
+        return str.toString();
+    }
 
 }
