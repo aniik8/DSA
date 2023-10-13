@@ -10,6 +10,7 @@ public class StackLeet {
 //        System.out.println(decodeString("3[a]2[bc]"));
         String str = "((A + B) - C * ( D / E)) + F";
         System.out.println(infix_to_postFix(str));
+        System.out.println(decodeStrings("2[abc]3[cd]ef"));
     }
     static String removeDuplicateLetters(String s) {
         String str = "";
@@ -286,5 +287,46 @@ public class StackLeet {
         System.out.println(str);
         return str.toString();
     }
+    // "3[a]2[bc]"
+     static String decodeStrings(String s){
+        Stack<Character> charStack = new Stack<>();
+        Stack<Integer> numStack = new Stack<>();
+        StringBuilder str = new StringBuilder();
+         StringBuilder string = new StringBuilder();
+        int i = 0;
+        while(i < s.length()){
+            char ch = s.charAt(i);
+            if(Character.isLetter(ch) || ch == '['){
+                charStack.push(ch);
+                System.out.println(ch);
+            }
+            else if((ch == ']')){
 
+                while(charStack.peek() != '[')
+                    string.append(charStack.pop());
+                string.reverse();
+                int n = numStack.pop();
+                for(int j = 0; j < n; j++){
+                    str.append(string);
+                }
+                charStack.pop();
+                string.setLength(0);
+            }
+            else {
+                int num = ch - '0';
+                System.out.println(num);
+                numStack.push(num);
+            }
+            i++;
+        }
+        StringBuilder sc= new StringBuilder();
+        while(!charStack.isEmpty()){
+            sc.append(charStack.pop());
+
+        }
+
+         str.append(sc.reverse());
+        System.out.println(str);
+        return str.toString();
+    }
 }

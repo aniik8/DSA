@@ -109,6 +109,7 @@ public class SwGFG {
         double sum = 0, maximum_average = -10001.00000, average = -100001;
         while(j < nums.length){
             sum += nums[j];
+
             if(j - i + 1 < k)
                 j++;
             else if(j - i + 1 == k){
